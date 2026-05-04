@@ -19,21 +19,21 @@ export default function PrivacyPolicyPage() {
               </div>
             </div>
             <div className="reveal delay-100 space-y-6 text-sm text-foreground/70 leading-relaxed">
-          <h2 className="text-lg font-display font-bold text-foreground">Information We Collect</h2>
-          <p>We may collect personal information that you voluntarily provide when filling out enquiry forms, admission applications, feedback forms, or fee payment portals. This includes: name, email address, phone number, mailing address, date of birth, educational qualifications, and payment information.</p>
-          <h2 className="text-lg font-display font-bold text-foreground">How We Use Your Information</h2>
-          <p>We use the information collected to: process admission applications, respond to enquiries, send academic communications, process fee payments, improve our website and services, comply with legal obligations, and maintain student records as required by UGC and university regulations.</p>
-          <h2 className="text-lg font-display font-bold text-foreground">Cookies</h2>
-          <p>Our website may use cookies to enhance user experience. Cookies are small files stored on your device that help us understand website usage patterns. You may disable cookies through your browser settings, though this may affect certain website functionalities.</p>
-          <h2 className="text-lg font-display font-bold text-foreground">Data Security</h2>
-          <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of electronic transmission or storage is 100% secure.</p>
-          <h2 className="text-lg font-display font-bold text-foreground">Contact Us</h2>
-          <p>For questions about this Privacy Policy, contact us at <a href="mailto:info@ishan.ac" className="text-navy font-semibold">info@ishan.ac</a> or write to: Ishan Educational Group, Knowledge Park-III, Greater Noida, UP 201308.</p>
-          <p className="text-xs text-muted-foreground">Last updated: January 2025</p>
+              <h2 className="text-lg font-display font-bold text-foreground">Information We Collect</h2>
+              <p>We may collect personal information that you voluntarily provide when filling out enquiry forms, admission applications, feedback forms, or fee payment portals. This includes: name, email address, phone number, mailing address, date of birth, educational qualifications, and payment information.</p>
+              <h2 className="text-lg font-display font-bold text-foreground">How We Use Your Information</h2>
+              <p>We use the information collected to: process admission applications, respond to enquiries, send academic communications, process fee payments, improve our website and services, comply with legal obligations, and maintain student records as required by UGC and university regulations.</p>
+              <h2 className="text-lg font-display font-bold text-foreground">Cookies</h2>
+              <p>Our website may use cookies to enhance user experience. Cookies are small files stored on your device that help us understand website usage patterns. You may disable cookies through your browser settings, though this may affect certain website functionalities.</p>
+              <h2 className="text-lg font-display font-bold text-foreground">Data Security</h2>
+              <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of electronic transmission or storage is 100% secure.</p>
+              <h2 className="text-lg font-display font-bold text-foreground">Contact Us</h2>
+              <p>For questions about this Privacy Policy, contact us at <a href="mailto:info@ishan.ac" className="text-navy font-semibold">info@ishan.ac</a> or write to: Ishan Educational Group, Knowledge Park-III, Greater Noida, UP 201308.</p>
+              <p className="text-xs text-muted-foreground">Last updated: January 2025</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
     </Layout>
   );
 }

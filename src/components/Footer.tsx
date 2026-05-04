@@ -12,6 +12,7 @@ const quickLinks = [
 const programs = [
   { label: "BA LLB (Hons)", href: "/courses/ba-llb" },
   { label: "LLB (3 Years)", href: "/courses/llb" },
+  { label: "LLM (2 Years)", href: "/courses/llm" },
   { label: "Certificate Courses", href: "/certificate-programs" },
 ];
 

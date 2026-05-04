@@ -12,7 +12,7 @@ const SLIDES = [
     badge: "BCI Approved · NAAC Accredited · CCS University Affiliated",
     title: "Forge Your Legacy in",
     highlight: "India's Courtrooms",
-    subtitle: "Excellence in legal education through integrated BA LLB and Professional LLB programs in Knowledge Park, Greater Noida.",
+    subtitle: "Excellence in legal education through integrated BA LLB (Hons) and Professional LLB programs in Greater Noida.",
     cta1: { label: "Our Law Programs", href: "/programs-overview" },
     cta2: { label: "Moot Court Tour", href: "/moot-court" },
   },
@@ -26,7 +26,7 @@ const SLIDES = [
     cta2: { label: "Apply for 2025", href: "/admissions" },
   },
   {
-    image: "https://law.ishan.ac/static/gallery/infra/infra-16.jpg",
+    image: "https://law.ishan.ac/all-law/gallery-photos/academics/academics-11.jpg",
     badge: "Specialized Legal Infrastructure",
     title: "Dedicated Resources",
     highlight: "For Future Advocates",

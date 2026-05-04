@@ -80,7 +80,7 @@ export default function StatsBar() {
           {statsList.map((stat: any, i: number) => (
             <div
               key={stat.label || i}
-              className="text-center"
+              className={`text-center reveal delay-${i * 100}`}
             >
               <AnimatedCounter rawValue={stat.value?.toString() || "0"} />
               <p className="stat-label text-white/70">{stat.label}</p>
@@ -97,11 +97,13 @@ export default function StatsBar() {
             <div className="flex animate-marquee whitespace-nowrap items-center">
               {[...brands, ...brands].map((brand, i) => (
                 <div key={`${brand.name}-${i}`} className="mx-8 md:mx-12 shrink-0 group">
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    className="h-16 md:h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
-                  />
+                  <div className="bg-white p-4 rounded-xl shadow-lg hover:scale-110 transition-transform duration-300">
+                    <img
+                      src={brand.logo}
+                      alt={brand.name}
+                      className="h-16 md:h-20 w-auto object-contain"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

@@ -60,6 +60,7 @@ export default function CulturalActivitiesPage() {
               </div>
             </div>
           </div>
+        </div>
       </section>
       <EnquiryCTA />
     </Layout>

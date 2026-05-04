@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion, AnimatePresence } from "framer-motion";
 const galleryImages = [
-  { title: "Moot Court Hall", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200", category: "Advocacy" },
-  { title: "Legal Research Lab", img: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200", category: "Research" },
-  { title: "Clinical Sessions", img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200", category: "Training" },
-  { title: "Legal Aid Clinic", img: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200", category: "Service" },
-  { title: "Academic Excellence", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200", category: "Campus" },
-  { title: "Judicial Cell", img: "https://images.unsplash.com/photo-1453948576136-15d9095642a8?auto=format&fit=crop&w=1200", category: "Governance" },
-  { title: "Event Plenary", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200", category: "Events" },
-  { title: "Lush Greenery", img: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1200", category: "Environment" },
+  { title: "Moot Court Hall", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-1.jpg", category: "Advocacy" },
+  { title: "Legal Research Lab", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-12.jpg", category: "Research" },
+  { title: "Clinical Sessions", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-5.jpg", category: "Training" },
+  { title: "Legal Aid Clinic", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-7.jpg", category: "Service" },
+  { title: "Academic Excellence", img: "https://law.ishan.ac/all-law/gallery-photos/academics/academics-1.jpg", category: "Campus" },
+  { title: "Judicial Cell", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-8.jpg", category: "Governance" },
+  { title: "Event Plenary", img: "https://law.ishan.ac/all-law/gallery-photos/academics/academics-11.jpg", category: "Events" },
+  { title: "Lush Greenery", img: "https://law.ishan.ac/all-law/gallery-photos/key-highlights/key-highlights-13.jpg", category: "Environment" },
 ];
 
 export default function CampusExperience() {

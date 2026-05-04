@@ -14,7 +14,10 @@ const defaultRecruiters = [
   { name: "47 Billion", logo: "https://law.ishan.ac/images/company/47-Billion.png" },
   { name: "Shardul Amarchand Mangaldas", logo: "" },
   { name: "AZB & Partners", logo: "" },
-  { name: "Khaitan & Co.", logo: "" },
+  { name: "NIRALA", logo: "https://law.ishan.ac/images/company/Nirala.png" },
+  { name: "SPICE", logo: "https://law.ishan.ac/images/company/Spice.png" },
+  { name: "THE TIMES", logo: "https://law.ishan.ac/images/company/The-Times.png" },
+  { name: "47 BILLION", logo: "https://law.ishan.ac/images/company/47-Billion.png" },
 ];
 
 export default function PlacementsSection() {
@@ -41,7 +44,7 @@ export default function PlacementsSection() {
           <div className="overflow-hidden relative">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
-              <div className="flex animate-marquee">
+              <div className="flex animate-marquee items-center">
               {[...recruiters, ...recruiters].map((rec: any, i) => (
                 <div
                   key={`${rec.name}-${i}`}
