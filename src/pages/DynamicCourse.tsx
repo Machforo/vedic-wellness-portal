@@ -1,158 +1,82 @@
-import { useParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
-import { Clock, GraduationCap, IndianRupee, Users, CheckCircle2 } from "lucide-react";
-import NotFound from "./NotFound";
+﻿import Layout from "@/components/Layout";
+import PageHeader from "@/components/PageHeader";
+import EnquiryCTA from "@/components/EnquiryCTA";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { CheckCircle2, BookOpen, Clock, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export default function DynamicCourse() {
-  const { courseId } = useParams();
-  const { data, isLoading } = useIshanLawData("courses");
-
-  if (isLoading) return <div className="min-h-screen flex flex-col"><Navbar /><div className="flex-1 flex items-center justify-center text-xl text-navy animate-pulse">Loading Academic Program...</div></div>;
-  
-  // Clean string to match slugs
-  const sanitizeSlug = (str: string) => str?.toLowerCase().replace(/[^a-z0-9]/g, '');
-  
-  const fallbackCourses = [
-    {
-      programName: "B.Pharm",
-      duration: "4 Years (Degree)",
-      eligibility: "10+2 with Physics, Chemistry & Biology/Mathematics with minimum 45% marks (40% for SC/ST). UPSEE/CUET score accepted.",
-      annualIntake: "60 Seats",
-      annualFee: "₹75,000 per year",
-      overview: "The Bachelor of Pharmacy (B.Pharm) at Ishan Institute of Pharmacy is a 4-year professional undergraduate degree approved by the Pharmacy Council of India (PCI) and affiliated with Dr. A.P.J. Abdul Kalam Technical University (AKTU). The program provides comprehensive training in pharmaceutical sciences, drug discovery, clinical pharmacy, and quality assurance — preparing students for careers across the pharmaceutical industry, hospitals, research, and regulatory agencies.",
-      curriculumStructure: "The curriculum spans 8 semesters covering Pharmaceutics, Pharmaceutical Chemistry, Pharmacology, Pharmacognosy, Pharmacy Practice, and related life sciences. Practical laboratory training in all 10 specialized labs, industrial visits, and a final-year project are integral components. The program follows AKTU and PCI syllabus standards.",
-      careerScope: "B.Pharm graduates can work as pharmacists in hospitals, community pharmacies, and pharmaceutical companies. Career options include Production Officer, Quality Control/Assurance Analyst, Drug Regulatory Officer, Medical Representative, Clinical Research Associate, or pursue M.Pharm/MBA for advanced roles.",
-      image: "https://pharmacy.ishan.ac/wp-content/uploads/2023/10/Lab-with-Latest-Equipments-1024x769.jpg"
-    },
-    {
-      programName: "D.Pharm",
-      duration: "2 Years (Diploma)",
-      eligibility: "10+2 with Physics, Chemistry & Biology/Mathematics with minimum 45% marks. JEECUP score accepted.",
-      annualIntake: "60 Seats",
-      annualFee: "₹45,000 per year",
-      overview: "The Diploma in Pharmacy (D.Pharm) at Ishan Institute of Pharmacy is a 2-year program approved by the Pharmacy Council of India (PCI) and affiliated with the Board of Technical Education, Uttar Pradesh (BTE UP). It is the entry-level qualification for registered pharmacists in India. The program offers a solid foundation in pharmaceutical sciences, dispensing, and patient counselling.",
-      curriculumStructure: "The curriculum covers Pharmaceutics, Pharmaceutical Chemistry, Pharmacognosy, Human Anatomy & Physiology, Health Education, and Biochemistry & Clinical Pathology. Practical training in the institutional labs and a hospital internship are mandatory components of the program.",
-      careerScope: "D.Pharm graduates are eligible to register as pharmacists with the UP Pharmacy Council. They can work as retail/hospital pharmacists, medical representatives, in pharmaceutical manufacturing, or pursue B.Pharm for further career advancement.",
-      image: "https://pharmacy.ishan.ac/wp-content/uploads/2023/10/Pharmacy-Lab-1024x683.jpg"
-    },
+export default function DynamicCoursePage() {
+  const ref = useScrollReveal();
+  const eligibility = [
+    "10+2 Biology (PCB) — minimum 50% marks",
+    "NEET-UG qualified (mandatory)",
+    "Indian national",
+    "Admission via AYUSH central or UP state counselling",
   ];
-
-  const courseList = data?.courses?.length > 0 ? data.courses : fallbackCourses;
-  const course = courseList.find((c: any) => sanitizeSlug(c.programName).includes(sanitizeSlug(courseId || '')));
-
-  if (!course) return <NotFound />;
-
+  const phases = [
+    { phase: "Phase I (Year 1–1.5)", desc: "Foundational Ayurvedic sciences — Siddhanta, Rachana Sharir, Kriya Sharir, Sanskrit" },
+    { phase: "Phase II (Year 1.5–3)", desc: "Pre-clinical — Dravyaguna, Rasa Shastra, Rog Nidan, Charak Samhita, Swasthavritta" },
+    { phase: "Phase III (Year 3–4.5)", desc: "Clinical — all 14 departments including Kayachikitsa, Panchkarma, Shalya, Shalakya" },
+    { phase: "Final Year + Internship (Year 4.5–5.5)", desc: "Advanced clinical rotations and 12-month compulsory rotatory hospital internship" },
+  ];
+  const outcomes = ["Government AYUSH Hospital Vaidya", "Private Ayurvedic Practice", "Panchkarma Clinic", "BAMS MD (AIAPGET)", "Ayurvedic Research", "Wellness & Tourism"];
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Navbar />
-      
-      {/* Header */}
-      <div className="bg-navy py-20 md:py-32 relative overflow-hidden">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
-           <img 
-             src={course.image || "https://pharmacy.ishan.ac/wp-content/uploads/2023/10/Lab-with-Latest-Equipments-1024x769.jpg"} 
-             className="w-full h-full object-cover opacity-20 mix-blend-overlay scale-110" 
-             alt="Background"
-           />
-           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/90 to-transparent" />
-        </div>
-
-        <div className="container-wide relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground leading-tight mb-4">
-              {course.programName}
-            </h1>
-            <p className="text-lg text-primary-foreground/70 leading-relaxed font-light">
-              Forge your legacy at Ishan Institute of Pharmacy with our comprehensive {course.duration} program.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 container-wide py-16 md:py-24">
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          
-          <div className="lg:col-span-2 space-y-12">
-            <div>
-              <h2 className="text-2xl font-bold text-navy mb-5 text-gold-underline">Program Overview</h2>
-              <p className="text-base text-foreground/80 leading-relaxed whitespace-pre-wrap">{course.overview || "Program overview details will be updated shortly."}</p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-navy mb-5 text-gold-underline">Curriculum Structure</h2>
-              <div className="bg-card border rounded-2xl p-6 shadow-sm">
-                 <p className="text-base text-foreground/80 leading-relaxed whitespace-pre-wrap">{course.curriculumStructure || "Curriculum structure will be updated shortly."}</p>
+    <Layout>
+      <PageHeader title="BAMS — Bachelor of Ayurvedic Medicine and Surgery" subtitle="5.5-year NCISM-recognised degree programme — the only Ayurvedic medical degree conferring the title 'Vaidya'" breadcrumbs={[{ label: "BAMS Programme" }]} />
+      <section className="py-20 md:py-28" ref={ref}>
+        <div className="container-wide max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 mb-16">
+            <div className="reveal-left space-y-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Programme Overview</p>
+              <h2 className="font-bold text-foreground leading-tight">The BAMS Degree — Gateway to Becoming a Vaidya</h2>
+              <p className="text-foreground/70 leading-relaxed">Bachelor of Ayurvedic Medicine and Surgery (BAMS) is a five-and-a-half-year degree programme including a one-year compulsory rotatory internship. NCISM recognised across India and in several foreign countries, BAMS is the only AYUSH medical degree that confers the title 'Vaidya' and confers full practitioner registration eligibility.</p>
+              <p className="text-foreground/70 leading-relaxed">At IAMC, BAMS students train across 14 specialised Ayurvedic departments, rotate through the in-campus teaching hospital OPDs, and develop in the living Herbal Garden. Research-active faculty of experienced Vaidyas guide both classical scholarship and clinical competence.</p>
+              <div className="flex items-center gap-3 p-4 bg-gold/5 rounded-xl border border-gold/20">
+                <Clock className="w-5 h-5 text-gold shrink-0" />
+                <span className="text-sm font-semibold text-foreground">Duration: 5.5 Years (4.5 Academic + 1 Year Internship)</span>
               </div>
             </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-navy mb-5 text-gold-underline">Career Scope</h2>
-              <p className="text-base text-foreground/80 leading-relaxed whitespace-pre-wrap">{course.careerScope || "Career scope will be updated shortly."}</p>
-            </div>
-          </div>
-
-          <div className="lg:col-span-1">
-            <div className="bg-navy text-primary-foreground rounded-2xl p-8 sticky top-32 shadow-[0_8px_30px_hsl(var(--navy)/0.2)]">
-              <h3 className="text-2xl font-bold mb-8">Quick Facts</h3>
-              
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
-                    <Clock className="w-6 h-6 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-primary-foreground/60 mb-1">Duration</p>
-                    <p className="font-semibold text-lg">{course.duration || "N/A"}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
-                    <IndianRupee className="w-6 h-6 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-primary-foreground/60 mb-1">Annual Fee</p>
-                    <p className="font-semibold text-lg">{course.annualFee || "N/A"}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
-                    <Users className="w-6 h-6 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-primary-foreground/60 mb-1">Annual Intake</p>
-                    <p className="font-semibold text-lg">{course.annualIntake || "N/A"}</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-foreground/10 flex items-center justify-center shrink-0">
-                    <GraduationCap className="w-6 h-6 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-primary-foreground/60 mb-1">Eligibility</p>
-                    <p className="font-semibold">{course.eligibility || "N/A"}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-10 pt-8 border-t border-primary-foreground/10">
-                <button className="w-full bg-gold hover:bg-gold-light text-navy font-bold py-4 rounded-xl transition-colors shadow-lg active:scale-[0.98]">
-                  Apply Now
-                </button>
+            <div className="reveal-right">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border">
+                <img src="https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=800&auto=format&fit=crop" alt="BAMS Programme" className="w-full h-[380px] object-cover" />
               </div>
             </div>
           </div>
-
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            <div className="reveal lg:col-span-1">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2"><BookOpen className="w-5 h-5 text-gold" />Eligibility</h3>
+              <ul className="space-y-3">
+                {eligibility.map(e => (
+                  <li key={e} className="flex items-start gap-2 text-sm text-foreground/70">
+                    <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />{e}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="reveal delay-100 lg:col-span-2">
+              <h3 className="font-bold text-foreground mb-4">Year-wise Structure</h3>
+              <div className="space-y-3">
+                {phases.map(p => (
+                  <div key={p.phase} className="flex gap-4 p-4 rounded-xl border bg-card">
+                    <div className="w-2 h-2 rounded-full bg-gold mt-1.5 shrink-0" />
+                    <div><p className="font-bold text-foreground text-sm">{p.phase}</p><p className="text-xs text-foreground/60 mt-1">{p.desc}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="reveal mb-12">
+            <h3 className="font-bold text-foreground mb-4">Career Outcomes</h3>
+            <div className="flex flex-wrap gap-3">
+              {outcomes.map(o => <span key={o} className="px-4 py-2 bg-navy/5 text-navy text-sm font-medium rounded-xl border">{o}</span>)}
+            </div>
+          </div>
+          <div className="text-center">
+            <Link to="/admissions" className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-navy font-bold rounded-xl hover:bg-navy hover:text-white transition-all shimmer-btn">Apply for BAMS 2025–26 <ArrowRight className="w-4 h-4" /></Link>
+          </div>
         </div>
-      </div>
-      
-      <Footer />
-    </div>
+      </section>
+      <EnquiryCTA />
+    </Layout>
   );
 }

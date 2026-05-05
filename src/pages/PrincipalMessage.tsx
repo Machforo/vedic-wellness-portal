@@ -1,73 +1,41 @@
-import Layout from "@/components/Layout";
+﻿import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function PrincipalMessagePage() {
   const ref = useScrollReveal();
-  
-  const msg = {
-      name: "Dr. Sandeep Singh", // Placeholder name
-      designation: "Principal, Ishan Institute of Pharmacy",
-      message: `Welcome to Ishan Institute of Pharmacy, where we transform healthcare aspirants into practice-ready professionals. In an era where the pharmaceutical landscape is rapidly evolving, our mission is to produce pharmacists and industry leaders who are not only masters of theoretical knowledge but also deeply committed to ethical healthcare practices.
-
-What distinguishes Ishan Pharmacy is our unwavering focus on practical and clinical training. We believe that pharmacy is a life-saving discipline, best mastered through rigorous hands-on experience. Our curriculum is purposefully structured to integrate academic scholarship with laboratory experiments from the very first semester. Whether it is formulating drugs in our advanced Pharmaceutics Lab or learning clinical applications, our students learn by doing.
-
-We provide our scholars with premier resources, including 10 specialized laboratories, a comprehensive medical library, a dedicated herbal garden, and mentorship from a faculty composed of distinguished industry practitioners and researchers. Our dedicated Placement Cell further ensures that students aspiring for careers in manufacturing, research, or clinical practice receive specialized guidance from day one.
-
-I invite you to join our community and embark on a journey that will build a formidable foundation for your career in healthcare. At Ishan Pharmacy, we don't just teach pharmacy; we prepare you to practice it with excellence and integrity.`,
-      image: "" // Removing generic unsplash
-  };
-
   return (
     <Layout>
-      <PageHeader
-        title="Principal's Message"
-        subtitle="Producing ethical and practice-ready healthcare professionals"
-        breadcrumbs={[{ label: "About", href: "/about" }, { label: "Principal's Message" }]}
-      />
-
+      <PageHeader title="Principal's Message" subtitle="A message from the Principal of Ishan Ayurvedic Medical College and Research Centre" breadcrumbs={[{ label: "About", href: "/about" }, { label: "Principal's Message" }]} />
       <section className="py-20 md:py-28" ref={ref}>
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-[280px_1fr] gap-10 md:gap-14">
-              <div className="reveal-left">
-                <div className="rounded-2xl overflow-hidden shadow-[0_4px_24px_hsl(var(--navy)/0.1)] border bg-card">
-                  {msg.image ? (
-                      <img src={msg.image} alt={msg.name} className="w-full h-auto object-cover" />
-                  ) : (
-                      <div className="aspect-[3/4] bg-muted flex items-center justify-center">
-                        <div className="text-center p-6">
-                          <div className="w-24 h-24 mx-auto rounded-full bg-gold-light flex items-center justify-center mb-3">
-                            <span className="text-3xl font-bold text-navy">{msg.name ? msg.name.charAt(0) : "P"}</span>
-                          </div>
-                          <p className="text-sm font-semibold text-foreground">{msg.name}</p>
-                          <p className="text-xs text-muted-foreground">{msg.designation}</p>
-                        </div>
-                      </div>
-                  )}
-                </div>
+        <div className="container-wide max-w-5xl">
+          <div className="grid lg:grid-cols-3 gap-12 items-start">
+            <div className="reveal-left lg:col-span-1">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&auto=format&fit=crop" alt="Principal, IAMC" className="w-full h-80 object-cover" />
               </div>
-
-              <div className="reveal-right space-y-8">
-                <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">
-                   {msg.message}
-                </p>
-
-                <div className="pt-4 border-t">
-                  <p className="font-semibold text-foreground">{msg.name}</p>
-                  <p className="text-sm text-muted-foreground">{msg.designation}</p>
-                </div>
-
-                <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                  <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80" alt="Ishan Pharmacy Academics" className="w-full h-64 object-cover" />
-                </div>
+              <div className="mt-6 p-4 rounded-xl border bg-card text-center">
+                <h3 className="font-bold text-foreground">Dr. Vijay Kumar Sharma</h3>
+                <p className="text-sm text-gold font-semibold mt-1">Principal</p>
+                <p className="text-xs text-muted-foreground mt-1">MD (Kayachikitsa) · 22 Years Experience</p>
+              </div>
+            </div>
+            <div className="reveal-right lg:col-span-2 space-y-5">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">A Word from Our Principal</p>
+              <h2 className="font-bold text-foreground leading-tight">Welcome to Ishan Ayurvedic Medical College</h2>
+              <div className="space-y-4 text-foreground/70 leading-relaxed">
+                <p>Dear future Vaidyas and well-wishers of Ayurveda,</p>
+                <p>It is my privilege to welcome you to Ishan Ayurvedic Medical College and Research Centre — a home for those who wish to pursue the ancient science of Ayurveda with academic rigour and clinical commitment.</p>
+                <p>Ayurveda is not merely a system of medicine — it is a comprehensive philosophy of life. At IAMC, we believe that a true Vaidya is both a scholar of classical texts and a compassionate clinician. Our curriculum is therefore designed to develop both: deep engagement with Charaka Samhita, Sushruta Samhita, and Ashtanga Hridaya alongside daily OPD exposure in our in-campus teaching hospital from Year 1.</p>
+                <p>We are proud to be the only private AYUSH medical college in the National Capital Region with NCISM approval. Our 14 Ayurvedic departments, living Herbal Garden of over 200 medicinal species, and dedicated faculty of BAMS MD-qualified Vaidyas create an environment in which classical learning and clinical practice are inseparable.</p>
+                <p>I invite you to visit our campus, meet our faculty, and experience the IAMC difference. The BAMS degree from IAMC is not just a qualification — it is the beginning of a life dedicated to healing, scholarship, and service.</p>
+                <p className="font-semibold text-foreground">With warm regards and blessings,<br />Dr. Vijay Kumar Sharma<br />Principal, IAMC</p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <EnquiryCTA />
     </Layout>
   );

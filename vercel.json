@@ -1,10 +1,51 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/opds-and-ipds",
+      "destination": "https://hospital.ishan.ac/opd/general-medicine",
+      "permanent": true
+    },
+    {
+      "source": "/opds-and-ipds/:path*",
+      "destination": "https://hospital.ishan.ac/opd/general-medicine",
+      "permanent": true
+    },
+    {
+      "source": "/panchkarma-facility",
+      "destination": "https://hospital.ishan.ac/panchkarma/overview",
+      "permanent": true
+    },
+    {
+      "source": "/panchkarma-facility/:path*",
+      "destination": "https://hospital.ishan.ac/panchkarma/overview",
+      "permanent": true
+    },
+    {
+      "source": "/pathology-and-radiology",
+      "destination": "https://hospital.ishan.ac/opd/diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/pathology-radiology",
+      "destination": "https://hospital.ishan.ac/opd/diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/medical-camps",
+      "destination": "https://hospital.ishan.ac/patient-services/medical-camps",
+      "permanent": true
+    }
+  ],
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
     }
   ]
 }

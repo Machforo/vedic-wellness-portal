@@ -1,84 +1,47 @@
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
+import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { FileText, ExternalLink } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { Shield } from "lucide-react";
 
-const defaultAccreditations = [
-  { title: "PCI", description: "Mandatory recognition for pharmacy programs. Pharmacy Council of India.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/PCI-150x150.png" },
-  { title: "AKTU", description: "Affiliation for B.Pharm degree programs. Dr. A.P.J. Abdul Kalam Technical University, Lucknow.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/AKTU-150x150.png" },
-  { title: "BTE UP", description: "Affiliation for D.Pharm diploma programs. Board of Technical Education, Uttar Pradesh.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/BTE-up-150x150.jpg" },
-  { title: "JEECUP", description: "Joint Entrance Examination Council, Uttar Pradesh — for polytechnic and D.Pharm admissions.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Jeecup-150x150.png" },
-  { title: "URISE", description: "UP Rozgar aur Shiksha Initiative — online portal for student registration and educational services.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/URISE.png" },
-  { title: "CUET", description: "Common University Entrance Test — accepted for B.Pharm admissions.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/CUET-150x150.jpg" },
-  { title: "UP Scholarship", description: "Official UP Government Scholarship portal for SC/ST/OBC and EWS students.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Scholarship-UP-150x150.jpg" },
-  { title: "UP Pharmacy Council", description: "State regulatory body for pharmacy practice and pharmacist registration in Uttar Pradesh.", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/UP-Pharmacy-Council-150x150.png" },
+const approvals = [
+  { name: "NCISM", fullName: "National Commission for Indian System of Medicine", logo: "https://ncism.gov.in/images/NCISM_LOGO.png", desc: "NCISM is the apex statutory body governing Ayurvedic, Unani, Siddha, and Sowa-Rigpa medical education and practice in India. IAMC's BAMS programme is NCISM-approved, ensuring the degree is recognised across India and eligible for practitioner registration." },
+  { name: "AYUSH", fullName: "Ministry of Ayurveda, Yoga & Naturopathy, Unani, Siddha and Homoeopathy", logo: "https://main.ayush.gov.in/sites/default/files/Ayush_logo.png", desc: "Ministry of AYUSH of the Government of India oversees all AYUSH institutions. IAMC operates under AYUSH regulatory guidelines and is eligible for AYUSH national mission schemes, scholarships, and research grants." },
+  { name: "UP AYUSH Directorate", fullName: "Directorate of AYUSH, Government of Uttar Pradesh", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Scholarship-UP-150x150.jpg", desc: "State-level AYUSH regulatory authority in Uttar Pradesh overseeing admissions, inspections, and affiliation. IAMC's BAMS seats are filled through UP state AYUSH counselling under the state Directorate's authority." },
 ];
 
 export default function ApprovalsPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("aboutus");
-  const accreditations = data?.approvals?.length > 0 ? data.approvals : defaultAccreditations;
-
   return (
     <Layout>
-      <PageHeader
-        title="Approvals & Affiliations"
-        subtitle="Ishan Pharmacy is fully recognized by the Pharmacy Council of India, ensuring the highest professional standards."
-        breadcrumbs={[{ label: "About", href: "/about" }, { label: "Approvals & Affiliations" }]}
-      />
-
+      <PageHeader title="Approvals & Affiliations" subtitle="IAMC's regulatory approvals and affiliations ensuring the BAMS degree is fully recognised and practitioner-eligible" breadcrumbs={[{ label: "About", href: "/about" }, { label: "Approvals & Affiliations" }]} />
       <section className="py-20 md:py-28" ref={ref}>
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto mb-16 space-y-6 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Regulatory Compliance</p>
-            <h2 className="font-bold text-foreground">A Fully Accredited Institution</h2>
-            <p className="text-foreground/70 leading-relaxed">
-              Pharmaceutical education in India is strictly regulated to ensure that practicing pharmacists meet the highest standards of professional ethics and competence in healthcare. Ishan Institute of Pharmacy holds all mandatory approvals from the Pharmacy Council of India (PCI) and is affiliated with Dr. A.P.J. Abdul Kalam Technical University (AKTU) and the Board of Technical Education, Uttar Pradesh (BTE UP). These certifications ensure that our diplomas and degrees are fully recognized for practice and higher education.
-            </p>
-            <div className="grid md:grid-cols-3 gap-8 pt-4">
-              <div className="space-y-2">
-                <h4 className="font-bold text-navy">PCI</h4>
-                <p className="text-xs">The primary regulator of pharmacy education in India, ensuring curriculum relevance and professional standards.</p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-bold text-navy">AKTU</h4>
-                <p className="text-xs">Provides academic affiliation for our degree programs (B.Pharm), conducts standardized examinations, and awards the final professional degree.</p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-bold text-navy">BTE UP</h4>
-                <p className="text-xs">Provides academic affiliation for our diploma programs (D.Pharm) and conducts standardized board examinations.</p>
-              </div>
-            </div>
+        <div className="container-wide max-w-5xl">
+          <div className="reveal mb-12">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Regulatory Standing</p>
+            <h2 className="font-bold text-foreground mb-4">Approved by India's Apex AYUSH Regulatory Body</h2>
+            <p className="text-foreground/70 leading-relaxed max-w-3xl">IAMC's BAMS degree is NCISM-approved � the only approval that confers full practitioner registration eligibility in all states of India. Without NCISM approval, an Ayurvedic degree is not recognised for medical practice. IAMC graduates are registered as Vaidyas and eligible for government AYUSH service.</p>
           </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {accreditations.map((acc: any, i: number) => (
-              <div key={acc.title || acc.name || i} className={`reveal delay-${Math.min(i, 5)}00 bg-card rounded-xl border p-6 text-center shadow-sm hover:shadow-[0_8px_30px_hsl(var(--navy)/0.08)] transition-shadow`}>
-                {acc.logo ? (
-                  <img src={acc.logo} alt={acc.title || acc.name} className="h-28 md:h-32 mx-auto object-contain mb-6 transition-transform hover:scale-110 duration-500" loading="lazy" />
-                ) : (
-                  <div className="h-28 md:h-32 flex items-center justify-center mb-6">
-                    <span className="text-3xl font-bold text-navy">{acc.title || acc.name}</span>
+          <div className="space-y-6">
+            {approvals.map((a, i) => (
+              <div key={a.name} className={`reveal delay- flex gap-6 p-6 rounded-2xl border bg-card items-start`}>
+                <div className="w-20 h-20 shrink-0 bg-white rounded-xl border p-2 flex items-center justify-center shadow-sm">
+                  <img src={a.logo} alt={a.name} className="h-full w-auto object-contain" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Shield className="w-4 h-4 text-gold" />
+                    <h3 className="font-bold text-foreground">{a.name}</h3>
                   </div>
-                )}
-                <h3 className="font-semibold text-foreground text-sm">{acc.title || acc.name}</h3>
-                <p className="text-xs mt-2">{acc.description || acc.desc}</p>
+                  <p className="text-xs font-semibold text-gold uppercase tracking-wider mb-2">{a.fullName}</p>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{a.desc}</p>
+                </div>
               </div>
             ))}
           </div>
-
-          <div className="mt-16 max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gold-light border border-[hsl(var(--gold)/0.2)]">
-              <FileText className="w-4 h-4 text-navy" />
-              <span className="text-sm font-medium text-foreground/80">
-                For approval letters and detailed disclosure documents, visit the{" "}
-                <a href="/mandatory-disclosure" className="text-navy font-semibold hover:underline">Mandatory Disclosure</a> page.
-              </span>
-            </div>
-          </div>
         </div>
       </section>
+      <EnquiryCTA />
     </Layout>
   );
 }

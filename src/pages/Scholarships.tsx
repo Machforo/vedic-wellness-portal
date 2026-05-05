@@ -1,81 +1,52 @@
-import Layout from "@/components/Layout";
+﻿import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Award, ExternalLink } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { CheckCircle2 } from "lucide-react";
 
-const defaultScholarships = [
-  { category: "Merit Scholarship", concession: "Up to 100% tuition fee waiver", description: "Awarded to top performers in qualifying examinations (10+2). Details available at the time of counseling." },
-  { category: "Academic Excellence", concession: "Up to 25% fee waiver", description: "Automatically applied for students with 90% and above marks in 10+2 (PCB/PCM)." },
-  { category: "SC/ST/OBC Scholarship", concession: "As per UP Scholarship Portal norms", description: "Apply through scholarship.up.gov.in. Ishan Pharmacy assists in documentation and verification." },
-  { category: "Economically Weaker Section", concession: "Partial fee concession", description: "Family income below ₹2.5 LPA. Submit income certificate with admission application." },
-  { category: "Sibling Discount", concession: "10% fee waiver", description: "Two or more siblings enrolled simultaneously at Ishan Group. Inform admissions office during enrolment." },
-  { category: "Sports Scholarship", concession: "Up to 15% fee waiver", description: "State or National level sports achievement required. Submit certificates during admission." },
+const scholarships = [
+  { name: "UP Government Scholarship", type: "Government", eligibility: "SC/ST/OBC/General EWS students domiciled in UP. Applied through URISE portal.", benefit: "Tuition fee waiver/reimbursement as per UP scholarship norms." },
+  { name: "National Scholarship Portal (NSP)", type: "Government", eligibility: "Central sector scholarship for students with NEET rank and family income below Rs 8 lakh.", benefit: "Up to Rs 12,000 per annum." },
+  { name: "IAMC Merit Scholarship", type: "Institutional", eligibility: "BAMS students with high NEET rank (top 10%) and consistent academic performance from Year 1.", benefit: "Partial fee waiver — 10% to 25% of tuition fee." },
+  { name: "AYUSH Ministry Fellowships", type: "Government", eligibility: "Post-BAMS researchers and internship students for research in classical Ayurveda.", benefit: "Monthly stipend as per AYUSH ministry guidelines." },
 ];
 
 export default function ScholarshipsPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("admissions");
-  // Schema: scholarships = [{category, concession, description}]
-  const scholarships = data?.scholarships?.length > 0 ? data.scholarships : defaultScholarships;
-
   return (
     <Layout>
-      <PageHeader
-        title="Scholarships"
-        subtitle="Financial support options for deserving healthcare aspirants across all pharmacy programs"
-        breadcrumbs={[{ label: "Admissions", href: "/admissions" }, { label: "Scholarships" }]}
-      />
-
+      <PageHeader title="Scholarships & Financial Aid" subtitle="Government and institutional scholarships available for BAMS students at IAMC" breadcrumbs={[{ label: "BAMS Programme", href: "/courses/bams" }, { label: "Scholarships" }]} />
       <section className="py-20 md:py-28" ref={ref}>
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto mb-12">
-            <div className="reveal space-y-8">
-              <p className="text-foreground/70 leading-relaxed">
-                Ishan Pharmacy believes that financial constraints should never hinder a student's access to quality pharmaceutical education. We offer multiple scholarship schemes — including merit awards, category-based support, and need-based concessions — to ensure that every deserving student can pursue their healthcare career.
-              </p>
-              <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80" alt="Ishan Pharmacy Student Success" className="w-full h-80 object-cover" />
-              </div>
-            </div>
-            <div className="space-y-6">
-              {scholarships.slice(0, 3).map((s: any, i: number) => (
-                <div key={s.category || i} className={`reveal delay-${Math.min(i, 5)}00 rounded-xl border bg-card p-6`}>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-gold-light flex items-center justify-center shrink-0">
-                      <Award className="w-5 h-5 text-navy" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground mb-3">{s.category}</h3>
-                      <div className="grid gap-2 text-sm">
-                        <div><span className="text-muted-foreground block text-xs">Benefit:</span><span className="text-foreground/80 font-medium">{s.concession}</span></div>
-                        <div><span className="text-muted-foreground block text-xs">Details:</span><span className="text-foreground/80">{s.description}</span></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="container-wide max-w-5xl">
+          <div className="reveal mb-12">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Financial Assistance</p>
+            <h2 className="font-bold text-foreground mb-4">Scholarships for BAMS Students</h2>
+            <p className="text-foreground/70 leading-relaxed max-w-2xl">Multiple scholarship programmes are available to BAMS students at IAMC. Our admissions team assists eligible students in applying.</p>
           </div>
-          <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {scholarships.slice(3).map((s: any, i: number) => (
-              <div key={s.category || i} className={`reveal delay-${Math.min(i, 5)}00 rounded-xl border bg-card p-6`}>
-                <h3 className="font-semibold text-foreground mb-3">{s.category}</h3>
-                <p className="text-sm text-foreground/80 mb-2 font-medium">{s.concession}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">{s.description}</p>
+          <div className="space-y-6 mb-12">
+            {scholarships.map((s, i) => (
+              <div key={s.name} className="reveal p-6 rounded-2xl border bg-card" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="font-bold text-foreground">{s.name}</h3>
+                  <span className={`text-xs font-black uppercase tracking-widest px-2.5 py-1 rounded-lg ${s.type === "Government" ? "bg-navy text-white" : "bg-gold text-navy"}`}>{s.type}</span>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div><p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Eligibility</p><p className="text-foreground/70">{s.eligibility}</p></div>
+                  <div><p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Benefit</p><p className="text-foreground/70 font-semibold">{s.benefit}</p></div>
+                </div>
               </div>
             ))}
           </div>
-          <div className="max-w-6xl mx-auto mt-12 p-6 rounded-xl bg-section-alt border text-center">
-            <p className="text-sm mb-3">Government Scholarships (SC/ST/OBC) are processed through:</p>
-            <a href="https://scholarship.up.gov.in" target="_blank" rel="noopener" className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:underline">
-              UP Scholarship Portal <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+          <div className="reveal p-6 rounded-2xl bg-navy/5 border border-navy/10">
+            <h3 className="font-bold text-foreground mb-3">How to Apply</h3>
+            <ul className="space-y-2">
+              {["Register on URISE portal for UP government scholarships","Register on NSP portal for central government scholarships","Contact IAMC admissions cell for institutional scholarship application","Ensure all documents including income certificate are current"].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-foreground/70"><CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />{item}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
-
       <EnquiryCTA />
     </Layout>
   );

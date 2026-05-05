@@ -6,36 +6,36 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const eminentFaculty = [
   {
-    name: "Dr. Sandeep Singh",
+    name: "Dr. Vijay Kumar Sharma",
     designation: "Principal",
-    qualification: "PhD, M.Pharm",
-    specialisation: "Pharmaceutics & Drug Delivery",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
-    bio: "Dr. Sandeep Singh is a visionary academician dedicated to the advancement of pharmaceutical education in India. With extensive experience in drug formulation, he has mentored hundreds of aspiring pharmacists."
+    qualification: "MD (Kayachikitsa), BAMS",
+    specialisation: "Internal Medicine (Kayachikitsa)",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80",
+    bio: "Dr. Vijay Kumar Sharma is a distinguished Ayurvedic scholar and clinician with over 22 years of experience. He specialises in chronic disease management through classical Kayachikitsa protocols."
   },
   {
-    name: "Prof. Rajesh Khanna",
-    designation: "Professor",
-    qualification: "M.Pharm, PhD",
-    specialisation: "Pharmacology & Toxicology",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=800&q=80",
-    bio: "Prof. Rajesh Khanna brings profound insights into pharmacological sciences. His clinical approach to teaching ensures that students understand the therapeutic actions and safe usage of drugs."
+    name: "Dr. Sunita Agarwal",
+    designation: "Professor & HOD",
+    qualification: "MD (Rachana Sharir), BAMS",
+    specialisation: "Ayurvedic Anatomy (Rachana Sharir)",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=800&q=80",
+    bio: "Prof. Sunita Agarwal brings 18 years of expertise in Rachana Sharir. She integrates classical Marma mapping with modern anatomical principles to provide a comprehensive understanding of the human body."
   },
   {
-    name: "Dr. Megha Gupta",
-    designation: "Associate Professor",
-    qualification: "PhD, M.Pharm",
-    specialisation: "Pharmaceutical Chemistry",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
-    bio: "Dr. Megha Gupta is a specialist in drug synthesis and analysis. She leads our Research & Development wing, encouraging students to contribute to national and international pharmaceutical journals."
+    name: "Dr. Ravi Shankar Mishra",
+    designation: "Professor & HOD",
+    qualification: "MD (Dravyaguna), BAMS",
+    specialisation: "Materia Medica (Dravyaguna Vigyana)",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80",
+    bio: "Dr. Ravi Shankar Mishra is a specialist in medicinal plant identification and pharmacology. He oversees the campus Herbal Garden and guides students in authentic drug identification and usage."
   },
   {
-    name: "Ms. Anjali Sharma",
-    designation: "Assistant Professor",
-    qualification: "M.Pharm",
-    specialisation: "Pharmacognosy & Natural Products",
-    image: "https://images.unsplash.com/photo-1580894732230-282b963aee2b?auto=format&fit=crop&w=800&q=80",
-    bio: "Ms. Anjali Sharma bridges the gap between traditional herbal medicine and modern drug discovery. She mentors our students in identifying and extracting active pharmaceutical ingredients from natural sources."
+    name: "Dr. Priyanka Singh",
+    designation: "Associate Professor & HOD",
+    qualification: "MD (Prasuti & Stri Roga), BAMS",
+    specialisation: "OB/GYN (Prasuti & Stri Roga)",
+    image: "https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&w=800&q=80",
+    bio: "Dr. Priyanka Singh specialises in women's health through Ayurveda. Her clinical focus includes antenatal care (Garbhini Paricharya) and the management of PCOS through classical protocols."
   }
 ];
 
@@ -50,10 +50,10 @@ export default function FacultySection() {
           <div className="max-w-2xl">
             <p className="reveal text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Academic Leaders</p>
             <h2 className="reveal delay-100 text-3xl md:text-5xl font-bold text-navy">
-              Eminent Faculty & Mentors
+              Eminent Vaidya Faculty & Mentors
             </h2>
             <p className="reveal delay-200 mt-5 leading-relaxed">
-              Our faculty members are distinguished pharmaceutical scholars and industry experts, dedicated to nurturing the next generation of healthcare professionals through practice-oriented mentorship.
+              Our faculty members are distinguished Ayurvedic clinicians and scholars, dedicated to nurturing the next generation of Vaidyas through deep textual scholarship and practice-oriented hospital mentorship.
             </p>
           </div>
           <Link 
@@ -78,7 +78,7 @@ export default function FacultySection() {
                   alt={f.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80";
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -139,7 +139,7 @@ export default function FacultySection() {
                     alt={selectedFaculty.name} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent" />

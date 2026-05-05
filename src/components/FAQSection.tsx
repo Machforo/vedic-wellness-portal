@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    question: "What programs are offered at Ishan Pharmacy?",
-    answer: "Ishan Institute of Pharmacy offers the 2-year Diploma in Pharmacy (D.Pharm) and the 4-year Bachelor of Pharmacy (B.Pharm) programs."
+    question: "What programme does IAMC offer?",
+    answer: "IAMC offers the 5.5-year BAMS (Bachelor of Ayurvedic Medicine and Surgery) degree programme, NCISM-approved, including a one-year compulsory rotatory internship."
   },
   {
-    question: "Is Ishan Pharmacy approved by the PCI?",
-    answer: "Yes, Ishan Institute of Pharmacy is fully approved by the Pharmacy Council of India (PCI) and affiliated with AKTU and BTE UP."
+    question: "Is IAMC approved by NCISM?",
+    answer: "Yes, IAMC is NCISM-approved. BAMS graduates are eligible for practitioner registration and government AYUSH service."
   },
   {
     question: "How does the institute support placements?",
@@ -25,7 +25,7 @@ const faqs = [
     answer: "Yes, we regularly organize industrial visits to leading pharmaceutical manufacturing units to give students a real-world understanding of large-scale production and quality control."
   },
   {
-    question: "What are the eligibility criteria for D.Pharm and B.Pharm?",
+    question: "What is the eligibility for BAMS admission?",
     answer: "Candidates must have passed 10+2 with Physics, Chemistry, and Biology/Mathematics with at least 50% marks (45% for SC/ST) from a recognized board."
   }
 ];

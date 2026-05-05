@@ -2,81 +2,41 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Award, Users, Globe, BookOpen, Building, TrendingUp, Shield, Lightbulb, GraduationCap, Heart, CheckCircle } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { Award, Building, Leaf, Users, BookOpen, Globe } from "lucide-react";
 
-const defaultReasons = [
-  { icon: Shield, title: "PCI Approved & AKTU/BTE UP Affiliated", description: "Ishan Institute of Pharmacy is fully approved by the Pharmacy Council of India (PCI) and affiliated with AKTU & BTE UP, ensuring your diploma/degree is nationally recognized for professional practice." },
-  { icon: Building, title: "10 Specialized Laboratories", description: "We offer 10 state-of-the-art pharmaceutical laboratories â€” from Pharmaceutics to Pharmacology â€” giving every student comprehensive hands-on training across all domains of pharmacy." },
-  { icon: Award, title: "Regular Industrial Visits", description: "From early semesters, students visit leading pharmaceutical manufacturing plants (Sun Pharma, Cipla, Dr. Reddy's), providing firsthand insight into large-scale drug production and quality control." },
-  { icon: Users, title: "Expert Industry Faculty", description: "Learn from a distinguished faculty of industry practitioners, research scientists, and pharmacologists who bridge academic theory with real-world pharmaceutical challenges." },
-  { icon: GraduationCap, title: "Dedicated Placement & Training Cell", description: "Our Placement Cell maintains active relationships with top pharma companies and hospitals, ensuring our graduates receive top-tier job opportunities upon completing their programs." },
-  { icon: BookOpen, title: "Dedicated Herbal Garden", description: "Our unique herbal garden provides students direct exposure to medicinal plants â€” essential for Pharmacognosy training â€” enriching practical knowledge beyond the classroom." },
-  { icon: Lightbulb, title: "Modern Digital Library", description: "Students have access to a comprehensive medical and pharmaceutical library with thousands of titles, journals, and digital research databases, supporting research and academic excellence." },
-  { icon: Heart, title: "Health Camps & Community Service", description: "Through regular health awareness camps and medical outreach initiatives, students develop a strong sense of social responsibility and a commitment to ethical public healthcare." },
+const reasons = [
+  { icon: Award, title: "NCISM Approved", desc: "The only approval that confers practitioner registration eligibility. IAMC's BAMS graduates are registered Vaidyas, eligible for government AYUSH service and independent clinical practice." },
+  { icon: Building, title: "In-Campus Teaching Hospital", desc: "Daily OPD exposure from Year 1 — over 5,000 patients per year. No commute, no waiting — clinical learning is integrated into the academic week from the first semester." },
+  { icon: Leaf, title: "Living Herbal Garden", desc: "Over 200 medicinal plant species on campus — the living classroom for Dravyaguna Vigyana. Students connect classical drug knowledge to living botanical specimens daily." },
+  { icon: Users, title: "14 Departments, MD Faculty", desc: "Every Ayurvedic specialisation covered by a dedicated MD-qualified Vaidya. Students engage with subject experts who practise what they teach in the hospital OPD." },
+  { icon: BookOpen, title: "Research Culture", desc: "Peer-reviewed Ayurvedic journal, annual Global Ayurvedic Summit, and AYUSH ministry-recognised research projects. AIAPGET preparation guidance for MD aspirants." },
+  { icon: Globe, title: "Only Private AYUSH College in NCR", desc: "Greater Noida's strategic location in Delhi NCR means proximity to AIIMS, Safdarjung, and major AYUSH hospitals — additional clinical exposure opportunities for internship students." },
 ];
 
-export default function WhyIshanPharmacyPage() {
+export default function WhyChooseUsPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("aboutus");
-  const whyContent: string | undefined = data?.WhyIshanPharmacy?.content;
-
   return (
     <Layout>
-      <PageHeader
-        title="Why Ishan Pharmacy?"
-        subtitle="8 reasons why students choose Ishan Institute of Pharmacy for a career in healthcare and pharmaceuticals"
-        breadcrumbs={[{ label: "Why Ishan Pharmacy?" }]}
-      />
-
+      <PageHeader title="Why Choose IAMC" subtitle="What makes Ishan Ayurvedic Medical College the right choice for your BAMS degree in the National Capital Region" breadcrumbs={[{ label: "About", href: "/about" }, { label: "Why Choose Us" }]} />
       <section className="py-20 md:py-28" ref={ref}>
-        <div className="container-wide">
-          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto mb-12">
-            <div className="reveal space-y-8">
-              <p className="text-foreground/70 leading-relaxed text-lg">
-                Ishan Institute of Pharmacy is not just an educational centre; it's a launchpad for healthcare leaders and pharmacists. Our commitment to laboratory training, ethical practice, and industry partnerships sets us apart in pharmaceutical education.
-              </p>
-              <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80" alt="Ishan Pharmacy Excellence" className="w-full h-80 object-cover" />
-              </div>
-            </div>
-            <div className="space-y-6">
-              {defaultReasons.slice(0, 4).map((r, i) => {
-                const Icon = r.icon;
-                return (
-                  <div key={r.title} className={`reveal delay-${Math.min(i % 3, 2)}00 flex gap-5 p-6 rounded-xl border bg-card hover:shadow-[0_4px_20px_hsl(var(--navy)/0.06)] transition-shadow group`}>
-                    <div className="w-12 h-12 rounded-xl bg-gold-light flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
-                      <Icon className="w-6 h-6 text-navy" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-foreground text-lg mb-2">{i + 1}. {r.title}</h3>
-                      <p className="text-sm leading-relaxed">{r.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+        <div className="container-wide max-w-6xl">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Our Advantage</p>
+            <h2 className="font-bold text-foreground leading-tight mb-4">6 Reasons BAMS Students Choose IAMC</h2>
+            <p className="text-foreground/70 leading-relaxed">Choosing a BAMS college is choosing your entire clinical career. IAMC's unique combination of NCISM approval, an in-campus teaching hospital, 14 specialised departments, and a living herbal garden makes it unrivalled in NCR.</p>
           </div>
-          <div className="max-w-6xl mx-auto space-y-6">
-            {defaultReasons.slice(4).map((r, i) => {
-              const Icon = r.icon;
-              return (
-                <div key={r.title} className={`reveal delay-${Math.min(i % 3, 2)}00 flex gap-5 p-6 rounded-xl border bg-card hover:shadow-[0_4px_20px_hsl(var(--navy)/0.06)] transition-shadow group`}>
-                  <div className="w-12 h-12 rounded-xl bg-gold-light flex items-center justify-center shrink-0 group-hover:bg-gold/20 transition-colors">
-                    <Icon className="w-6 h-6 text-navy" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-foreground text-lg mb-2">{i + 5}. {r.title}</h3>
-                    <p className="text-sm leading-relaxed">{r.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {reasons.map((r, i) => { const Icon = r.icon; return (
+              <div key={r.title} className={`reveal delay- p-6 rounded-2xl border bg-card hover:shadow-[0_8px_32px_hsl(var(--navy)/0.08)] transition-all`}>
+                <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-navy" /></div>
+                <h3 className="font-bold text-foreground mb-2">{r.title}</h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">{r.desc}</p>
+              </div>
+            ); })}
           </div>
         </div>
       </section>
-
-      <EnquiryCTA title="Convinced? Take the Next Step" subtitle="Schedule a campus visit or speak with our admissions counsellor today." />
+      <EnquiryCTA />
     </Layout>
   );
 }

@@ -4,11 +4,10 @@ import {
   Menu, X, Phone, Mail, ChevronDown,
   BookOpen, Users, Award, Building2, GraduationCap,
   Camera, Microscope, ArrowRight, FileText, Shield,
-  MessageSquare, Briefcase, Search, Activity
+  MessageSquare, Briefcase, Search, Activity, Leaf, Heart
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface NavLink { label: string; href: string; }
 interface MegaColumn { heading: string; icon: React.ElementType; links: NavLink[]; }
 interface FeaturedCard { img: string; title: string; desc: string; href: string; }
@@ -19,14 +18,13 @@ interface NavItem {
   extraImgs?: { img: string; caption: string; href: string }[];
 }
 
-// ─── Navigation Data ──────────────────────────────────────────────────────────
 const navLinks: NavItem[] = [
   {
     label: "About Us",
     featured: {
-      img: "https://images.unsplash.com/photo-1587854692152-cbe668df9731?q=80&w=800&auto=format&fit=crop",
-      title: "Excellence in Pharmacy",
-      desc: "PCI Approved institution in Greater Noida, dedicated to producing competent healthcare professionals.",
+      img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop",
+      title: "Excellence in Ayurveda",
+      desc: "NCISM-approved, the only private AYUSH medical college in NCR — rooted in classical tradition, oriented to modern clinical practice.",
       href: "/about",
     },
     columns: [
@@ -34,7 +32,7 @@ const navLinks: NavItem[] = [
         heading: "Institution",
         icon: Building2,
         links: [
-          { label: "About Ishan Pharmacy", href: "/about" },
+          { label: "About IAMC", href: "/about" },
           { label: "Principal's Message", href: "/principal-message" },
           { label: "Mission & Vision", href: "/mission-vision" },
           { label: "Why Choose Us", href: "/why-choose-us" },
@@ -46,28 +44,28 @@ const navLinks: NavItem[] = [
         icon: Shield,
         links: [
           { label: "Mandatory Disclosure", href: "/mandatory-disclosure" },
-          { label: "Code of Conduct", href: "/code-of-conduct-discipline" },
+          { label: "Code of Conduct", href: "/code-of-conduct" },
           { label: "FAQs", href: "/faqs" },
         ],
       },
     ],
   },
   {
-    label: "Programs",
+    label: "BAMS Programme",
     featured: {
-      img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800&auto=format&fit=crop",
-      title: "Pharmaceutical Sciences",
-      desc: "Comprehensive B.Pharm and D.Pharm programs designed for modern healthcare practice.",
-      href: "/courses/b-pharm",
+      img: "https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=800&auto=format&fit=crop",
+      title: "Bachelor of Ayurvedic Medicine & Surgery",
+      desc: "5.5-year NCISM-recognised degree with in-campus hospital clinical training and 14 specialised Ayurvedic departments.",
+      href: "/courses/bams",
     },
     columns: [
       {
-        heading: "Courses",
+        heading: "Programme",
         icon: GraduationCap,
         links: [
-          { label: "Bachelor of Pharmacy (B.Pharm)", href: "/courses/b-pharm" },
-          { label: "Diploma in Pharmacy (D.Pharm)", href: "/courses/d-pharm" },
-          { label: "Certificate Programmes", href: "/certificate-programs" },
+          { label: "About BAMS", href: "/courses/bams" },
+          { label: "Scope of BAMS", href: "/scope-of-bams" },
+          { label: "Syllabus — Year Wise", href: "/syllabus" },
         ],
       },
       {
@@ -90,58 +88,67 @@ const navLinks: NavItem[] = [
     ],
   },
   {
-    label: "Labs & Campus",
+    label: "14 Departments",
     featured: {
-      img: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=800&auto=format&fit=crop",
-      title: "10 Specialized Labs",
-      desc: "State-of-the-art facilities mirroring professional pharmacy settings.",
-      href: "/pharmaceutical-chemistry",
+      img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop",
+      title: "14 Ayurvedic Departments",
+      desc: "Every branch of Ayurvedic medicine covered — from Siddhanta to Surgery — with dedicated faculty and clinical exposure.",
+      href: "/kayachikitsa",
     },
     columns: [
       {
-        heading: "10 Labs",
-        icon: Microscope,
+        heading: "Foundational",
+        icon: BookOpen,
         links: [
-          { label: "Pharmaceutics Lab", href: "/pharmaceutics" },
-          { label: "Pharmaceutical Chemistry", href: "/pharmaceutical-chemistry" },
-          { label: "Pharmacognosy Lab", href: "/pharmacognosy" },
-          { label: "Pharmacology Lab", href: "/pharmacology" },
-          { label: "Pharmacy Practice", href: "/pharmacy-practice" },
-          { label: "Human Anatomy", href: "/human-anatomy" },
-          { label: "Machine Room", href: "/machine-room" },
-          { label: "Herbal Garden", href: "/herbal-garden" },
-          { label: "Museum & Computer Lab", href: "/museum-computer-lab" },
+          { label: "Ayurvedic Siddhanta", href: "/ayurvedic-siddhanta" },
+          { label: "Rachana Sharir (Anatomy)", href: "/rachana-sharir" },
+          { label: "Kriya Sharir (Physiology)", href: "/kriya-sharir" },
+          { label: "Dravyaguna Vigyana", href: "/dravyaguna-vigyana" },
+          { label: "Rasa Shastra & Bhaishajya Kalpana", href: "/rasa-shastra" },
+          { label: "Samhita & Sanskrit", href: "/samhita-sanskrit" },
+          { label: "Agada Tantra (Toxicology)", href: "/agada-tantra" },
         ],
       },
       {
-        heading: "Facilities",
-        icon: Building2,
+        heading: "Clinical",
+        icon: Heart,
         links: [
-          { label: "Infrastructure", href: "/infrastructure" },
-          { label: "Library", href: "/library" },
-          { label: "Hostel Facilities", href: "/hostel" },
-          { label: "Auditorium & Sports", href: "/auditorium-sports" },
+          { label: "Kayachikitsa (Internal Medicine)", href: "/kayachikitsa" },
+          { label: "Panchkarma", href: "/panchkarma" },
+          { label: "Shalya Tantra (Surgery)", href: "/shalya-tantra" },
+          { label: "Shalakya Tantra (ENT & Ophth.)", href: "/shalakya-tantra" },
+          { label: "Prasuti & Stri Roga (OB/GYN)", href: "/prasuti-stri-roga" },
+          { label: "Kaumarabhritya (Paediatrics)", href: "/kaumarabhritya" },
+          { label: "Swasthavritta & Yoga", href: "/swasthavritta-yoga" },
         ],
       },
     ],
   },
   {
-    label: "Student Life",
+    label: "Campus & Life",
     featured: {
       img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
-      title: "Vibrant Campus",
-      desc: "Engaging activities, events, and resources for an enriching student experience.",
+      title: "Vibrant Campus Life",
+      desc: "Global Ayurvedic Summits, Yoga Day, Shishyopanyan Sanshkar, medical camps and a living herbal garden.",
       href: "/news-events",
     },
     columns: [
       {
-        heading: "Learning & Events",
-        icon: Activity,
+        heading: "Facilities",
+        icon: Building2,
+        links: [
+          { label: "Infrastructure", href: "/infrastructure" },
+          { label: "Herbal Garden", href: "/herbal-garden" },
+          { label: "Hostel", href: "/hostel" },
+          { label: "Auditorium & Sports", href: "/auditorium-sports" },
+        ],
+      },
+      {
+        heading: "Events & Gallery",
+        icon: Camera,
         links: [
           { label: "News & Events", href: "/news-events" },
           { label: "Events Calendar", href: "/events-calendar" },
-          { label: "Guest Lectures", href: "/guest-lectures" },
-          { label: "Industrial Visits", href: "/industrial-visits" },
           { label: "Photo Gallery", href: "/photo-gallery" },
           { label: "Video Gallery", href: "/video-gallery" },
           { label: "Press Coverage", href: "/press-coverage" },
@@ -154,6 +161,7 @@ const navLinks: NavItem[] = [
           { label: "Downloads", href: "/downloads" },
           { label: "Past Exam Papers", href: "/past-papers" },
           { label: "Student Portal", href: "/student-portal" },
+          { label: "Fee Payment", href: "/fee-payment" },
         ],
       },
     ],
@@ -162,19 +170,20 @@ const navLinks: NavItem[] = [
     label: "Connect",
     featured: {
       img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
-      title: "Research & Careers",
-      desc: "Outstanding placement outcomes and cutting-edge research opportunities.",
+      title: "Research & Placements",
+      desc: "Clinical research, Ayurvedic journal, alumni Vaidyas, and government AYUSH placement guidance.",
       href: "/placements",
     },
     columns: [
       {
-        heading: "Career & Research",
-        icon: Briefcase,
+        heading: "Research",
+        icon: Microscope,
         links: [
-          { label: "Placements", href: "/placements" },
-          { label: "Research Projects", href: "/research-projects" },
+          { label: "Research Journal", href: "/research-journal" },
           { label: "Publications", href: "/publications" },
+          { label: "Research Projects", href: "/research-projects" },
           { label: "Alumni Network", href: "/alumni-network" },
+          { label: "Placements", href: "/placements" },
         ],
       },
       {
@@ -190,7 +199,6 @@ const navLinks: NavItem[] = [
   },
 ];
 
-// ─── Component ─────────────────────────────────────────────────────────────────
 export default function Navbar({ isNotFound = false }: { isNotFound?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -200,27 +208,26 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
   const location = useLocation();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Searchable items
   const searchableItems = [
-    { name: "B.Pharm", href: "/courses/b-pharm" },
-    { name: "D.Pharm", href: "/courses/d-pharm" },
-    { name: "Pharmaceutical Chemistry", href: "/pharmaceutical-chemistry" },
-    { name: "Pharmaceutics", href: "/pharmaceutics" },
+    { name: "BAMS Programme", href: "/courses/bams" },
     { name: "Admissions", href: "/admissions" },
-    { name: "Placements", href: "/placements" },
+    { name: "Kayachikitsa", href: "/kayachikitsa" },
+    { name: "Panchkarma", href: "/panchkarma" },
     { name: "Faculty", href: "/faculty" },
     { name: "Contact Us", href: "/contact" },
-    { name: "Infrastructure", href: "/infrastructure" },
+    { name: "Herbal Garden", href: "/herbal-garden" },
     { name: "News & Events", href: "/news-events" },
+    { name: "Placements", href: "/placements" },
+    { name: "NCISM Approvals", href: "/approvals" },
   ];
 
-  const filteredItems = searchQuery.trim().length > 0 
+  const filteredItems = searchQuery.trim().length > 0
     ? searchableItems.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
     : [];
 
-  useEffect(() => { 
-    setMobileOpen(false); 
-    setOpenDropdown(null); 
+  useEffect(() => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
     setSearchOpen(false);
   }, [location.pathname]);
 
@@ -240,20 +247,19 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
 
   const adjustFont = (amount: number) => {
     const root = document.documentElement;
-    // Default to 16 if not set
     const currentSize = parseFloat(getComputedStyle(root).getPropertyValue('--base-font-size') || "16");
     const newSize = Math.max(12, Math.min(24, currentSize + amount));
     root.style.setProperty('--base-font-size', `${newSize}px`);
-    localStorage.setItem('ishan_pharmacy_font_size', newSize.toString());
+    localStorage.setItem('ishan_ayurveda_font_size', newSize.toString());
   };
 
   const resetFont = () => {
     document.documentElement.style.setProperty('--base-font-size', '16px');
-    localStorage.setItem('ishan_pharmacy_font_size', '16');
+    localStorage.setItem('ishan_ayurveda_font_size', '16');
   };
 
   useEffect(() => {
-    const savedSize = localStorage.getItem('ishan_pharmacy_font_size');
+    const savedSize = localStorage.getItem('ishan_ayurveda_font_size');
     if (savedSize) {
       document.documentElement.style.setProperty('--base-font-size', `${savedSize}px`);
     }
@@ -266,14 +272,11 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
 
   return (
     <>
-      {/* ═══════════════════════ HEADER ═══════════════════════ */}
-      {/* Must be `relative` so absolute mega-panel child is positioned from header bottom */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${(scrolled || isNotFound) ? "bg-card shadow-lg" : "bg-transparent"}`}
         onMouseLeave={closeMenu}
       >
-
-        {/* ── Top info bar ── */}
+        {/* Top info bar */}
         <div className={`bg-navy/10 backdrop-blur-sm text-white text-sm hidden md:block transition-all duration-500 ${scrolled ? "h-0 overflow-hidden" : "py-2 border-b border-white/10"}`}>
           <div className="container-wide flex items-center justify-between">
             <div className="flex items-center gap-6">
@@ -285,7 +288,6 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
               </a>
             </div>
             <div className="flex items-center gap-4 text-xs font-medium">
-              {/* Font controls */}
               <div className="flex items-center gap-1.5 opacity-80 border-r border-white/20 pr-4">
                 <span className="text-xs uppercase tracking-wider opacity-60">Text:</span>
                 <button onClick={() => adjustFont(-1)} className="w-5 h-5 flex items-center justify-center hover:bg-white/10 rounded transition-colors" title="Decrease font size" aria-label="Decrease font size">A-</button>
@@ -301,19 +303,17 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
           </div>
         </div>
 
-        {/* ── Main nav bar ── */}
+        {/* Main nav bar */}
         <div className={`container-wide flex items-center justify-between transition-all duration-500 ${scrolled ? "h-14 md:h-[64px]" : "h-16 md:h-20"}`}>
 
           {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 shrink-0 group">
+          <Link to="/" className="flex items-center gap-2 shrink-0 group">
             <div className="h-10 shrink-0 overflow-hidden flex items-center">
-              <img 
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtBPP1F_Pp9ioq_SfiDL6mn5No4JbZSE9X9A&s" 
-                alt="Ishan Pharmacy Logo" 
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtBPP1F_Pp9ioq_SfiDL6mn5No4JbZSE9X9A&s"
+                alt="Ishan Ayurvedic Medical College Logo"
                 className="h-full w-auto object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
             </div>
             <div className="flex flex-col leading-tight">
@@ -321,12 +321,12 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                 ISHAN
               </span>
               <span className={`text-[10px] uppercase font-bold tracking-[0.14em] leading-none transition-colors duration-500 ${(scrolled || isNotFound) ? "text-muted-foreground" : "text-white/85 drop-shadow-md"}`}>
-                Institute of Pharmacy
+                Ayurvedic Medical College
               </span>
             </div>
           </Link>
 
-          {/* Desktop nav — only trigger buttons here */}
+          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-0.5">
             {navLinks.map((link) => (
               <button
@@ -365,23 +365,16 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
           </div>
         </div>
 
-        {/* ═══════════════ FULL-WIDTH MEGA MENU PANEL ═══════════════
-            Rendered as a DIRECT child of <header> so top:100% = bottom of header.
-            left-0 right-0 makes it span the full viewport width.            */}
+        {/* Mega Menu Panel */}
         {activeLink && (
           <div
             className="hidden lg:block absolute top-full left-0 right-0 animate-slide-in-nav shadow-[0_16px_64px_hsl(0,0%,0%,0.18)]"
             onMouseEnter={() => openMenu(activeLink.label)}
           >
-            {/* Thin visual separator */}
             <div className="h-px w-full bg-border/60" />
-
             <div className="bg-card">
-              {/* Inner centred content — uses same max-width as the rest of the site */}
               <div className="container-wide py-6">
                 <div className="flex gap-6">
-
-                  {/* Left: featured image card */}
                   <Link
                     to={activeLink.featured.href}
                     className="relative w-72 shrink-0 rounded-2xl overflow-hidden group"
@@ -403,10 +396,7 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                     </div>
                   </Link>
 
-                  {/* Right: columns + optional image tiles */}
                   <div className="flex-1 min-w-0">
-
-                    {/* Link columns */}
                     <div
                       className="grid gap-6"
                       style={{ gridTemplateColumns: `repeat(${activeLink.columns.length}, minmax(0,1fr))` }}
@@ -439,29 +429,6 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                         );
                       })}
                     </div>
-
-                    {/* Extra image tiles (Student Zone & Contact) */}
-                    {activeLink.extraImgs && activeLink.extraImgs.length > 0 && (
-                      <div className="grid grid-cols-2 gap-4 mt-5 pt-4 border-t border-border/40">
-                        {activeLink.extraImgs.map((tile) => (
-                          <Link
-                            key={tile.href}
-                            to={tile.href}
-                            className="relative rounded-xl overflow-hidden group h-[80px]"
-                          >
-                            <img
-                              src={tile.img}
-                              alt={tile.caption}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                            <div className="absolute inset-0 bg-navy/50 group-hover:bg-navy/60 transition-colors" />
-                            <span className="absolute bottom-2 left-3 text-xs font-bold text-white drop-shadow">
-                              {tile.caption}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -469,7 +436,7 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
           </div>
         )}
 
-        {/* ── Mobile menu ── */}
+        {/* Mobile menu */}
         {mobileOpen && (
           <div className="lg:hidden border-t bg-card animate-fade-up max-h-[80vh] overflow-y-auto">
             <div className="container-wide py-4 space-y-1">
@@ -508,7 +475,7 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
           </div>
         )}
 
-        {/* ── Global Search Overlay ── */}
+        {/* Global Search Overlay */}
         <AnimatePresence>
           {searchOpen && (
             <motion.div
@@ -519,8 +486,8 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
             >
               <div className="w-full max-w-4xl mx-auto flex flex-col h-full">
                 <div className="flex items-center justify-between mb-12">
-                  <span className="text-white/40 text-xs font-bold uppercase tracking-[0.3em]">Institutional Search</span>
-                  <button 
+                  <span className="text-white/40 text-xs font-bold uppercase tracking-[0.3em]">Ayurveda Search</span>
+                  <button
                     onClick={() => { setSearchOpen(false); setSearchQuery(""); }}
                     className="w-12 h-12 rounded-full bg-white/5 text-white flex items-center justify-center hover:bg-gold hover:text-navy transition-all"
                   >
@@ -530,22 +497,22 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
 
                 <div className="relative mb-12">
                   <Search className="absolute left-0 top-1/2 -translate-y-1/2 text-gold w-8 h-8" />
-                  <input 
+                  <input
                     autoFocus
-                    type="text" 
-                    placeholder="Search courses, pages, faculty..." 
+                    type="text"
+                    placeholder="Search BAMS, departments, faculty..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full bg-transparent border-b-2 border-white/10 pb-6 pl-12 text-3xl md:text-5xl font-bold text-white outline-none focus:border-gold transition-all placeholder:text-white/10"
                   />
                 </div>
 
-                <div className="flex-1 overflow-y-auto custom-scrollbar pr-4">
+                <div className="flex-1 overflow-y-auto pr-4">
                   {searchQuery.trim().length > 0 ? (
                     <div className="grid md:grid-cols-2 gap-4">
                       {filteredItems.length > 0 ? (
                         filteredItems.map((item) => (
-                          <Link 
+                          <Link
                             key={item.href}
                             to={item.href}
                             className="group p-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-all flex items-center justify-between"
@@ -567,8 +534,8 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                     <div>
                       <p className="text-white/40 text-xs font-bold uppercase tracking-widest mb-6">Popular Searches</p>
                       <div className="flex flex-wrap gap-3">
-                        {["B.Pharm", "D.Pharm", "10 Labs", "Admissions", "Placements", "Contact"].map(tag => (
-                          <button 
+                        {["BAMS", "Admissions", "Panchkarma", "Kayachikitsa", "Herbal Garden", "Contact"].map(tag => (
+                          <button
                             key={tag}
                             onClick={() => setSearchQuery(tag)}
                             className="px-6 py-3 rounded-xl bg-white/5 text-white/80 hover:bg-gold hover:text-navy transition-all font-bold text-sm"

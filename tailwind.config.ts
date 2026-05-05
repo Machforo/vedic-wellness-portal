@@ -56,14 +56,17 @@ export default {
         navy: {
           DEFAULT: "hsl(var(--navy))",
           light: "hsl(var(--navy) / 0.8)",
-          dark: "hsl(var(--navy) / 1.2)",
-          foreground: "hsl(var(--navy-foreground))",
+          dark: "hsl(var(--navy))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold) / 0.8)",
-          dark: "hsl(var(--gold) / 1.2)",
-          foreground: "hsl(var(--gold-foreground))",
+          dark: "hsl(var(--gold))",
+        },
+        saffron: {
+          DEFAULT: "hsl(var(--saffron))",
+          light: "hsl(var(--saffron) / 0.8)",
+          dark: "hsl(var(--saffron))",
         },
         "blue-light": "hsl(var(--blue-light))",
         ivory: "hsl(var(--background))",

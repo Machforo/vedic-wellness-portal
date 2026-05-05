@@ -6,36 +6,36 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const defaultNews = [
   {
-    title: "National Pharmacy Week Celebration",
-    date: "November 22, 2025",
+    title: "National Ayurveda Day & Dhanvantari Jayanti Celebration",
+    date: "October 28, 2025",
     category: "Events",
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80",
-    description: "Ishan Institute of Pharmacy celebrated National Pharmacy Week with a series of expert talks and student competitions focusing on the pharmacist's role in global health.",
-    location: "Auditorium, Ishan Pharmacy"
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
+    description: "Ishan Ayurvedic Medical College celebrated National Ayurveda Day with a mega health camp and shloka recitation competition. Distinguished Vaidyas shared insights on the global acceptance of Ayurveda.",
+    location: "Auditorium, IAMC Campus"
   },
   {
-    title: "Health Camp & Free Checkups in Greater Noida",
-    date: "February 18, 2025",
-    category: "Social Service",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
-    description: "Our D.Pharm and B.Pharm students organized a community outreach program to provide basic diagnostic tests and medication counseling to over 100 community members.",
-    location: "Knowledge Park III"
+    title: "Workshop on Clinical Application of Panchkarma",
+    date: "February 12, 2025",
+    category: "Academic",
+    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80",
+    description: "A three-day hands-on workshop was conducted for BAMS students on the practical procedures of Vamana and Virechana, led by senior practitioners from the IAMC Teaching Hospital.",
+    location: "Panchkarma Dept, IAMC"
   },
   {
-    title: "Industrial Visit to Sun Pharma Production Facility",
-    date: "January 25, 2025",
+    title: "Medicinal Plant Identification Tour in Herbal Garden",
+    date: "January 15, 2025",
     category: "Institutional",
-    image: "https://images.unsplash.com/photo-1587854692152-cbe668df9731?auto=format&fit=crop&w=800&q=80",
-    description: "Final year B.Pharm students visited the Sun Pharma manufacturing unit to understand large-scale drug production, quality control, and regulatory compliance.",
-    location: "Sun Pharma, Noida"
+    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80",
+    description: "First-year BAMS students participated in a guided tour of the campus Herbal Garden, identifying over 50 species of medicinal plants used in classical Ayurvedic formulations.",
+    location: "Herbal Garden, IAMC"
   },
   {
-    title: "Seminar on Modern Drug Delivery Systems",
-    date: "April 12, 2025",
+    title: "Guest Lecture: Surgical Excellence in Sushruta Samhita",
+    date: "April 05, 2025",
     category: "Guest Lecture",
-    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
-    description: "Eminent pharmaceutical scientists delivered a comprehensive lecture on the latest advancements in targeted drug delivery systems and their impact on patient care.",
-    location: "Seminar Hall, Ishan Pharmacy"
+    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=80",
+    description: "Eminent Shalya Tantra experts delivered a lecture on the surgical techniques described in Sushruta Samhita and their correlation with modern surgical principles.",
+    location: "Seminar Hall, IAMC"
   },
 ];
 
@@ -55,7 +55,7 @@ export default function NewsSection() {
               News &amp; Events
             </h2>
           </div>
-          <a href="/news" className="reveal delay-200 inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold transition-colors group">
+          <a href="/news-events" className="reveal delay-200 inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold transition-colors group">
             View All News
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
@@ -152,7 +152,7 @@ export default function NewsSection() {
                       </div>
                       <div className="flex items-center gap-1.5">
                         <MapPin size={14} className="text-gold" />
-                        {selectedNews.location || "Ishan Pharmacy Campus"}
+                        {selectedNews.location || "IAMC Campus"}
                       </div>
                     </div>
                     <h2 className="font-bold text-navy leading-tight">

@@ -6,59 +6,62 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 40% 10%;
+    /* ── Ayurveda colour palette (Synced with ishan-ayurveda) ───────────────── */
+    --background: 40 30% 98%;          /* warm cream */
+    --foreground: 213 50% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 40% 10%;
+    --card-foreground: 213 50% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 10%;
+    --popover-foreground: 213 50% 10%;
 
-    --primary: 220 72% 32%;
+    --primary: 215 100% 25%;           /* Institutional Blue #1a337e */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 30% 95%;
-    --secondary-foreground: 220 40% 10%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 213 50% 10%;
 
-    --muted: 220 15% 93%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 40 20% 90%;
+    --muted-foreground: 213 20% 45%;
 
-    --accent: 42 80% 50%;
-    --accent-foreground: 220 40% 10%;
+    --accent: 35 90% 45%;              /* Saffron */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 220 72% 32%;
+    --border: 40 20% 90%;
+    --input:  40 20% 90%;
+    --ring:   215 100% 25%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --navy: 220 55% 12%;
+    /* Custom tokens */
+    --navy: 215 100% 25%;
     --navy-foreground: 0 0% 100%;
-    --gold: 42 80% 50%;
-    --gold-foreground: 220 40% 10%;
-    --blue-light: 220 60% 96%;
-    --section-alt: 220 20% 97%;
+    --gold: 45 60% 50%;                /* Institutional Gold */
+    --gold-foreground: 213 50% 10%;
+    --saffron: 35 90% 45%;
+    --blue-light: 215 60% 96%;
+    --section-alt: 40 30% 98%;
 
     --font-heading: 'Inter', system-ui, sans-serif;
-    --font-body: 'Inter', system-ui, sans-serif;
+    --font-body:    'Inter', system-ui, sans-serif;
 
-    --gradient-primary: linear-gradient(135deg, hsl(220, 72%, 32%), hsl(220, 65%, 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(220, 55%, 12%) 0%, hsl(220, 45%, 20%) 50%, hsl(220, 72%, 32%) 100%);
-    --gradient-cta: linear-gradient(135deg, hsl(220, 72%, 32%), hsl(42, 80%, 50%), hsl(220, 65%, 45%));
-    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(220, 60%, 97%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(42, 80%, 50%), hsl(38, 85%, 55%));
-    --gradient-dark-section: linear-gradient(180deg, hsl(220, 55%, 12%) 0%, hsl(220, 72%, 32%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(215, 100%, 25%), hsl(215, 80%, 40%));
+    --gradient-hero:    linear-gradient(135deg, hsl(215, 100% , 25%) 0%, hsl(215, 80%, 35%) 100%);
+    --gradient-cta:     linear-gradient(135deg, hsl(215, 100%, 25%), hsl(35, 90%, 45%), hsl(215, 80%, 40%));
+    --gradient-card:    linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(40, 30%, 97%) 100%);
+    --gradient-gold:    linear-gradient(135deg, hsl(45, 60%, 50%), hsl(45, 70%, 60%));
+    --gradient-dark-section: linear-gradient(180deg, hsl(215, 100%, 25%) 0%, hsl(215, 80%, 20%) 100%);
 
-    --shadow-soft: 0 4px 20px -4px hsl(220 72% 32% / 0.15);
-    --shadow-elevated: 0 20px 60px -15px hsl(220 55% 12% / 0.2);
-    --shadow-glow: 0 0 40px hsl(220 72% 32% / 0.2);
-    --shadow-card: var(--shadow-soft);
+    --shadow-soft:    0 10px 40px -10px hsl(215 50% 10% / 0.08);
+    --shadow-elevated: 0 20px 50px -12px hsl(215 50% 10% / 0.15);
+    --shadow-glow:    0 0 40px hsl(215 100% 25% / 0.2);
+    --shadow-card:    var(--shadow-soft);
     --shadow-card-hover: var(--shadow-elevated);
-    --shadow-gold: 0 10px 20px -5px rgba(197, 157, 95, 0.3);
+    --shadow-gold:    0 10px 20px -5px rgba(190, 140, 40, 0.3);
   }
 }
 
@@ -138,7 +141,7 @@
   }
 
   .bg-navy-dark {
-    background-color: hsl(var(--navy-dark));
+    background-color: hsl(var(--navy));
   }
 
   .text-navy {
@@ -147,10 +150,6 @@
 
   .bg-section-alt {
     background-color: hsl(var(--section-alt));
-  }
-
-  .bg-gold-light {
-    background-color: hsl(var(--gold-light));
   }
 
   .gold-underline {
@@ -230,11 +229,11 @@
   }
 
   .cta-glow {
-    box-shadow: 0 0 20px hsla(42, 90%, 55%, 0.3);
+    box-shadow: 0 0 20px hsla(38, 82%, 48%, 0.3);
     transition: all 0.3s ease;
   }
   .cta-glow:hover {
-    box-shadow: 0 0 35px hsla(42, 90%, 55%, 0.5);
+    box-shadow: 0 0 35px hsla(38, 82%, 48%, 0.5);
     transform: translateY(-2px);
   }
 
@@ -267,6 +266,14 @@
   }
 }
 
+.leaf-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c0 0-15 10-15 25s15 25 15 25 15-10 15-25S30 5 30 5z' fill='none' stroke='%231a337e' stroke-width='0.5' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.mega-menu-gradient {
+  background: linear-gradient(to right, #ffffff 60%, #f8faff 40%);
+}
+
 @layer utilities {
   .delay-100 { transition-delay: 100ms; }
   .delay-200 { transition-delay: 200ms; }
@@ -274,3 +281,4 @@
   .delay-400 { transition-delay: 400ms; }
   .delay-500 { transition-delay: 500ms; }
 }
+

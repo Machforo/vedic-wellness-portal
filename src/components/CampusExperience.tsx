@@ -34,7 +34,7 @@ export default function CampusExperience() {
     <section id="experience" className="py-16 md:py-24 bg-navy text-white overflow-hidden min-h-screen flex flex-col justify-center snap-start" ref={ref}>
       <div className="container-wide">
         <div className="mb-10 md:mb-12">
-          <p className="reveal text-xs font-bold uppercase tracking-[0.25em] text-gold mb-3 opacity-80">Life at Ishan Pharmacy</p>
+          <p className="reveal text-xs font-bold uppercase tracking-[0.25em] text-gold mb-3 opacity-80">Life at IAMC</p>
           <h2 className="reveal delay-100 text-3xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-4xl">
             Where <span className="text-gold">Healthcare Professionals</span> Are Formed
           </h2>

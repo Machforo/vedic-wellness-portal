@@ -2,126 +2,71 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { FileText, Calendar, Phone, CheckCircle2, ArrowRight } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { CheckCircle2, ArrowRight, FileText, Phone } from "lucide-react";
 
 const steps = [
-  { num: "01", title: "UPSEE / CUET Counselling", desc: "For B.Pharm, begin by participating in the UPSEE (AKTU) or CUET-based state counselling. For D.Pharm, register on the BTE UP portal. Seat allotment is based on your 10+2 merit." },
-  { num: "02", title: "Application at Ishan Pharmacy", desc: "After counselling, submit your application form at Ishan Institute of Pharmacy, Knowledge Park-III, Greater Noida, along with the required documents." },
-  { num: "03", title: "Personal Interaction & Aptitude Check", desc: "Shortlisted candidates are invited for a brief interaction to assess their suitability, interest in healthcare, and readiness for rigorous laboratory-based study." },
-  { num: "04", title: "Document Verification", desc: "Visit our campus with all original documents — 10+2 marksheets, transfer/migration certificates, and character certificates — for physical verification by the admissions office." },
-  { num: "05", title: "Admission Finalization", desc: "Confirm your seat by submitting the requisite admission fees. Our team will assist with the final enrollment on the AKTU / BTE UP portals and PCI registration." },
+  { step: "01", title: "Register for NEET-UG", desc: "All BAMS admissions in India require a valid NEET-UG score. Register and appear for NEET-UG conducted by NTA. 10+2 Biology (PCB) with minimum 50% marks required." },
+  { step: "02", title: "Appear for NEET-UG", desc: "Appear for the NEET-UG examination. Your NEET score and rank determine eligibility for AYUSH counselling." },
+  { step: "03", title: "AYUSH Counselling Registration", desc: "Register for AYUSH central counselling (AACCC) or UP state AYUSH counselling based on your preference and rank." },
+  { step: "04", title: "Merit-Based Allotment", desc: "Seat allotment based on NEET rank, category, and preference. IAMC seats available through both central and state AYUSH counselling." },
+  { step: "05", title: "IAMC Document Verification & Fee", desc: "Report to IAMC with all original documents for verification. Complete fee payment to confirm your seat and begin your BAMS journey." },
 ];
 
 const documents = [
-  "10th Marksheet & Certificate (Original + 3 Copies)",
-  "12th Marksheet with PCB/PCM (Original + 3 Copies)",
-  "Transfer & Migration Certificates",
-  "Character Certificate from last institution",
-  "Aadhar Card (Original + Copy)",
-  "8 Passport-size Photographs",
-  "UPSEE / CUET Score / Allotment Letter",
-  "Category Certificate (if applicable — SC/ST/OBC)",
-  "Income Certificate (for scholarship applicants)",
-  "Medical Fitness Certificate",
+  "10+2 Marksheet & Certificate",
+  "NEET-UG Scorecard",
+  "AYUSH Counselling Allotment Letter",
+  "Category Certificate (SC/ST/OBC if applicable)",
+  "Domicile Certificate",
+  "Passport-size Photographs",
+  "Aadhaar Card / Government ID",
 ];
 
 export default function AdmissionsPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("admissions");
-  
-  const howToApply = data?.howToApply?.length > 0 ? data.howToApply : steps;
-  const docs = data?.documents?.length > 0 ? data.documents.map((d: any) => d.docName) : documents;
-  const alert = data?.alertBanner || { title: "Admissions Open for 2025-26", content: "Applications are being accepted for D.Pharm and B.Pharm programs.", isActive: true };
-  const contact = data?.admissionContact || { phone: "8448797700", email: "admissions@ishan.ac" };
-
   return (
     <Layout>
-      <PageHeader
-        title="Admissions 2025-26"
-        subtitle="Your pathway to a career in healthcare — D.Pharm & B.Pharm"
-        breadcrumbs={[{ label: "Admissions" }]}
-      />
-
+      <PageHeader title="BAMS Admissions 2025–26" subtitle="Admission to BAMS at IAMC is through NEET-UG followed by AYUSH central or UP state counselling — our team guides you through every step" breadcrumbs={[{ label: "Admissions" }]} />
       <section className="py-20 md:py-28" ref={ref}>
-        <div className="container-wide">
-          <div className="max-w-4xl mx-auto">
-            {/* Alert banner */}
-            {alert.isActive && (
-              <div className="reveal bg-gold-light rounded-xl p-6 mb-10 border border-[hsl(var(--gold)/0.2)]">
-                <div className="flex items-start gap-4">
-                  <Calendar className="w-6 h-6 text-navy shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-foreground mb-1">{alert.title}</p>
-                    <p className="text-sm">{alert.content}</p>
-                  </div>
+        <div className="container-wide max-w-5xl">
+          <div className="reveal mb-12">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Admission Process</p>
+            <h2 className="font-bold text-foreground mb-4">5-Step Admission Process</h2>
+            <p className="text-foreground/70 leading-relaxed max-w-2xl">BAMS admission is regulated — all students must appear for NEET-UG and obtain a seat through AYUSH counselling. IAMC's admissions team guides students through central and UP state counselling processes, stray vacancy rounds, and document verification.</p>
+          </div>
+          <div className="space-y-4 mb-16">
+            {steps.map((s, i) => (
+              <div key={s.step} className={`reveal delay-${i * 100} flex gap-6 p-6 rounded-2xl border bg-card`}>
+                <div className="w-12 h-12 rounded-xl bg-gold text-navy font-black text-lg flex items-center justify-center shrink-0">{s.step}</div>
+                <div>
+                  <h3 className="font-bold text-foreground mb-1">{s.title}</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{s.desc}</p>
                 </div>
               </div>
-            )}
-
-            <div className="reveal grid sm:grid-cols-2 gap-6 mb-14">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80" alt="Ishan Pharmacy Admissions" className="w-full h-64 object-cover" />
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-2xl border hidden sm:block">
-                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80" alt="Ishan Pharmacy Life" className="w-full h-64 object-cover" />
-              </div>
+            ))}
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="reveal p-6 rounded-2xl border bg-card">
+              <h3 className="font-bold text-foreground mb-4 flex items-center gap-2"><FileText className="w-5 h-5 text-gold" />Documents Required</h3>
+              <ul className="space-y-2">
+                {documents.map(d => (
+                  <li key={d} className="flex items-center gap-2 text-sm text-foreground/70">
+                    <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />{d}
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            {/* Steps */}
-            <h2 className="text-2xl font-bold text-foreground mb-8">Admission Process</h2>
-            
-            <div className="space-y-6 mb-16">
-              {howToApply.map((step: any, i: number) => (
-                <div key={step.step || step.num || i} className={`reveal delay-${Math.min(i, 4)}00 flex gap-5 p-6 rounded-xl border bg-card`}>
-                  <div className="w-12 h-12 rounded-xl bg-navy flex items-center justify-center shrink-0">
-                    <span className="text-sm font-bold text-primary-foreground">{step.step || step.num}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">{step.title}</h3>
-                    <p className="text-sm leading-relaxed">{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Documents */}
-            <h2 className="text-2xl font-bold text-foreground mb-6">Document Checklist</h2>
-            <div className="reveal grid sm:grid-cols-2 gap-3 mb-16">
-              {docs.map((doc: string, i: number) => (
-                <div key={i} className="flex items-start gap-2.5 px-4 py-3 rounded-lg border bg-card text-sm text-foreground/80">
-                  <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                  {doc}
-                </div>
-              ))}
-            </div>
-
-            {/* Contact */}
-            <div className="reveal rounded-xl border bg-section-alt p-8 text-center shadow-sm">
-              <h3 className="text-xl font-bold text-foreground mb-3">Ready to Join Ishan Institute of Pharmacy?</h3>
-              <p className="text-sm mb-8">Begin your pharmacy journey today by filling out our online application form.</p>
-              
-              <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-                <button className="inline-flex items-center justify-center gap-2 px-10 py-4 text-base font-bold bg-gold text-navy rounded-xl hover:bg-gold-light transition-all shadow-lg active:scale-[0.97] shimmer-btn">
-                  Apply Online Now
-                </button>
-              </div>
-
-              <p className="text-xs text-muted-foreground uppercase tracking-widest mb-6">Or get in touch with us</p>
-              
-              <div className="flex flex-wrap justify-center gap-4">
-                <a href={`tel:+91${contact.phone}`} className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-navy text-primary-foreground rounded-lg hover:bg-navy/90 transition-colors active:scale-[0.97]">
-                  <Phone className="w-4 h-4" /> Call: {contact.phone}
-                </a>
-                <a href={`https://wa.me/91${contact.phone}`} target="_blank" rel="noopener" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold border border-navy/20 text-navy rounded-lg hover:bg-navy/5 transition-colors active:scale-[0.97]">
-                  WhatsApp Us
-                </a>
+            <div className="reveal delay-100 p-6 rounded-2xl border bg-navy text-white">
+              <h3 className="font-bold text-white mb-4 flex items-center gap-2"><Phone className="w-5 h-5 text-gold" />Admissions Helpline</h3>
+              <p className="text-white/70 text-sm leading-relaxed mb-6">Our admissions counsellors are available Mon–Sat, 9 AM–5 PM to answer all NEET, counselling, eligibility, and documentation queries.</p>
+              <div className="space-y-3">
+                <a href="tel:+918448797700" className="flex items-center gap-2 text-gold font-bold hover:text-white transition-colors"><Phone className="w-4 h-4" />8448797700</a>
+                <a href="https://wa.me/918448797700" className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy font-bold rounded-xl hover:bg-white transition-all w-full justify-center">WhatsApp Us <ArrowRight className="w-4 h-4" /></a>
               </div>
             </div>
           </div>
         </div>
       </section>
-
       <EnquiryCTA />
     </Layout>
   );

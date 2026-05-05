@@ -3,21 +3,25 @@ import { TrendingUp, Building2, Users2, Star } from "lucide-react";
 import { useIshanLawData } from "@/hooks/useIshanLawData";
 
 const defaultRecruiters = [
-  { name: "Sun Pharma", logo: "" },
-  { name: "Cipla", logo: "" },
-  { name: "Dr. Reddy's", logo: "" },
-  { name: "Mankind", logo: "" },
-  { name: "Lupin", logo: "" },
-  { name: "Divis Labs", logo: "" },
-  { name: "Apollo Pharmacy", logo: "" },
-  { name: "Netmeds", logo: "" },
-  { name: "Tata 1mg", logo: "" },
+  { name: "Himalaya Wellness", logo: "" },
+  { name: "Patanjali", logo: "" },
+  { name: "Dabur India", logo: "" },
+  { name: "Baidyanath", logo: "" },
+  { name: "Charak Pharma", logo: "" },
+  { name: "VICCO Laboratories", logo: "" },
+  { name: "Kottakkal Arya Vaidya Sala", logo: "" },
+  { name: "Zandu Ayurveda", logo: "" },
+  { name: "Hamu Ayurveda", logo: "" },
+  { name: "Government AYUSH Hospitals", logo: "" },
 ];
 
 export default function PlacementsSection() {
   const ref = useScrollReveal();
   const { data } = useIshanLawData("homepage");
-  const placementsCfg = data?.placements || { title: "Career Outcomes & Placements", description: "Our alumni work in top-tier pharmaceutical companies and healthcare institutions across India." };
+  const placementsCfg = data?.placements || { 
+    title: "Career Outcomes & Placements", 
+    description: "Our BAMS graduates work in top-tier Ayurvedic companies, wellness centres, and government AYUSH hospitals across India." 
+  };
   const recruiters = data?.recruitingPartners?.length > 0 ? data.recruitingPartners : defaultRecruiters;
 
   return (
@@ -33,7 +37,7 @@ export default function PlacementsSection() {
         {/* Recruiters marquee */}
         <div className="reveal delay-300">
           <p className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-6">
-            Our Recruiting Partners
+            Clinical & Professional Partners
           </p>
           <div className="overflow-hidden relative">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
@@ -42,7 +46,7 @@ export default function PlacementsSection() {
               {[...recruiters, ...recruiters].map((rec: any, i) => (
                 <div
                   key={`${rec.name}-${i}`}
-                  className="shrink-0 mx-6 px-10 py-6 rounded-xl border bg-card text-sm font-semibold flex items-center justify-center whitespace-nowrap min-w-[180px] shadow-sm"
+                  className="shrink-0 mx-6 px-10 py-6 rounded-xl border bg-card text-sm font-semibold flex items-center justify-center whitespace-nowrap min-w-[200px] shadow-sm"
                 >
                   {rec.logo ? <img src={rec.logo} alt={rec.name} className="h-14 md:h-16 w-auto object-contain" /> : rec.name}
                 </div>
