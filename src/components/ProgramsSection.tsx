@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const defaultDepartments = [
+const programs = [
   {
     name: "BAMS",
     type: "Degree",

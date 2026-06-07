@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { User, Phone, BookOpen, Send, Calendar, Clock, CheckCircle } from "lucide-react";
@@ -13,8 +13,17 @@ export default function Consultation() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, email: `${formData.phone}@placeholder.com`, message: `Consultation Booking: ${formData.course} on ${formData.date} at ${formData.time}`, source: "Consultation Page" }),
+      });
+    } catch (err) {
+      console.warn("Backend not reachable", err);
+    }
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

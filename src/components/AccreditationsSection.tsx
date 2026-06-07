@@ -1,10 +1,10 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const accreditations = [
-  { name: "NCISM", url: "https://ncism.gov.in/images/NCISM_LOGO.png" },
-  { name: "Ministry of AYUSH", url: "https://main.ayush.gov.in/sites/default/files/Ayush_logo.png" },
+  { name: "NCISM", url: "https://placehold.co/150x150/e2e8f0/1e293b?text=NCISM" },
+  { name: "Ministry of AYUSH", url: "https://placehold.co/150x150/e2e8f0/1e293b?text=AYUSH" },
   { name: "UP AYUSH", url: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Scholarship-UP-150x150.jpg" }, // Placeholder for UP AYUSH logo
-  { name: "AKTU", url: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/AKTU-150x150.png" },
+  { name: "AKTU", url: "https://placehold.co/150x150/e2e8f0/1e293b?text=AKTU" },
   { name: "URISE", url: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/URISE.png" },
   { name: "NSP", url: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Scholarship-UP-150x150.jpg" }, // Placeholder
 ];

@@ -52,8 +52,8 @@ export default function StatsBar() {
 
   // NCISM & regulatory logos for Ayurveda
   const brands = [
-    { name: "NCISM", logo: "https://ncism.gov.in/images/NCISM_LOGO.png" },
-    { name: "Ministry of AYUSH", logo: "https://main.ayush.gov.in/sites/default/files/Ayush_logo.png" },
+    { name: "NCISM", logo: "https://placehold.co/150x150/e2e8f0/1e293b?text=NCISM" },
+    { name: "Ministry of AYUSH", logo: "https://placehold.co/150x150/e2e8f0/1e293b?text=AYUSH" },
     { name: "UP AYUSH Directorate", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/Scholarship-UP-150x150.jpg" },
     { name: "UP State AYUSH Counselling", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/URISE.png" },
     { name: "AIAPGET", logo: "https://pharmacy.ishan.ac/wp-content/uploads/2023/07/CUET-150x150.jpg" },

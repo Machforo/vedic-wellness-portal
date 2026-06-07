@@ -79,9 +79,18 @@ export default function HeroSection() {
     else toast.info("Notification: " + item.title);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!/^\d{10}$/.test(formData.phone)) { toast.error("Please enter a valid 10-digit phone number."); return; }
+    try {
+      await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, email: `${formData.phone}@placeholder.com`, message: `Course: ${formData.course}`, source: "Hero Section" }),
+      });
+    } catch (e) {
+      console.warn("Backend not reachable", e);
+    }
     setIsSubmitted(true);
     toast.success("Application received! Our counsellor will call you shortly.");
     setTimeout(() => { setIsSubmitted(false); setFormData({ name: "", phone: "", course: "" }); }, 5000);
@@ -95,7 +104,7 @@ export default function HeroSection() {
 
   useEffect(() => { resetTimer(); return () => { if (timerRef.current) clearInterval(timerRef.current); }; }, []); // eslint-disable-line
 
-  const slide = SLIDES[current];
+  const slide = SLIDES[current] || SLIDES[0];
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-navy">

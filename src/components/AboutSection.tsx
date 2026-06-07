@@ -13,7 +13,7 @@ export default function AboutSection() {
   const ref = useScrollReveal();
   const { data } = useAyurvedaData("homepage");
   const profile = data?.institutionalProfile;
-  const { data: instituteData } = useAyurvedaData("institute");
+  const { data: instituteData } = useAyurvedaData("aboutus");
   const aboutInfo = instituteData?.ourStory;
 
   const heading = profile?.heading || "NCR's Only Private AYUSH College Rooted in Classical Ayurvedic Tradition";
