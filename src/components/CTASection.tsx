@@ -16,7 +16,7 @@ export default function CTASection() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("http://localhost:5000/api/ayurveda/leads", {
+      const res = await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)

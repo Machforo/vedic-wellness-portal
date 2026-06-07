@@ -1,5 +1,6 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useEffect, useState, useRef } from "react";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 const defaultStats = [
   { value: "14", label: "AYURVEDIC DEPARTMENTS" },
@@ -46,6 +47,8 @@ function AnimatedCounter({ rawValue }: { rawValue: string }) {
 
 export default function StatsBar() {
   const ref = useScrollReveal();
+  const { data } = useAyurvedaData("homepage");
+  const stats = data?.stats?.length > 0 ? data.stats : defaultStats;
 
   // NCISM & regulatory logos for Ayurveda
   const brands = [
@@ -62,7 +65,7 @@ export default function StatsBar() {
     <section className="bg-navy relative z-10 overflow-hidden" ref={ref}>
       <div className="container-wide py-16 md:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 mb-16 md:mb-24">
-          {defaultStats.map((stat, i) => (
+          {stats.map((stat: any, i: number) => (
             <div key={stat.label} className={`text-center reveal delay-${i * 100}`}>
               <AnimatedCounter rawValue={stat.value} />
               <p className="stat-label text-white/70">{stat.label}</p>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Calendar, ArrowRight, X, MapPin, Tag, Share2 } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { motion, AnimatePresence } from "framer-motion";
 
 const defaultNews = [
@@ -42,8 +42,8 @@ const defaultNews = [
 export default function NewsSection() {
   const ref = useScrollReveal();
   const [selectedNews, setSelectedNews] = useState<any>(null);
-  const { data } = useIshanLawData("homepage");
-  const news = data?.newsEvents?.length > 0 ? data.newsEvents : defaultNews;
+  const { data } = useAyurvedaData("news");
+  const news = data?.length > 0 ? data : (data?.data?.length > 0 ? data.data : defaultNews);
 
   return (
     <section className="py-20 md:py-28 bg-section-alt" ref={ref}>
@@ -62,7 +62,7 @@ export default function NewsSection() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {news.map((item: any, i: number) => (
+          {news.slice(0, 4).map((item: any, i: number) => (
             <article
               key={item.title || i}
               onClick={() => setSelectedNews(item)}

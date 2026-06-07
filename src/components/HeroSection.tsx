@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Award, GraduationCap, Send, User, Phone as PhoneIcon, BookOpen, ChevronLeft, ChevronRight, CheckCircle, Sparkles, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const SLIDES = [
+const DEFAULT_SLIDES = [
   {
     image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1600&auto=format&fit=crop",
     badge: "NCISM Approved · Only Private AYUSH College in NCR",
@@ -34,34 +35,44 @@ const SLIDES = [
   },
 ];
 
-const SESSION_START = (() => {
-  try {
-    const key = "ishan_ayurveda_hero_start";
-    const s = sessionStorage.getItem(key);
-    if (s !== null) return parseInt(s, 10) % SLIDES.length;
-    const r = Math.floor(Math.random() * SLIDES.length);
-    sessionStorage.setItem(key, String(r));
-    return r;
-  } catch { return 0; }
-})();
-
-const DELAY = 5500;
-
-const newsData = [
-  { type: 'EVENT', title: 'Global Ayurvedic Summit 2025', date: 'MAR 14', action: 'popup', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop', details: 'IAMC hosted the Annual Global Ayurvedic Summit bringing together Ayurvedacharyas, NCISM officials, and wellness practitioners for a landmark two-day conference on classical and contemporary Ayurvedic practice.' },
-  { type: 'EVENT', title: 'World Yoga Day Celebration', date: 'JUN 21', action: 'popup', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop', details: 'Students and faculty celebrated International Yoga Day with a sunrise session on campus grounds, followed by a seminar on Yoga therapy in clinical Ayurvedic practice.' },
-  { type: 'NEWS', title: 'Shishyopanyan Sanshkar — 2025 Induction', date: 'SEP 5', action: 'none' },
-  { type: 'EVENT', title: 'Free Medical Camp — Knowledge Park', date: 'FEB 12', action: 'popup', image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop', details: 'IAMC students and faculty organised a free Ayurvedic health camp serving over 200 patients, providing Nadi Pariksha, dietary counselling, and herbal medicine distribution.' },
-  { type: 'NEWS', title: 'New Panchkarma Suite Inaugurated', date: 'JAN 20', action: 'popup', image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop', details: 'A new fully-equipped Panchkarma therapy suite has been added to the IAMC teaching hospital, providing students hands-on training in Shirodhara, Abhyanga, and Basti therapies.' }
-];
-
 export default function HeroSection() {
+  const { data } = useAyurvedaData("homepage");
+  const SLIDES = data?.banners?.length > 0 ? data.banners.map((b: any) => ({
+    image: b.image,
+    badge: "NCISM Approved",
+    title: b.heading || "Reviving the Science",
+    highlight: b.subheading || "of Holistic Healing",
+    subtitle: b.description || "Ishan Ayurvedic Medical College — Greater Noida's premier institution.",
+    cta1: { label: b.ctaText || "BAMS Programme", href: b.ctaLink || "/courses/bams" },
+    cta2: { label: "Campus Tour", href: "/infrastructure" },
+  })) : DEFAULT_SLIDES;
+
+  const SESSION_START = (() => {
+    try {
+      const key = "ishan_ayurveda_hero_start";
+      const s = sessionStorage.getItem(key);
+      if (s !== null) return parseInt(s, 10) % SLIDES.length;
+      const r = Math.floor(Math.random() * SLIDES.length);
+      sessionStorage.setItem(key, String(r));
+      return r;
+    } catch { return 0; }
+  })();
+
   const [current, setCurrent] = useState(SESSION_START);
   const [formData, setFormData] = useState({ name: "", phone: "", course: "" });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [heroActiveTab, setHeroActiveTab] = useState<'enquiry' | 'campus'>('enquiry');
   const [selectedNews, setSelectedNews] = useState<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  
+  const DELAY = 5500;
+  const newsData = [
+    { type: 'EVENT', title: 'Global Ayurvedic Summit 2025', date: 'MAR 14', action: 'popup', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop', details: 'IAMC hosted the Annual Global Ayurvedic Summit bringing together Ayurvedacharyas, NCISM officials, and wellness practitioners for a landmark two-day conference on classical and contemporary Ayurvedic practice.' },
+    { type: 'EVENT', title: 'World Yoga Day Celebration', date: 'JUN 21', action: 'popup', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop', details: 'Students and faculty celebrated International Yoga Day with a sunrise session on campus grounds, followed by a seminar on Yoga therapy in clinical Ayurvedic practice.' },
+    { type: 'NEWS', title: 'Shishyopanyan Sanshkar — 2025 Induction', date: 'SEP 5', action: 'none' },
+    { type: 'EVENT', title: 'Free Medical Camp — Knowledge Park', date: 'FEB 12', action: 'popup', image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop', details: 'IAMC students and faculty organised a free Ayurvedic health camp serving over 200 patients, providing Nadi Pariksha, dietary counselling, and herbal medicine distribution.' },
+    { type: 'NEWS', title: 'New Panchkarma Suite Inaugurated', date: 'JAN 20', action: 'popup', image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop', details: 'A new fully-equipped Panchkarma therapy suite has been added to the IAMC teaching hospital, providing students hands-on training in Shirodhara, Abhyanga, and Basti therapies.' }
+  ];
 
   const handleNewsClick = (item: any) => {
     if (item.action === 'popup') setSelectedNews(item);

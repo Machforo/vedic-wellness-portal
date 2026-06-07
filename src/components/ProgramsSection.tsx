@@ -3,8 +3,9 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const programs = [
+const defaultDepartments = [
   {
     name: "BAMS",
     type: "Degree",
@@ -16,9 +17,21 @@ const programs = [
   },
 ];
 
+const defaultDepartments = [
+  { name: "Kayachikitsa", href: "/kayachikitsa" },
+  { name: "Panchkarma", href: "/panchkarma" },
+  { name: "Shalya Tantra", href: "/shalya-tantra" },
+  { name: "Dravyaguna", href: "/dravyaguna-vigyana" },
+  { name: "Rachana Sharir", href: "/rachana-sharir" },
+  { name: "Samhita & Sanskrit", href: "/samhita-sanskrit" },
+  { name: "Swasthavritta & Yoga", href: "/swasthavritta-yoga" },
+];
+
 export default function ProgramsSection() {
   const ref = useScrollReveal();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { data } = useAyurvedaData("academics");
+  const departments = data?.departments?.length > 0 ? data.departments : defaultDepartments;
 
   return (
     <section id="programs" className="py-12 md:py-20 bg-section-alt overflow-hidden" ref={ref}>
@@ -96,22 +109,14 @@ export default function ProgramsSection() {
 
         {/* Dept grid teaser */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          {[
-            { name: "Kayachikitsa", href: "/kayachikitsa" },
-            { name: "Panchkarma", href: "/panchkarma" },
-            { name: "Shalya Tantra", href: "/shalya-tantra" },
-            { name: "Dravyaguna", href: "/dravyaguna-vigyana" },
-            { name: "Rachana Sharir", href: "/rachana-sharir" },
-            { name: "Samhita & Sanskrit", href: "/samhita-sanskrit" },
-            { name: "Swasthavritta & Yoga", href: "/swasthavritta-yoga" },
-          ].map((dept) => (
-            <Link key={dept.name} to={dept.href} className="p-3 rounded-xl border bg-white text-center text-xs font-semibold text-navy hover:bg-gold hover:border-gold hover:text-navy transition-all">
+          {departments.slice(0, 7).map((dept: any) => (
+            <Link key={dept.name} to={dept.path || dept.href || `/departments/${dept.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="p-3 rounded-xl border bg-white text-center text-xs font-semibold text-navy hover:bg-gold hover:border-gold hover:text-navy transition-all">
               {dept.name}
             </Link>
           ))}
         </div>
         <div className="text-center mt-6">
-          <Link to="/kayachikitsa" className="text-sm font-semibold text-navy hover:text-gold transition-colors inline-flex items-center gap-1">View All 14 Departments <ArrowUpRight className="w-4 h-4" /></Link>
+          <Link to="/academics" className="text-sm font-semibold text-navy hover:text-gold transition-colors inline-flex items-center gap-1">View All {departments.length} Departments <ArrowUpRight className="w-4 h-4" /></Link>
         </div>
       </div>
     </section>

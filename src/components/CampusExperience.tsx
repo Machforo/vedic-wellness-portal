@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion, AnimatePresence } from "framer-motion";
-const galleryImages = [
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+
+const defaultGalleryImages = [
   { title: "Pharmaceutics Lab", img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80", category: "Practical" },
   { title: "Library", img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80", category: "Research" },
   { title: "Clinical Sessions", img: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80", category: "Training" },
@@ -14,6 +16,11 @@ const galleryImages = [
 
 export default function CampusExperience() {
   const ref = useScrollReveal();
+  const { data } = useAyurvedaData("homepage");
+  const galleryImages = data?.lifeAtIshan?.length > 0 ? data.lifeAtIshan.map((item: any) => ({
+    title: "Campus Life", img: item.image, category: "IAMC"
+  })) : defaultGalleryImages;
+
   const [activeIndices, setActiveIndices] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   // Subtle rotation of images in specific tiles to keep it "dynamic"

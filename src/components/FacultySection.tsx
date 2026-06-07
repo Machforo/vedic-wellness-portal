@@ -3,6 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 import { ArrowRight, GraduationCap, Award, BookOpen, X, Mail, Linkedin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 const eminentFaculty = [
   {
@@ -42,6 +43,8 @@ const eminentFaculty = [
 export default function FacultySection() {
   const ref = useScrollReveal();
   const [selectedFaculty, setSelectedFaculty] = useState<any>(null);
+  const { data } = useAyurvedaData("faculty");
+  const faculty = data?.length > 0 ? data : (data?.data?.length > 0 ? data.data : eminentFaculty);
 
   return (
     <section className="py-20 md:py-28 bg-section-alt" ref={ref}>
@@ -66,19 +69,19 @@ export default function FacultySection() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {eminentFaculty.map((f, i) => (
+          {faculty.slice(0, 4).map((f: any, i: number) => (
             <div 
-              key={f.name} 
+              key={f.name || i} 
               onClick={() => setSelectedFaculty(f)}
               className={`reveal delay-${i % 4}00 group bg-card rounded-[2rem] border overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer`}
             >
               <div className="aspect-[4/5] relative overflow-hidden">
                 <img 
-                  src={f.image} 
+                  src={f.image || f.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(f.name || "Faculty")}&size=400&background=145428&color=fff`} 
                   alt={f.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80";
+                    (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(f.name || "Faculty")}&size=400&background=145428&color=fff`;
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -95,11 +98,11 @@ export default function FacultySection() {
                 <p className="text-xs font-bold text-gold uppercase tracking-widest mt-1">{f.designation}</p>
                 <div className="mt-4 pt-4 border-t border-muted space-y-3">
                   <div className="flex items-center gap-2 text-xs font-medium">
-                    <BookOpen size={14} className="text-gold" />
-                    {f.specialisation}
+                    <BookOpen size={14} className="text-gold shrink-0" />
+                    <span className="truncate">{f.specialisation || f.speciality || f.department || f.dept}</span>
                   </div>
                   <div className="inline-block px-3 py-1 rounded-md bg-muted text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                    {f.qualification}
+                    {f.qualification || f.qualifications || f.qual || "BAMS"}
                   </div>
                 </div>
               </div>
@@ -135,11 +138,11 @@ export default function FacultySection() {
                 {/* Left: Image */}
                 <div className="w-full md:w-2/5 h-64 md:h-auto relative overflow-hidden bg-muted">
                   <img 
-                    src={selectedFaculty.image} 
+                    src={selectedFaculty.image || selectedFaculty.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedFaculty.name || "Faculty")}&size=400&background=145428&color=fff`} 
                     alt={selectedFaculty.name} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80";
+                      (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(selectedFaculty.name || "Faculty")}&size=400&background=145428&color=fff`;
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent" />
@@ -156,11 +159,11 @@ export default function FacultySection() {
                   <div className="grid grid-cols-2 gap-4 mb-8">
                     <div className="p-4 rounded-2xl bg-muted/30">
                       <p className="text-xs font-bold text-navy/40 uppercase tracking-widest mb-1">Qualification</p>
-                      <p className="text-sm font-bold text-navy">{selectedFaculty.qualification}</p>
+                      <p className="text-sm font-bold text-navy">{selectedFaculty.qualification || selectedFaculty.qualifications || selectedFaculty.qual || "BAMS"}</p>
                     </div>
                     <div className="p-4 rounded-2xl bg-muted/30">
                       <p className="text-xs font-bold text-navy/40 uppercase tracking-widest mb-1">Specialisation</p>
-                      <p className="text-sm font-bold text-navy">{selectedFaculty.specialisation}</p>
+                      <p className="text-sm font-bold text-navy">{selectedFaculty.specialisation || selectedFaculty.speciality || selectedFaculty.department || selectedFaculty.dept}</p>
                     </div>
                   </div>
 
@@ -168,7 +171,7 @@ export default function FacultySection() {
                     <div>
                       <h4 className="text-xs font-bold text-navy uppercase tracking-widest mb-3 border-b pb-2">Biography</h4>
                       <p className="text-foreground/70 leading-relaxed italic">
-                        "{selectedFaculty.bio}"
+                        "{selectedFaculty.bio || selectedFaculty.description || "Leading faculty member at Ishan Ayurvedic Medical College."}"
                       </p>
                     </div>
 
