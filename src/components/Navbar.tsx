@@ -7,6 +7,7 @@ import {
   MessageSquare, Briefcase, Search, Activity, Leaf, Heart
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 interface NavLink { label: string; href: string; }
 interface MegaColumn { heading: string; icon: React.ElementType; links: NavLink[]; }
@@ -198,8 +199,99 @@ const navLinks: NavItem[] = [
     ],
   },
 ];
-
 export default function Navbar({ isNotFound = false }: { isNotFound?: boolean }) {
+  const { data: siteConfigData } = useAyurvedaData("siteconfig");
+  const logoText = siteConfigData?.navbar?.logo?.text || "ISHAN";
+  const logoSubtext = siteConfigData?.navbar?.logo?.subtext || "Ayurvedic Medical College";
+  const logoImageUrl = siteConfigData?.navbar?.logo?.imageUrl || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtBPP1F_Pp9ioq_SfiDL6mn5No4JbZSE9X9A&s";
+
+  const contactPhone = siteConfigData?.navbar?.topBar?.phone || "8448797700";
+  const contactEmail = siteConfigData?.navbar?.topBar?.email || "info@ishan.ac";
+
+  const utilityLinks = siteConfigData?.navbar?.topBar?.utilityLinks || [
+    { label: "Fee Payment", href: "/fee-payment" },
+    { label: "Student Portal", href: "/student-portal" },
+    { label: "News", href: "/news-events" }
+  ];
+
+  const ctaButton = siteConfigData?.navbar?.ctaButton || { label: "Apply Now", href: "/admissions" };
+
+  const iconMap: Record<string, any> = {
+    Building2, GraduationCap, ArrowRight, BookOpen, Heart, Camera, FileText, Microscope, Phone, Shield
+  };
+
+  const dbNavLinks = siteConfigData?.navbar?.navLinks;
+  
+  const mappedNavLinks = dbNavLinks?.length > 0 ? dbNavLinks.map((link: any, index: number) => {
+    const defaultFeatured = [
+      {
+        img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop",
+        title: "Excellence in Ayurveda",
+        desc: "NCISM-approved, the only private AYUSH medical college in NCR.",
+        href: link.href || "/about"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=800&auto=format&fit=crop",
+        title: "Bachelor of Ayurvedic Medicine & Surgery",
+        desc: "5.5-year NCISM-recognised degree with clinical training.",
+        href: link.href || "/courses/bams"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop",
+        title: "14 Ayurvedic Departments",
+        desc: "Every branch of Ayurvedic medicine covered — from Siddhanta to Surgery.",
+        href: link.href || "/kayachikitsa"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
+        title: "Vibrant Campus Life",
+        desc: "Yoga Day, summits, camps and a living herbal garden.",
+        href: link.href || "/news-events"
+      },
+      {
+        img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop",
+        title: "Research & Placements",
+        desc: "Clinical research, publications, and recruiter guidance.",
+        href: link.href || "/placements"
+      }
+    ];
+
+    const featured = (link.featured && link.featured.title) ? link.featured : defaultFeatured[index % defaultFeatured.length];
+
+    let columns: any[] = [];
+    const colIconFallback = [Building2, GraduationCap, BookOpen, Camera, Microscope, Shield, Heart][index % 7];
+
+    if (link.columns && link.columns.length > 0) {
+      columns = link.columns.map((col: any) => ({
+        heading: col.heading || "Explore",
+        icon: iconMap[col.icon] || colIconFallback,
+        links: col.links || []
+      }));
+    } else if (link.children && link.children.length > 0) {
+      const chunkSize = 7;
+      for (let i = 0; i < link.children.length; i += chunkSize) {
+        const chunk = link.children.slice(i, i + chunkSize);
+        columns.push({
+          heading: i === 0 ? "Explore" : "More Links",
+          icon: colIconFallback,
+          links: chunk.map((c: any) => ({ label: c.label, href: c.href }))
+        });
+      }
+    } else {
+      columns.push({
+        heading: "Explore",
+        icon: colIconFallback,
+        links: [{ label: link.label, href: link.href }]
+      });
+    }
+
+    return {
+      label: link.label,
+      featured,
+      columns
+    };
+  }) : navLinks;
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -265,7 +357,7 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
     }
   }, []);
 
-  const activeLink = navLinks.find((l) => l.label === openDropdown) ?? null;
+  const activeLink = mappedNavLinks.find((l: any) => l.label === openDropdown) ?? null;
   const textCls = (scrolled || isNotFound)
     ? "text-navy/80 hover:text-navy hover:bg-muted"
     : "text-white hover:text-white hover:bg-white/10 drop-shadow-lg";
@@ -280,11 +372,11 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
         <div className={`bg-navy/10 backdrop-blur-sm text-white text-sm hidden md:block transition-all duration-500 ${scrolled ? "h-0 overflow-hidden" : "py-2 border-b border-white/10"}`}>
           <div className="container-wide flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <a href="mailto:info@ishan.ac" className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
-                <Mail className="w-3.5 h-3.5" /> info@ishan.ac
+              <a href={`mailto:${contactEmail}`} className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
+                <Mail className="w-3.5 h-3.5" /> {contactEmail}
               </a>
-              <a href="tel:+918448797700" className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
-                <Phone className="w-3.5 h-3.5" /> 8448797700
+              <a href={`tel:+91${contactPhone}`} className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
+                <Phone className="w-3.5 h-3.5" /> {contactPhone}
               </a>
             </div>
             <div className="flex items-center gap-4 text-xs font-medium">
@@ -294,11 +386,12 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                 <button onClick={resetFont} className="w-5 h-5 flex items-center justify-center hover:bg-white/10 rounded transition-colors" title="Reset font size" aria-label="Reset font size">A</button>
                 <button onClick={() => adjustFont(1)} className="w-5 h-5 flex items-center justify-center hover:bg-white/10 rounded transition-colors" title="Increase font size" aria-label="Increase font size">A+</button>
               </div>
-              <Link to="/fee-payment" className="opacity-80 hover:opacity-100 transition-opacity">Fee Payment</Link>
-              <span className="opacity-30">|</span>
-              <Link to="/student-portal" className="opacity-80 hover:opacity-100 transition-opacity">Student Portal</Link>
-              <span className="opacity-30">|</span>
-              <Link to="/news-events" className="opacity-80 hover:opacity-100 transition-opacity">News</Link>
+              {utilityLinks.map((item: any, i: number) => (
+                <span key={item.label} className="flex items-center gap-4">
+                  {i > 0 && <span className="opacity-30">|</span>}
+                  <Link to={item.href} className="opacity-80 hover:opacity-100 transition-opacity">{item.label}</Link>
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -308,27 +401,27 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0 group">
-            <div className="h-10 shrink-0 overflow-hidden flex items-center">
+            <div className="h-10 shrink-0 overflow-hidden flex items-center bg-white/10 rounded-lg px-2 py-1">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtBPP1F_Pp9ioq_SfiDL6mn5No4JbZSE9X9A&s"
-                alt="Ishan Ayurvedic Medical College Logo"
+                src={logoImageUrl}
+                alt="Ishan Logo"
                 className="h-full w-auto object-contain"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
             </div>
             <div className="flex flex-col leading-tight">
               <span className={`font-extrabold text-base md:text-lg tracking-tight transition-colors duration-500 ${(scrolled || isNotFound) ? "text-navy" : "text-white drop-shadow-lg"}`}>
-                ISHAN
+                {logoText}
               </span>
               <span className={`text-[10px] uppercase font-bold tracking-[0.14em] leading-none transition-colors duration-500 ${(scrolled || isNotFound) ? "text-muted-foreground" : "text-white/85 drop-shadow-md"}`}>
-                Ayurvedic Medical College
+                {logoSubtext}
               </span>
             </div>
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-0.5">
-            {navLinks.map((link) => (
+            {mappedNavLinks.map((link: any) => (
               <button
                 key={link.label}
                 className={`flex items-center gap-1 px-3 py-1.5 text-sm font-bold transition-all rounded-md ${textCls} ${openDropdown === link.label ? "bg-white/10" : ""}`}
@@ -350,10 +443,10 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
               <Search className="w-5 h-5" />
             </button>
             <Link
-              to="/admissions"
+              to={ctaButton.href}
               className={`hidden md:inline-flex items-center px-5 py-2.5 text-sm font-bold rounded-xl shadow-lg transition-all active:scale-[0.98] shimmer-btn ${scrolled ? "bg-gold text-navy hover:scale-[1.02]" : "bg-white text-navy hover:bg-gold hover:scale-[1.05]"}`}
             >
-              Apply Now
+              {ctaButton.label}
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -441,8 +534,8 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
           <div className="lg:hidden border-t bg-card animate-fade-up max-h-[80vh] overflow-y-auto">
             <div className="container-wide py-4 space-y-1">
               <Link to="/" className="block px-3 py-2.5 text-sm font-bold text-navy">🏠 Home</Link>
-              {navLinks.map((link) => {
-                const allChildren = link.columns.flatMap((c) => c.links);
+              {mappedNavLinks.map((link: any) => {
+                const allChildren = link.columns.flatMap((c: any) => c.links);
                 return (
                   <div key={link.label}>
                     <button
@@ -454,7 +547,7 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                     </button>
                     {openDropdown === link.label && (
                       <div className="pl-4 space-y-0.5 pb-2">
-                        {allChildren.map((child) => (
+                        {allChildren.map((child: any) => (
                           <Link
                             key={child.label}
                             to={child.href}
@@ -468,8 +561,8 @@ export default function Navbar({ isNotFound = false }: { isNotFound?: boolean })
                   </div>
                 );
               })}
-              <Link to="/admissions" className="block mx-3 mt-3 text-center px-5 py-2.5 text-sm font-semibold bg-gold text-foreground rounded-lg">
-                Apply Now
+              <Link to={ctaButton.href} className="block mx-3 mt-3 text-center px-5 py-2.5 text-sm font-semibold bg-gold text-foreground rounded-lg">
+                {ctaButton.label}
               </Link>
             </div>
           </div>

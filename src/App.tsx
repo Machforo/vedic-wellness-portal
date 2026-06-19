@@ -51,20 +51,7 @@ const Faculty = lazy(() => import("./pages/Faculty"));
 const VisitingFaculty = lazy(() => import("./pages/VisitingFaculty"));
 
 // 14 Departments
-const AyurvedicSiddhanta = lazy(() => import("./pages/AyurvedicSiddhanta"));
-const RachanaSharir = lazy(() => import("./pages/RachanaSharir"));
-const KriyaSharir = lazy(() => import("./pages/KriyaSharir"));
-const DravyagunaVigyana = lazy(() => import("./pages/DravyagunaVigyana"));
-const RasaShastra = lazy(() => import("./pages/RasaShastra"));
-const Kaumarabhritya = lazy(() => import("./pages/Kaumarabhritya"));
-const PrasutiStriRoga = lazy(() => import("./pages/PrasutiStriRoga"));
-const Kayachikitsa = lazy(() => import("./pages/Kayachikitsa"));
-const Panchkarma = lazy(() => import("./pages/Panchkarma"));
-const ShalyaTantra = lazy(() => import("./pages/ShalyaTantra"));
-const ShalakYaTantra = lazy(() => import("./pages/ShalakYaTantra"));
-const SwasthavrittaYoga = lazy(() => import("./pages/SwasthavrittaYoga"));
-const AgadaTantra = lazy(() => import("./pages/AgadaTantra"));
-const SamhitaSanskrit = lazy(() => import("./pages/SamhitaSanskrit"));
+const DynamicDepartment = lazy(() => import("./pages/DynamicDepartment"));
 
 // Campus Facilities
 const Infrastructure = lazy(() => import("./pages/Infrastructure"));
@@ -147,20 +134,20 @@ const App = () => (
               <Route path="/visiting-faculty" element={<VisitingFaculty />} />
 
               {/* ── 14 Departments ── */}
-              <Route path="/ayurvedic-siddhanta" element={<AyurvedicSiddhanta />} />
-              <Route path="/rachana-sharir" element={<RachanaSharir />} />
-              <Route path="/kriya-sharir" element={<KriyaSharir />} />
-              <Route path="/dravyaguna-vigyana" element={<DravyagunaVigyana />} />
-              <Route path="/rasa-shastra" element={<RasaShastra />} />
-              <Route path="/kaumarabhritya" element={<Kaumarabhritya />} />
-              <Route path="/prasuti-stri-roga" element={<PrasutiStriRoga />} />
-              <Route path="/kayachikitsa" element={<Kayachikitsa />} />
-              <Route path="/panchkarma" element={<Panchkarma />} />
-              <Route path="/shalya-tantra" element={<ShalyaTantra />} />
-              <Route path="/shalakya-tantra" element={<ShalakYaTantra />} />
-              <Route path="/swasthavritta-yoga" element={<SwasthavrittaYoga />} />
-              <Route path="/agada-tantra" element={<AgadaTantra />} />
-              <Route path="/samhita-sanskrit" element={<SamhitaSanskrit />} />
+              <Route path="/ayurvedic-siddhanta" element={<DynamicDepartment slug="ayurvedic-siddhanta" />} />
+              <Route path="/rachana-sharir" element={<DynamicDepartment slug="rachana-sharir" />} />
+              <Route path="/kriya-sharir" element={<DynamicDepartment slug="kriya-sharir" />} />
+              <Route path="/dravyaguna-vigyana" element={<DynamicDepartment slug="dravyaguna-vigyana" />} />
+              <Route path="/rasa-shastra" element={<DynamicDepartment slug="rasa-shastra" />} />
+              <Route path="/kaumarabhritya" element={<DynamicDepartment slug="kaumarabhritya" />} />
+              <Route path="/prasuti-stri-roga" element={<DynamicDepartment slug="prasuti-stri-roga" />} />
+              <Route path="/kayachikitsa" element={<DynamicDepartment slug="kayachikitsa" />} />
+              <Route path="/panchkarma" element={<DynamicDepartment slug="panchkarma" />} />
+              <Route path="/shalya-tantra" element={<DynamicDepartment slug="shalya-tantra" />} />
+              <Route path="/shalakya-tantra" element={<DynamicDepartment slug="shalakya-tantra" />} />
+              <Route path="/swasthavritta-yoga" element={<DynamicDepartment slug="swasthavritta-yoga" />} />
+              <Route path="/agada-tantra" element={<DynamicDepartment slug="agada-tantra" />} />
+              <Route path="/samhita-sanskrit" element={<DynamicDepartment slug="samhita-sanskrit" />} />
 
               {/* ── Campus Facilities ── */}
               <Route path="/infrastructure" element={<Infrastructure />} />

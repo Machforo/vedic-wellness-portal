@@ -2,12 +2,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useEffect, useState, useRef } from "react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const defaultStats = [
-  { value: "14", label: "AYURVEDIC DEPARTMENTS" },
-  { value: "5000+", label: "HOSPITAL PATIENTS / YEAR" },
-  { value: "200+", label: "MEDICINAL PLANT SPECIES" },
-  { value: "50+", label: "VAIDYA FACULTY" },
-];
+const defaultStats = [];
 
 function AnimatedCounter({ rawValue }: { rawValue: string }) {
   const numMatch = typeof rawValue === 'string' ? rawValue.match(/^[\d,.]+/) : null;

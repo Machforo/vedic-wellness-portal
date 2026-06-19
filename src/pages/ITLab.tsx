@@ -5,14 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Monitor, Wifi, Clock, Shield } from "lucide-react";
 import { useIshanLawData } from "@/hooks/useIshanLawData";
 
-const defaultSpecs = [
-  { label: "Research Terminals", value: "60+ high-end systems" },
-  { label: "Pharmaceutical Databases", value: "Manupatra, SCC Online, LexisNexis" },
-  { label: "Internet Speed", value: "100 Mbps dedicated" },
-  { label: "Operating Systems", value: "Windows 11 Professional" },
-  { label: "Software", value: "MS Office 365, Grammarly, Turnitin (Plagiarism Check)" },
-  { label: "Timings", value: "8:30 AM – 6:30 PM (Mon-Sat)" },
-];
+const defaultSpecs = [];
 
 export default function ITLabPage() {
   const ref = useScrollReveal();

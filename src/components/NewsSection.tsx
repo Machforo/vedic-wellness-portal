@@ -4,40 +4,7 @@ import { Calendar, ArrowRight, X, MapPin, Tag, Share2 } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { motion, AnimatePresence } from "framer-motion";
 
-const defaultNews = [
-  {
-    title: "National Ayurveda Day & Dhanvantari Jayanti Celebration",
-    date: "October 28, 2025",
-    category: "Events",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80",
-    description: "Ishan Ayurvedic Medical College celebrated National Ayurveda Day with a mega health camp and shloka recitation competition. Distinguished Vaidyas shared insights on the global acceptance of Ayurveda.",
-    location: "Auditorium, IAMC Campus"
-  },
-  {
-    title: "Workshop on Clinical Application of Panchkarma",
-    date: "February 12, 2025",
-    category: "Academic",
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80",
-    description: "A three-day hands-on workshop was conducted for BAMS students on the practical procedures of Vamana and Virechana, led by senior practitioners from the IAMC Teaching Hospital.",
-    location: "Panchkarma Dept, IAMC"
-  },
-  {
-    title: "Medicinal Plant Identification Tour in Herbal Garden",
-    date: "January 15, 2025",
-    category: "Institutional",
-    image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80",
-    description: "First-year BAMS students participated in a guided tour of the campus Herbal Garden, identifying over 50 species of medicinal plants used in classical Ayurvedic formulations.",
-    location: "Herbal Garden, IAMC"
-  },
-  {
-    title: "Guest Lecture: Surgical Excellence in Sushruta Samhita",
-    date: "April 05, 2025",
-    category: "Guest Lecture",
-    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=800&q=80",
-    description: "Eminent Shalya Tantra experts delivered a lecture on the surgical techniques described in Sushruta Samhita and their correlation with modern surgical principles.",
-    location: "Seminar Hall, IAMC"
-  },
-];
+const defaultNews = [];
 
 export default function NewsSection() {
   const ref = useScrollReveal();

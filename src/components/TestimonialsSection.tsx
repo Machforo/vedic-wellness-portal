@@ -41,8 +41,8 @@ const parentTestimonials = [
 
 export default function TestimonialsSection() {
   const [activeTab, setActiveTab] = useState<'students' | 'parents'>('students');
-  const { data } = useAyurvedaData("homepage");
-  const testimonials = data?.studentTestimonials?.length > 0 ? data.studentTestimonials : studentTestimonials;
+  const { data: testimonialsData } = useAyurvedaData("testimonials");
+  const testimonials = testimonialsData?.length > 0 ? testimonialsData : (testimonialsData?.data?.length > 0 ? testimonialsData.data : studentTestimonials);
   const parents = parentTestimonials; // Admin panel only shows "Student Testimonials" normally, but can fallback
 
   return (
@@ -102,7 +102,7 @@ export default function TestimonialsSection() {
                   </div>
 
                   <p className="text-foreground/70 leading-relaxed italic text-sm line-clamp-4">
-                    "{t.text || t.content || t.description}"
+                    "{t.feedback || t.text || t.content || t.description}"
                   </p>
                 </div>
               ))}

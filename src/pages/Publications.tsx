@@ -2,34 +2,40 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { BookOpen, ExternalLink } from "lucide-react";
+import { BookOpen } from "lucide-react";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const publications = [
-  { title: "Novel Drug Delivery Systems for Enhanced Bioavailability", authors: "Dr. Sandeep Singh, Dr. Megha Gupta", journal: "Asian Journal of Pharmaceutics", year: "2024", doi: "#" },
-  { title: "Phytochemical Analysis of Ocimum sanctum for Antimicrobial Activity", authors: "Prof. Amit Das, Ms. Anjali Sharma", journal: "Journal of Pharmacognosy", year: "2023", doi: "#" },
-  { title: "Formulation and Evaluation of Sustained Release Tablets of Metformin", authors: "Dr. Sandeep Singh, Mr. Karan Bajaj", journal: "International Journal of Pharmaceutics", year: "2023", doi: "#" },
-  { title: "In-Silico ADMET Prediction of Novel Antidiabetic Compounds", authors: "Mr. Vivek Verma, Ms. Neha Singh", journal: "Medicinal Chemistry Research", year: "2024", doi: "#" },
-  { title: "Comparative Pharmacological Study of Herbal Adaptogenic Plants", authors: "Dr. Megha Gupta, Prof. Rajesh Khanna", journal: "Journal of Ethnopharmacology", year: "2022", doi: "#" },
-  { title: "Quality Control Parameters for Herbal Formulations: A Review", authors: "Ms. Anjali Sharma, Prof. Amit Das", journal: "Pharmacognosy Reviews", year: "2023", doi: "#" },
+const defaultPublications = [
+  { title: "Clinical Efficacy of Panchakarma in Management of Rheumatoid Arthritis", authors: "Dr. R. Sharma, Dr. P. Mishra", journal: "Journal of Ayurveda and Integrative Medicine", year: "2024", doi: "#" },
+  { title: "Phytochemical Analysis of Ashwagandha Root for Immunomodulatory Activity", authors: "Prof. A. Kumar, Dr. S. Verma", journal: "Ancient Science of Life", year: "2023", doi: "#" },
+  { title: "Standardisation of Triphala Churna: A Quality Control Study", authors: "Dr. N. Gupta, Dr. V. Singh", journal: "International Journal of Ayurveda Research", year: "2023", doi: "#" },
 ];
 
 export default function PublicationsPage() {
   const ref = useScrollReveal();
+  const { data } = useAyurvedaData("research");
+  const pubs = data?.publications || {};
+  const publications = pubs.items?.length > 0 ? pubs.items : defaultPublications;
+
   return (
     <Layout>
       <PageHeader
-        title="Research Publications"
-        subtitle="Peer-reviewed research contributions by Ishan Pharmacy faculty and students"
+        title={pubs.title || "Research Publications"}
+        subtitle={pubs.subtitle || "Peer-reviewed research contributions by Ishan Ayurveda faculty and students"}
         breadcrumbs={[{ label: "Research" }, { label: "Publications" }]}
       />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
-          <p className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12">
-            The faculty and students of Ishan Institute of Pharmacy are actively engaged in pharmaceutical research, regularly publishing in national and international peer-reviewed journals. Our research spans drug delivery, phytochemistry, medicinal chemistry, and clinical pharmacy.
-          </p>
+          {pubs.description ? (
+            <div className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: pubs.description }}></div>
+          ) : (
+            <p className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12">
+              The faculty and students of Ishan Ayurvedic Medical College are actively engaged in Ayurvedic research, regularly publishing in national and international peer-reviewed journals.
+            </p>
+          )}
           <div className="space-y-4 max-w-4xl mx-auto">
-            {publications.map((p, i) => (
-              <div key={p.title} className={`reveal delay-${Math.min(i, 4)}00 p-6 rounded-xl border bg-card hover:shadow-[0_4px_20px_hsl(var(--navy)/0.06)] transition-shadow`}>
+            {publications.map((p: any, i: number) => (
+              <div key={p.title || i} className={`reveal delay-${Math.min(i, 4)}00 p-6 rounded-xl border bg-card hover:shadow-[0_4px_20px_hsl(var(--navy)/0.06)] transition-shadow`}>
                 <div className="flex gap-4 items-start">
                   <div className="w-10 h-10 rounded-lg bg-gold-light flex items-center justify-center shrink-0 mt-0.5">
                     <BookOpen className="w-5 h-5 text-navy" />

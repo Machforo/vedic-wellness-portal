@@ -1,20 +1,13 @@
-﻿import Layout from "@/components/Layout";
+import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const defaultVideos = [
-  { title: "National Moot Court Competition Final Round", category: "Moot Court Highlights", ytId: "" },
-  { title: "Understanding The New Criminal Laws", category: "Faculty Talks", ytId: "" },
-  { title: "My Journey at Ishan Pharmacy", category: "Student Testimonials", ytId: "" },
-  { title: "Supreme Court Visit Documentary", category: "Court Visits", ytId: "" },
-  { title: "Annual Cultural Fest Kshitiz", category: "Events", ytId: "" },
-  { title: "Legal Aid Camp in Rural Noida", category: "Events", ytId: "" },
-];
+const defaultVideos: any[] = [];
 
 export default function VideoGalleryPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("gallery");
+  const { data } = useAyurvedaData("video-gallery");
 
   const getYTId = (url: string) => {
     if (!url) return "";
@@ -23,23 +16,24 @@ export default function VideoGalleryPage() {
     return (match && match[2].length === 11) ? match[2] : url;
   };
 
-  const videos = data?.videos?.length > 0 ? data.videos.map((v: any) => ({
+  const rawVideos = Array.isArray(data) ? data : [];
+  const videos = rawVideos.length > 0 ? rawVideos.map((v: any) => ({
     ...v,
-    ytId: getYTId(v.url)
+    ytId: getYTId(v.videoUrl)
   })) : defaultVideos;
 
   return (
     <Layout>
-      <PageHeader title="Video Gallery" subtitle="Visual insights into academic and extracurricular life at Ishan Pharmacy" breadcrumbs={[{ label: "Gallery" }, { label: "Videos" }]} />
+      <PageHeader title="Video Gallery" subtitle="Visual insights into academic and extracurricular life at Ishan Ayurveda" breadcrumbs={[{ label: "Gallery" }, { label: "Videos" }]} />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
           <p className="reveal leading-relaxed max-w-4xl mx-auto text-center mb-16 text-lg">
-            Watch Ishan Pharmacy in action — moot court performances, court visit documentaries, faculty talks, student testimonials; subscribe to the YouTube channel to stay updated.
+            Watch Ishan Ayurvedic Medical College in action — clinical postings, hospital documentaries, faculty talks, Dhanvantari jayanti, and student testimonials; subscribe to our YouTube channel to stay updated.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {videos.map((v: any, i: number) => (
               <div key={v.title || v.ytId || i} className={`reveal delay-${Math.min(i % 3, 2)}00 group rounded-xl border bg-card overflow-hidden hover:shadow-[0_8px_30px_hsl(var(--navy)/0.08)] transition-shadow cursor-pointer`}>
-                <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-muted flex items-center justify-center overflow-hidden relative">
                   {v.ytId ? (
                     <iframe
                       src={`https://www.youtube.com/embed/${v.ytId}`}
@@ -63,10 +57,21 @@ export default function VideoGalleryPage() {
                     </div>
                   )}
                 </div>
+                {!v.ytId && (
+                  <div className="p-4 bg-card">
+                    <span className="text-xs font-bold text-gold uppercase tracking-wider mb-1 block">{v.category}</span>
+                    <h3 className="text-sm font-semibold text-foreground leading-tight line-clamp-2">{v.title}</h3>
+                  </div>
+                )}
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-8">Video placeholders shown — embed YouTube videos via CMS.</p>
+          {videos.length === 0 && (
+            <div className="reveal py-20 text-center bg-muted/30 rounded-3xl border border-dashed">
+              <p className="text-muted-foreground">No videos available at the moment.</p>
+              <p className="text-center text-sm text-muted-foreground mt-4">Add YouTube video links via the CMS gallery manager to populate this section.</p>
+            </div>
+          )}
         </div>
       </section>
     </Layout>

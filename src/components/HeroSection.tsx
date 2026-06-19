@@ -44,7 +44,7 @@ export default function HeroSection() {
     highlight: b.subheading || "of Holistic Healing",
     subtitle: b.description || "Ishan Ayurvedic Medical College — Greater Noida's premier institution.",
     cta1: { label: b.ctaText || "BAMS Programme", href: b.ctaLink || "/courses/bams" },
-    cta2: { label: "Campus Tour", href: "/infrastructure" },
+    cta2: { label: b.cta2Text || "Campus Tour", href: b.cta2Link || "/infrastructure" },
   })) : DEFAULT_SLIDES;
 
   const SESSION_START = (() => {
@@ -64,7 +64,7 @@ export default function HeroSection() {
   const [heroActiveTab, setHeroActiveTab] = useState<'enquiry' | 'campus'>('enquiry');
   const [selectedNews, setSelectedNews] = useState<any>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  
+
   const DELAY = 5500;
   const newsData = [
     { type: 'EVENT', title: 'Global Ayurvedic Summit 2025', date: 'MAR 14', action: 'popup', image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=800&auto=format&fit=crop', details: 'IAMC hosted the Annual Global Ayurvedic Summit bringing together Ayurvedacharyas, NCISM officials, and wellness practitioners for a landmark two-day conference on classical and contemporary Ayurvedic practice.' },
@@ -83,17 +83,22 @@ export default function HeroSection() {
     e.preventDefault();
     if (!/^\d{10}$/.test(formData.phone)) { toast.error("Please enter a valid 10-digit phone number."); return; }
     try {
-      await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
+      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, email: `${formData.phone}@placeholder.com`, message: `Course: ${formData.course}`, source: "Hero Section" }),
       });
-    } catch (e) {
-      console.warn("Backend not reachable", e);
+      if (!response.ok) {
+        throw new Error("Failed to submit enquiry");
+      }
+      setIsSubmitted(true);
+      toast.success("Application received! Our counsellor will call you shortly.");
+      setTimeout(() => { setIsSubmitted(false); setFormData({ name: "", phone: "", course: "" }); }, 5000);
+    } catch (err) {
+      toast.error("Unable to submit enquiry. Please try again.");
+      console.error(err);
     }
-    setIsSubmitted(true);
-    toast.success("Application received! Our counsellor will call you shortly.");
-    setTimeout(() => { setIsSubmitted(false); setFormData({ name: "", phone: "", course: "" }); }, 5000);
   };
 
   const go = useCallback((idx: number) => { setCurrent((idx + SLIDES.length) % SLIDES.length); }, []);

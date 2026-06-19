@@ -3,16 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const defaultGalleryImages = [
-  { title: "Pharmaceutics Lab", img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80", category: "Practical" },
-  { title: "Library", img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80", category: "Research" },
-  { title: "Clinical Sessions", img: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=800&q=80", category: "Training" },
-  { title: "Health Camp", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80", category: "Service" },
-  { title: "Academic Excellence", img: "https://images.unsplash.com/photo-1587854692152-cbe668df9731?auto=format&fit=crop&w=800&q=80", category: "Campus" },
-  { title: "Pharmacology Lab", img: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80", category: "Training" },
-  { title: "Event Plenary", img: "https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=800&q=80", category: "Events" },
-  { title: "Lush Greenery", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80", category: "Environment" },
-];
+const defaultGalleryImages = [];
 
 export default function CampusExperience() {
   const ref = useScrollReveal();
@@ -25,6 +16,7 @@ export default function CampusExperience() {
 
   // Subtle rotation of images in specific tiles to keep it "dynamic"
   useEffect(() => {
+    if (galleryImages.length === 0) return;
     const interval = setInterval(() => {
       const tileToChange = Math.floor(Math.random() * 8);
       const nextImage = Math.floor(Math.random() * galleryImages.length);
@@ -35,7 +27,11 @@ export default function CampusExperience() {
       });
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [galleryImages.length]);
+
+  if (!galleryImages || galleryImages.length === 0) {
+    return null;
+  }
 
   return (
     <section id="experience" className="py-16 md:py-24 bg-navy text-white overflow-hidden min-h-screen flex flex-col justify-center snap-start" ref={ref}>

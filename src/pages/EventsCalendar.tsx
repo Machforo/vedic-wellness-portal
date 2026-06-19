@@ -1,47 +1,48 @@
-﻿import Layout from "@/components/Layout";
+import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Calendar, MapPin, Tag, Clock, Share2 } from "lucide-react";
+import { Calendar, MapPin, Share2 } from "lucide-react";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 export default function EventsCalendarPage() {
   const ref = useScrollReveal();
+  const { data } = useAyurvedaData("events");
 
-  const events = [
+  const defaultEvents = [
     {
-      name: "National Seminar on Digital Business",
+      title: "National Seminar on Ayurveda",
       date: "May 15, 2024",
-      venue: "Main Auditorium",
-      category: "Academic",
-      description: "A comprehensive seminar on how digital transformation is reshaping traditional business models.",
+      location: "Main Auditorium",
+      description: "A comprehensive seminar on clinical applications of classical Ayurvedic formulations.",
     },
     {
-      name: "Kshitiz 2024: Annual Cultural Fest",
-      date: "June 05-07, 2024",
-      venue: "Campus Grounds",
-      category: "Cultural",
-      description: "Our flagship cultural festival featuring music, dance, and arts from across the region.",
+      title: "Dhanvantari Jayanti Celebration",
+      date: "October 29, 2024",
+      location: "Campus Grounds",
+      description: "Annual celebration of National Ayurveda Day with medical camps and cultural events.",
     },
     {
-      name: "Mega Placement Drive",
+      title: "Free Medical Camp",
       date: "May 20, 2024",
-      venue: "Placement Cell",
-      category: "Placement",
-      description: "Annual recruitment event with 30+ corporate partners participating.",
+      location: "Hospital OPD",
+      description: "Free consultation and medicine distribution camp for the local community.",
     },
     {
-      name: "Workshop on Python for Data Science",
+      title: "Workshop on Nadi Pariksha",
       date: "May 10, 2024",
-      venue: "IT Lab 1",
-      category: "Workshop",
-      description: "Hands-on skill development workshop for BCA and interested BBA students.",
+      location: "Clinical Lab 1",
+      description: "Hands-on skill development workshop on Ayurvedic pulse diagnosis for final year students.",
     },
   ];
+
+  const rawEvents = Array.isArray(data) ? data : [];
+  const events = rawEvents.length > 0 ? rawEvents : defaultEvents;
 
   return (
     <Layout>
       <PageHeader
         title="Events Calendar"
-        subtitle="Stay updated with academic, cultural, and professional events at Ishan Institute of Pharmacy."
+        subtitle="Stay updated with academic, cultural, and professional events at Ishan Ayurvedic Medical College."
         breadcrumbs={[{ label: "Events Calendar" }]}
       />
 
@@ -54,47 +55,44 @@ export default function EventsCalendarPage() {
                 Plan Your Campus Experience
               </h2>
               <p className="text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-                Ishan Institute of Pharmacy maintains a packed events calendar including national seminars, guest lectures, cultural festivals, sports meets, and placement drives. This helps students plan their participation and never miss an opportunity for growth.
+                Ishan Ayurvedic Medical College maintains a packed events calendar including national seminars, guest lectures, cultural festivals, medical camps, and Dhanvantari Jayanti celebrations. This helps students plan their participation and never miss an opportunity for growth.
               </p>
-              <div className="flex justify-center gap-4 pt-2">
-                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/20 text-xs font-bold text-navy hover:bg-gold hover:text-white transition-all shadow-sm">
-                  <Share2 className="w-3 h-3" /> Export to Google Calendar
-                </button>
-                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold/20 text-xs font-bold text-navy hover:bg-gold hover:text-white transition-all shadow-sm">
-                  <Share2 className="w-3 h-3" /> Download iCal
-                </button>
-              </div>
             </div>
 
             <div className="reveal-up grid gap-6">
-              {events.map((e, i) => (
-                <div key={i} className="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl border bg-card hover:border-gold transition-all duration-300">
-                  <div className="md:w-32 shrink-0 flex flex-col items-center justify-center p-4 bg-muted rounded-xl text-center group-hover:bg-gold group-hover:text-white transition-colors">
-                    <Calendar className="w-6 h-6 mb-2" />
-                    <span className="text-sm font-bold uppercase tracking-tighter leading-none">{e.date.split(',')[0]}</span>
-                    <span className="text-xl font-black leading-none">{e.date.split(' ')[1].replace(',', '')}</span>
-                  </div>
-                  
-                  <div className="flex-1 space-y-4">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="px-2 py-0.5 rounded bg-gold/10 text-xs font-bold text-gold uppercase tracking-widest">{e.category}</span>
-                      <div className="flex items-center gap-1.5 text-foreground/50 text-xs font-medium">
-                        <MapPin className="w-3 h-3" /> {e.venue}
+              {events.map((e: any, i: number) => {
+                const dateObj = new Date(e.date || new Date());
+                const month = dateObj.toLocaleString('default', { month: 'short' });
+                const day = dateObj.getDate();
+                
+                return (
+                  <div key={e._id || i} className="group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl border bg-card hover:border-gold transition-all duration-300 shadow-[0_4px_20px_hsl(var(--navy)/0.03)] hover:shadow-[0_8px_30px_hsl(var(--gold)/0.15)]">
+                    <div className="md:w-32 shrink-0 flex flex-col items-center justify-center p-4 bg-muted/50 rounded-xl text-center group-hover:bg-gold group-hover:text-white transition-colors border border-dashed group-hover:border-transparent">
+                      <Calendar className="w-6 h-6 mb-2 text-gold group-hover:text-white transition-colors" />
+                      <span className="text-sm font-bold uppercase tracking-tighter leading-none">{month}</span>
+                      <span className="text-2xl font-black leading-none mt-1">{day}</span>
+                    </div>
+                    
+                    <div className="flex-1 flex flex-col justify-center space-y-3">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <div className="flex items-center gap-1.5 text-foreground/50 text-xs font-medium">
+                          <MapPin className="w-3.5 h-3.5 text-gold" /> {e.location || "Campus"}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-navy transition-colors">{e.title}</h3>
+                        {e.description && <p className="text-sm leading-relaxed text-foreground/70 line-clamp-2">{e.description}</p>}
                       </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">{e.name}</h3>
-                      <p className="text-sm leading-relaxed">{e.description}</p>
+                    
+                    <div className="md:w-32 flex items-center justify-end">
+                      <button className="px-4 py-2 rounded-lg bg-navy/5 text-navy text-xs font-bold uppercase tracking-wider group-hover:bg-navy group-hover:text-white transition-colors">
+                        Details
+                      </button>
                     </div>
                   </div>
-                  
-                  <div className="md:w-32 flex items-center justify-end">
-                    <button className="px-4 py-2 rounded-lg bg-navy text-white text-xs font-bold uppercase tracking-wider hover:bg-gold transition-colors">
-                      Register
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

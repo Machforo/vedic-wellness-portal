@@ -1,28 +1,17 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { TrendingUp, Building2, Users2, Star } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const defaultRecruiters = [
-  { name: "Himalaya Wellness", logo: "" },
-  { name: "Patanjali", logo: "" },
-  { name: "Dabur India", logo: "" },
-  { name: "Baidyanath", logo: "" },
-  { name: "Charak Pharma", logo: "" },
-  { name: "VICCO Laboratories", logo: "" },
-  { name: "Kottakkal Arya Vaidya Sala", logo: "" },
-  { name: "Zandu Ayurveda", logo: "" },
-  { name: "Hamu Ayurveda", logo: "" },
-  { name: "Government AYUSH Hospitals", logo: "" },
-];
+const defaultRecruiters = [];
 
 export default function PlacementsSection() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("homepage");
-  const placementsCfg = data?.placements || { 
+  const { data } = useAyurvedaData("research");
+  const placementsCfg = { 
     title: "Career Outcomes & Placements", 
-    description: "Our BAMS graduates work in top-tier Ayurvedic companies, wellness centres, and government AYUSH hospitals across India." 
+    description: data?.placements?.summary || "Our BAMS graduates work in top-tier Ayurvedic companies, wellness centres, and government AYUSH hospitals across India." 
   };
-  const recruiters = data?.recruitingPartners?.length > 0 ? data.recruitingPartners : defaultRecruiters;
+  const recruiters = data?.placements?.companies?.length > 0 ? data.placements.companies : defaultRecruiters;
 
   return (
     <section id="placements" className="py-12 md:py-20" ref={ref}>

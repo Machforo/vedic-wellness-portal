@@ -1,5 +1,6 @@
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 const quickLinks = [
   { label: "About IAMC", href: "/about" },
@@ -26,6 +27,27 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const { data: siteConfigData } = useAyurvedaData("siteconfig");
+
+  const brandDescription = siteConfigData?.footer?.brandDescription || "NCISM Approved | Only Private AYUSH College in NCR | Excellence in classical Ayurvedic education with in-campus teaching hospital.";
+  
+  const contact = siteConfigData?.footer?.contact || {
+    address: "Knowledge Park-III, Greater Noida, Uttar Pradesh 201308",
+    phone: "8448797700",
+    email: "info@ishan.ac"
+  };
+
+  const footerQuickLinks = siteConfigData?.footer?.quickLinks || quickLinks;
+  const footerDepartments = siteConfigData?.footer?.departmentLinks || departments;
+  const socialLinksData = siteConfigData?.footer?.socialLinks || socialLinks;
+  const bottomLinks = siteConfigData?.footer?.bottomLinks || [
+    { label: "Mandatory Disclosure", href: "/mandatory-disclosure" },
+    { label: "Anti-Ragging", href: "/anti-ragging" },
+    { label: "Grievance", href: "/grievance-redressal" },
+    { label: "Code of Conduct", href: "/code-of-conduct" },
+  ];
+  const copyrightText = siteConfigData?.footer?.copyrightText || "Ishan Ayurvedic Medical College & Research Centre. All rights reserved.";
+
   return (
     <footer className="bg-navy text-primary-foreground border-t border-white/5">
       <div className="container-wide py-12">
@@ -43,14 +65,18 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-sm text-primary-foreground/50 leading-relaxed max-w-xs">
-              NCISM Approved | Only Private AYUSH College in NCR | Excellence in classical Ayurvedic education with in-campus teaching hospital.
+              {brandDescription}
             </p>
             <div className="flex gap-2">
-              {socialLinks.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 hover:bg-gold hover:text-navy flex items-center justify-center transition-all duration-300" aria-label={s.label}>
-                  <s.icon size={18} />
-                </a>
-              ))}
+              {socialLinksData.map((s: any) => {
+                const iconMap: Record<string, any> = { Facebook, Instagram, Youtube, Linkedin, Twitter };
+                const Ic = iconMap[s.icon || s.platform || s.label] || Facebook;
+                return (
+                  <a key={s.label || s.platform} href={s.href || s.url} target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-white/5 hover:bg-gold hover:text-navy flex items-center justify-center transition-all duration-300" aria-label={s.label || s.platform}>
+                    <Ic size={18} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -58,7 +84,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-wider mb-6 text-gold">Quick Links</h4>
             <ul className="space-y-3">
-              {quickLinks.map((l) => (
+              {footerQuickLinks.map((l: any) => (
                 <li key={l.label}>
                   <Link to={l.href} className="text-sm text-primary-foreground/50 hover:text-white transition-colors flex items-center gap-2 group">
                     <span className="w-1 h-1 rounded-full bg-gold/50 group-hover:bg-gold transition-colors" />
@@ -73,7 +99,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-sm uppercase tracking-wider mb-6 text-gold">Departments</h4>
             <ul className="space-y-3">
-              {departments.map((p) => (
+              {footerDepartments.map((p: any) => (
                 <li key={p.label}>
                   <Link to={p.href} className="text-sm text-primary-foreground/50 hover:text-white transition-colors flex items-center gap-2 group">
                     <span className="w-1 h-1 rounded-full bg-gold/50 group-hover:bg-gold transition-colors" />
@@ -90,15 +116,15 @@ export default function Footer() {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 shrink-0 text-gold mt-0.5" />
-                <span className="text-sm text-primary-foreground/50 leading-relaxed">Knowledge Park-III, Greater Noida, Uttar Pradesh 201308</span>
+                <span className="text-sm text-primary-foreground/50 leading-relaxed">{contact.address}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 shrink-0 text-gold" />
-                <a href="tel:+918448797700" className="text-sm text-primary-foreground/50 hover:text-white transition-colors">8448797700</a>
+                <a href={`tel:+91${contact.phone}`} className="text-sm text-primary-foreground/50 hover:text-white transition-colors">{contact.phone}</a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 shrink-0 text-gold" />
-                <a href="mailto:info@ishan.ac" className="text-sm text-primary-foreground/50 hover:text-white transition-colors">info@ishan.ac</a>
+                <a href={`mailto:${contact.email}`} className="text-sm text-primary-foreground/50 hover:text-white transition-colors">{contact.email}</a>
               </div>
             </div>
           </div>
@@ -109,15 +135,10 @@ export default function Footer() {
       <div className="border-t border-white/5 py-6 bg-black/20">
         <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-primary-foreground/30">
-            © {new Date().getFullYear()} Ishan Ayurvedic Medical College & Research Centre. All rights reserved.
+            © {new Date().getFullYear()} {copyrightText}
           </p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {[
-              { label: "Mandatory Disclosure", href: "/mandatory-disclosure" },
-              { label: "Anti-Ragging", href: "/anti-ragging" },
-              { label: "Grievance", href: "/grievance-redressal" },
-              { label: "Code of Conduct", href: "/code-of-conduct" },
-            ].map((l) => (
+            {bottomLinks.map((l: any) => (
               <Link key={l.label} to={l.href} className="text-xs text-primary-foreground/30 hover:text-gold transition-colors uppercase tracking-widest font-medium">
                 {l.label}
               </Link>

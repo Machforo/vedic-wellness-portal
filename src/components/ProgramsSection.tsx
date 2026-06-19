@@ -17,15 +17,7 @@ const programs = [
   },
 ];
 
-const defaultDepartments = [
-  { name: "Kayachikitsa", href: "/kayachikitsa" },
-  { name: "Panchkarma", href: "/panchkarma" },
-  { name: "Shalya Tantra", href: "/shalya-tantra" },
-  { name: "Dravyaguna", href: "/dravyaguna-vigyana" },
-  { name: "Rachana Sharir", href: "/rachana-sharir" },
-  { name: "Samhita & Sanskrit", href: "/samhita-sanskrit" },
-  { name: "Swasthavritta & Yoga", href: "/swasthavritta-yoga" },
-];
+const defaultDepartments = [];
 
 export default function ProgramsSection() {
   const ref = useScrollReveal();

@@ -5,6 +5,12 @@ import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 export default function WhyIAMCSection() {
   const ref = useScrollReveal();
   const { data } = useAyurvedaData("homepage");
+  const whySection = data?.whySection || {
+    heading: "What Makes Ishan Ayurveda the NCR's Premier Choice",
+    description: "Choosing a BAMS college is choosing your entire clinical career. IAMC's unique combination of NCISM approval, an in-campus teaching hospital, 14 specialised departments, and a living herbal garden makes it unrivalled in the National Capital Region.",
+    ctaText: "Schedule a Campus Tour",
+    ctaLink: "/why-choose-us"
+  };
   const reasons = data?.whyChooseUs?.length > 0 ? data.whyChooseUs : [
     { icon: Award, title: "NCISM Approved", desc: "Only NCISM-approved private AYUSH college in NCR — BAMS graduates registered as Ayurvedic practitioners, eligible for government AYUSH jobs." },
     { icon: Building, title: "In-Campus Teaching Hospital", desc: "Students rotate through OPDs from Year 1 — real patients, real consultations, real Ayurvedic clinical learning from Day One." },
@@ -20,16 +26,16 @@ export default function WhyIAMCSection() {
           <div className="reveal-left">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Why Choose IAMC</p>
             <h2 className="font-bold text-foreground leading-tight">
-              What Makes Ishan Ayurveda the NCR's Premier Choice
+              {whySection.heading}
             </h2>
             <p className="mt-4 leading-relaxed">
-              Choosing a BAMS college is choosing your entire clinical career. IAMC's unique combination of NCISM approval, an in-campus teaching hospital, 14 specialised departments, and a living herbal garden makes it unrivalled in the National Capital Region.
+              {whySection.description}
             </p>
             <a
-              href="/why-choose-us"
+              href={whySection.ctaLink || "/why-choose-us"}
               className="inline-flex items-center gap-2 mt-8 px-6 py-3 text-sm font-semibold bg-navy text-primary-foreground rounded-lg hover:bg-gold hover:text-navy transition-all active:scale-[0.97] shimmer-btn"
             >
-              Schedule a Campus Tour
+              {whySection.ctaText || "Schedule a Campus Tour"}
             </a>
           </div>
 

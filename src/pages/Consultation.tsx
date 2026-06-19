@@ -3,6 +3,8 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { User, Phone, BookOpen, Send, Calendar, Clock, CheckCircle } from "lucide-react";
 
+import { toast } from "sonner";
+
 export default function Consultation() {
   const [formData, setFormData] = useState({
     name: "",
@@ -16,28 +18,33 @@ export default function Consultation() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
+      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, email: `${formData.phone}@placeholder.com`, message: `Consultation Booking: ${formData.course} on ${formData.date} at ${formData.time}`, source: "Consultation Page" }),
       });
+      if (!response.ok) {
+        throw new Error("Failed to book consultation");
+      }
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
-      console.warn("Backend not reachable", err);
+      toast.error("Unable to book consultation. Please try again.");
+      console.error(err);
     }
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <Layout>
-      <PageHeader 
-        title="Book a Consultation with Ishan" 
+      <PageHeader
+        title="Book a Consultation with Ishan"
         subtitle="Speak directly with our expert counsellors to find the perfect programme that aligns with your career goals."
       />
-      
+
       <div className="container-wide py-16 md:py-24">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
-          
+
           {/* Left Column: Info */}
           <div className="lg:col-span-2 space-y-8">
             <div>
@@ -46,7 +53,7 @@ export default function Consultation() {
                 Choosing the right professional degree is the most important decision of your career. Our academic counsellors are here to help you navigate your options, understand the pharmacy career landscape, and find your perfect fit at Ishan Pharmacy.
               </p>
             </div>
-            
+
             <ul className="space-y-6">
               {[
                 { title: "Personalized Legal Career Path", desc: "Get tailored advice on pursuing litigation, corporate law, or the judiciary." },
@@ -66,7 +73,7 @@ export default function Consultation() {
               ))}
             </ul>
           </div>
-          
+
           {/* Right Column: Form */}
           <div className="lg:col-span-3">
             <div className="bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] p-8 md:p-12 border border-border/50">
@@ -79,8 +86,8 @@ export default function Consultation() {
                   <p className="text-lg text-muted-foreground max-w-md mx-auto leading-relaxed">
                     Thank you, {formData.name}. Your consultation has been scheduled. Our academic counsellor will contact you shortly to confirm the details.
                   </p>
-                  <button 
-                    onClick={() => { setSubmitted(false); setFormData({name: "", phone: "", course: "", date: "", time: ""}); }}
+                  <button
+                    onClick={() => { setSubmitted(false); setFormData({ name: "", phone: "", course: "", date: "", time: "" }); }}
                     className="mt-8 px-8 py-3 bg-navy text-white font-bold rounded-xl shadow-lg hover:bg-navy-dark transition-all"
                   >
                     Book Another Session
@@ -92,48 +99,48 @@ export default function Consultation() {
                     <h3 className="text-2xl font-bold text-navy mb-2">Schedule Your Session</h3>
                     <p className="text-muted-foreground">Fill in the details below and we'll arrange a call.</p>
                   </div>
-                  
+
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-sm font-bold text-navy ml-1">Full Name *</label>
                         <div className="relative">
                           <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <input 
-                            type="text" 
-                            required 
+                          <input
+                            type="text"
+                            required
                             value={formData.name}
-                            onChange={e => setFormData({...formData, name: e.target.value})}
-                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" 
-                            placeholder="John Doe" 
+                            onChange={e => setFormData({ ...formData, name: e.target.value })}
+                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm"
+                            placeholder="John Doe"
                           />
                         </div>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <label className="text-sm font-bold text-navy ml-1">Mobile Number *</label>
                         <div className="relative">
                           <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <input 
-                            type="tel" 
-                            required 
+                          <input
+                            type="tel"
+                            required
                             value={formData.phone}
-                            onChange={e => setFormData({...formData, phone: e.target.value})}
-                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" 
-                            placeholder="+91 XXXXX XXXXX" 
+                            onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm"
+                            placeholder="+91 XXXXX XXXXX"
                           />
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-navy ml-1">Programme of Interest *</label>
                       <div className="relative">
                         <BookOpen size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                        <select 
-                          required 
+                        <select
+                          required
                           value={formData.course}
-                          onChange={e => setFormData({...formData, course: e.target.value})}
+                          onChange={e => setFormData({ ...formData, course: e.target.value })}
                           className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white appearance-none transition-all text-sm cursor-pointer"
                         >
                           <option value="" disabled>Select Programme</option>
@@ -143,30 +150,30 @@ export default function Consultation() {
                         </select>
                       </div>
                     </div>
-                    
+
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-sm font-bold text-navy ml-1">Preferred Date *</label>
                         <div className="relative">
                           <Calendar size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <input 
-                            type="date" 
-                            required 
+                          <input
+                            type="date"
+                            required
                             value={formData.date}
-                            onChange={e => setFormData({...formData, date: e.target.value})}
-                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" 
+                            onChange={e => setFormData({ ...formData, date: e.target.value })}
+                            className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm"
                           />
                         </div>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <label className="text-sm font-bold text-navy ml-1">Preferred Time *</label>
                         <div className="relative">
                           <Clock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                          <select 
-                            required 
+                          <select
+                            required
                             value={formData.time}
-                            onChange={e => setFormData({...formData, time: e.target.value})}
+                            onChange={e => setFormData({ ...formData, time: e.target.value })}
                             className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white appearance-none transition-all text-sm cursor-pointer"
                           >
                             <option value="" disabled>Select Time Slot</option>
@@ -182,7 +189,7 @@ export default function Consultation() {
                       Book Consultation Now
                       <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </button>
-                    
+
                     <p className="text-xs text-center text-muted-foreground">
                       By submitting this form, you agree to our privacy policy and authorize Ishan Pharmacy to contact you regarding your consultation.
                     </p>
@@ -191,7 +198,7 @@ export default function Consultation() {
               )}
             </div>
           </div>
-          
+
         </div>
       </div>
     </Layout>

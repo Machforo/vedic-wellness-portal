@@ -2,20 +2,19 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export default function ContactPage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("contact");
+  const { data } = useAyurvedaData("contact");
   const mainContact = data?.mainContact || {
     address: "Knowledge Park-III, Greater Noida, Uttar Pradesh 201308",
     phone: "8448797700",
     email: "admissions@ishan.ac",
-    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.2!2d77.49!3d28.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sIshan+Institute+of+Pharmacy!5e0!3m2!1sen!2sin!4v1"
+    mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.2!2d77.49!3d28.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sIshan+Ayurvedic+Medical+College!5e0!3m2!1sen!2sin!4v1"
   };
-  const collegeContacts = data?.collegeContacts || [];
 
   const [form, setForm] = useState({ name: "", phone: "", email: "", program: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
@@ -32,25 +31,25 @@ export default function ContactPage() {
       return;
     }
 
-    setSubmitting(true);
-
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Attempt real submit but don't block the UI if it fails (as backend might not be up)
     try {
-      await fetch("https://ishan-backend-g096.onrender.com/api/ayurveda/leads", {
+      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, source: "Contact Page" }),
       });
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+      toast.success("Your message has been sent successfully!");
+      setSubmitted(true);
+      setForm({ name: "", phone: "", email: "", program: "", message: "" });
     } catch (err) {
-      console.warn("Backend not reachable, simulating success for demo", err);
+      toast.error("Unable to send message. Please try again.");
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitted(true);
-    setForm({ name: "", phone: "", email: "", program: "", message: "" });
-    setSubmitting(false);
   };
 
   return (
@@ -60,7 +59,7 @@ export default function ContactPage() {
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
           <p className="reveal leading-relaxed max-w-3xl mb-12 text-lg">
-            Ishan Pharmacy's team is available to assist prospective students, parents, enrolled students, and visitors. Admissions queries are given priority, with responses guaranteed within 24 working hours.
+            Ishan Ayurvedic Medical College's team is available to assist prospective students, parents, enrolled students, and visitors. Admissions queries are given priority, with responses guaranteed within 24 working hours.
           </p>
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             <div className="reveal-left space-y-8">
@@ -68,10 +67,10 @@ export default function ContactPage() {
                 <h2 className="text-2xl font-bold text-foreground mb-6">Contact Directory</h2>
                 <div className="space-y-4">
                   {[
-                    { icon: Phone, label: "Admissions Office", value: "8448797700 (Phone & WhatsApp)", href: `tel:${mainContact.phone}` },
+                    { icon: Phone, label: "Admissions Office", value: `${mainContact.phone} (Phone & WhatsApp)`, href: `tel:${mainContact.phone}` },
                     { icon: Mail, label: "Admissions Email", value: mainContact.email, href: `mailto:${mainContact.email}` },
-                    { icon: Phone, label: "Academic Office", value: "0120-2323233", href: "tel:01202323233" },
-                    { icon: Mail, label: "Principal's Office", value: "principal.pharmacy@ishan.ac", href: "mailto:principal.pharmacy@ishan.ac" },
+                    { icon: Phone, label: "Hospital Desk", value: "0120-2323233", href: "tel:01202323233" },
+                    { icon: Mail, label: "Principal's Office", value: "principal.ayurveda@ishan.ac", href: "mailto:principal.ayurveda@ishan.ac" },
                     { icon: MapPin, label: "Campus Address", value: mainContact.address },
                     { icon: Clock, label: "Office Hours", value: "Mon–Sat: 9:00 AM – 5:00 PM" },
                   ].map(({ icon: Icon, label, value, href }) => (
@@ -85,13 +84,13 @@ export default function ContactPage() {
                   ))}
                 </div>
                 <div className="mt-6">
-                  <a href={`https://wa.me/918448797700`} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#128C7E] transition-colors w-full sm:w-auto">
+                  <a href={`https://wa.me/91${mainContact.phone}`} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white font-bold rounded-lg hover:bg-[#128C7E] transition-colors w-full sm:w-auto">
                     <span className="text-lg">💬</span> Chat on WhatsApp
                   </a>
                 </div>
               </div>
               <div className="rounded-xl overflow-hidden border h-[300px]">
-                <iframe src={mainContact.mapEmbed} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" title="Ishan Pharmacy Location" />
+                <iframe src={mainContact.mapEmbed} width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy" title="Ishan Ayurveda Location" />
               </div>
             </div>
 
@@ -116,7 +115,7 @@ export default function ContactPage() {
                     <input type="email" placeholder="Email Address" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold)/0.5)] transition-shadow" />
                     <select value={form.program} onChange={e => setForm(p => ({ ...p, program: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border bg-background text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold)/0.5)] transition-shadow">
                       <option value="">Select Program</option>
-                      <option>D.Pharm</option><option>B.Pharm</option>
+                      <option>BAMS</option>
                     </select>
                     <textarea placeholder="Your Message (optional)" rows={4} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold)/0.5)] transition-shadow resize-none" />
                     <button type="submit" disabled={submitting} className="w-full py-3.5 text-sm font-semibold bg-navy text-primary-foreground rounded-lg shadow-lg hover:bg-navy/90 transition-all active:scale-[0.97] disabled:opacity-60">

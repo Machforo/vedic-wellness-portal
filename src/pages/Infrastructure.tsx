@@ -1,75 +1,76 @@
-﻿import Layout from "@/components/Layout";
+import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Link } from "react-router-dom";
-import { Wifi, Monitor, BookOpen, Building2, Cctv, MapPin, ArrowRight, Scale } from "lucide-react";
-import { useIshanLawData } from "@/hooks/useIshanLawData";
+import { Wifi, Monitor, BookOpen, Building2, Cctv, MapPin, ArrowRight, Scale, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube } from "lucide-react";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
-const facilities = [
-  { icon: Building2, title: "Moot Court Hall", desc: "A realistic High Court environment for regular clinical training, oral advocacy practice, and national competitions.", link: "/moot-court" },
-  { icon: BookOpen, title: "Pharmacy Library", desc: "Extensive collection of pharmaceutical texts, law reports (AIR, SCC), and international journals with a dedicated research wing.", link: "/library" },
-  { icon: Monitor, title: "Digital Research Lab", desc: "High-speed IT lab with 24/7 access to Manupatra, SCC Online, and LexisNexis for comprehensive pharmaceutical research.", link: "/it-lab" },
-  { icon: Scale, title: "Legal Aid Clinic", desc: "A dedicated facility for community service where students provide free legal counseling under expert supervision.", link: "/legal-aid-cell" },
-  { icon: Monitor, title: "Smart Classrooms", desc: "Modern air-conditioned lecture halls equipped with AV systems for interactive legal discussions and case presentations." },
-  { icon: Wifi, title: "Wi-Fi Campus", desc: "Seamless connectivity across the campus to support digital learning and research terminals." },
-];
+const iconMap: Record<string, any> = {
+  Building2, BookOpen, Monitor, Scale, Wifi, Cctv, MapPin, ArrowRight, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube, default: Building2
+};
 
 export default function InfrastructurePage() {
   const ref = useScrollReveal();
-  const { data } = useIshanLawData("campuslife");
-  const intro = `Ishan Institute of Pharmacy's campus is strategically located in Knowledge Park III, Greater Noida, offering a specialized environment designed for pharmaceutical scholarship and professional training. The campus is built on a foundation of tradition and modern infrastructure, providing a premium learning experience for aspiring advocates.
-
-Our facilities include a high-tech Moot Court Hall, a comprehensive pharmacy library with digital research terminals, and a dedicated Pharmacy Practice Cell for community service. We also provide smart classrooms and secure campus-wide Wi-Fi, ensuring that our students have access to the best tools for pharmaceutical research and advocacy.
-
-The campus is highly accessible, situated in the heart of Greater Noida's educational hub and well-connected by major transport links, including the Pari Chowk Metro Station, making it an ideal choice for serious pharmacy professionals.`;
+  const { data } = useAyurvedaData("facilities");
+  
+  const infrastructure = data?.infrastructure || {};
+  const intro = infrastructure.content || "Ishan Ayurvedic Medical College provides a state-of-the-art campus designed specifically for Ayurvedic education and clinical practice. Our facilities include advanced laboratories, a comprehensive library, smart classrooms, and a dedicated teaching hospital, ensuring students receive both classical knowledge and modern scientific training.";
+  
+  const facilities = infrastructure.features?.length > 0 ? infrastructure.features : [
+    { icon: "Microscope", title: "Rachana Sharir Lab", desc: "Anatomy laboratory equipped with cadaver dissection facilities, models, and specimens for practical anatomical study." },
+    { icon: "Beaker", title: "Kriya Sharir Lab", desc: "Physiology lab with modern instruments to study human physiological functions according to Ayurvedic and modern parameters." },
+    { icon: "Library", title: "Ayurvedic Library", desc: "Extensive collection of classical Samhitas, modern medical textbooks, and international research journals." },
+    { icon: "TestTube", title: "Rasa Shastra Lab", desc: "Fully functional pharmacy lab for preparing classical Ayurvedic formulations, bhasmas, and quality testing." },
+    { icon: "Monitor", title: "Smart Classrooms", desc: "Modern air-conditioned lecture halls equipped with AV systems for interactive learning and case presentations." },
+    { icon: "Wifi", title: "Wi-Fi Campus", desc: "Seamless high-speed connectivity across the campus to support digital learning and research." },
+  ];
 
   return (
     <Layout>
       <PageHeader
         title="Campus Infrastructure"
-        subtitle="Modern facilities designed to create an optimal learning environment"
+        subtitle="Modern facilities designed for excellence in Ayurvedic medical education"
         breadcrumbs={[{ label: "Campus", href: "/infrastructure" }, { label: "Infrastructure" }]}
       />
 
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
           <div className="reveal max-w-3xl mb-14">
-            <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">
-              {intro}
-            </p>
+            {infrastructure.content ? (
+              <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: infrastructure.content }}></div>
+            ) : (
+              <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">
+                {intro}
+              </p>
+            )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             <div className="reveal rounded-2xl overflow-hidden border shadow-sm">
-              <img src="https://placehold.co/1024x768/e2e8f0/1e293b?text=Ishan+Campus" alt="Campus Building" className="w-full h-64 object-cover" />
+              <img src={infrastructure.image || "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1000&q=80"} alt="Campus Building" className="w-full h-64 object-cover" />
             </div>
             <div className="reveal delay-100 rounded-2xl overflow-hidden border shadow-sm">
-              <img src="https://pharmacy.ishan.ac/wp-content/uploads/2023/10/Library-2-1024x769.jpg" alt="Institutional Facility" className="w-full h-64 object-cover" />
+              <img src="https://images.unsplash.com/photo-1577969858595-65487779d71c?auto=format&fit=crop&w=1000&q=80" alt="Institutional Facility" className="w-full h-64 object-cover" />
             </div>
-            <div className="reveal delay-200 rounded-2xl overflow-hidden border shadow-sm">
-              <img src="https://pharmacy.ishan.ac/wp-content/uploads/2023/10/Girls-Hostel-1024x768.jpg" alt="Campus Infrastructure" className="w-full h-64 object-cover" />
+            <div className="reveal delay-200 rounded-2xl overflow-hidden border shadow-sm lg:col-span-1 md:col-span-2 lg:block">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=80" alt="Campus Infrastructure" className="w-full h-64 object-cover md:h-[400px] lg:h-64" />
             </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {facilities.map((f, i) => {
-              const Icon = f.icon;
-              const content = (
-                <div className={`reveal delay-${Math.min(i, 5)}00 bg-card rounded-xl border p-6 h-full hover:shadow-[0_8px_30px_hsl(var(--navy)/0.08)] transition-shadow ${f.link ? 'group cursor-pointer' : ''}`}>
-                  <div className="w-12 h-12 rounded-xl bg-gold-light flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
+            {facilities.map((f: any, i: number) => {
+              const Icon = iconMap[f.icon] || iconMap.default;
+              return (
+                <div key={i} className={`reveal delay-${Math.min(i % 3, 2)}00 bg-card rounded-xl border p-6 h-full hover:shadow-[0_8px_30px_hsl(var(--navy)/0.08)] transition-shadow`}>
+                  <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors">
                     <Icon className="w-6 h-6 text-navy" />
                   </div>
                   <h3 className="font-bold text-foreground mb-2">{f.title}</h3>
-                  <p className="text-sm leading-relaxed">{f.desc}</p>
-                  {f.link && (
-                    <span className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-navy group-hover:text-gold transition-colors">
-                      View Details <ArrowRight className="w-4 h-4" />
-                    </span>
+                  {f.desc && (
+                    <div className="text-sm leading-relaxed text-foreground/70 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: f.desc }}></div>
                   )}
                 </div>
               );
-              return f.link ? <Link key={f.title} to={f.link}>{content}</Link> : <div key={f.title}>{content}</div>;
             })}
           </div>
         </div>
