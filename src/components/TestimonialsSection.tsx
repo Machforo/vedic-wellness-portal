@@ -42,8 +42,10 @@ const parentTestimonials = [
 export default function TestimonialsSection() {
   const [activeTab, setActiveTab] = useState<'students' | 'parents'>('students');
   const { data: testimonialsData } = useAyurvedaData("testimonials");
-  const testimonials = testimonialsData?.length > 0 ? testimonialsData : (testimonialsData?.data?.length > 0 ? testimonialsData.data : studentTestimonials);
-  const parents = parentTestimonials; // Admin panel only shows "Student Testimonials" normally, but can fallback
+  const backendTestimonials = testimonialsData?.length > 0 ? testimonialsData : (testimonialsData?.data?.length > 0 ? testimonialsData.data : []);
+  
+  const testimonials = backendTestimonials.length > 0 ? backendTestimonials.filter((t: any) => t.type === "Student") : studentTestimonials;
+  const parents = backendTestimonials.length > 0 ? backendTestimonials.filter((t: any) => t.type === "Parent") : parentTestimonials;
 
   return (
     <section className="py-16 md:py-24 bg-section-alt overflow-hidden">

@@ -55,6 +55,24 @@ export default function ScopeOfBAMSPage() {
               ); 
             })}
           </div>
+
+          {scopeOfBams?.editorialImages && scopeOfBams.editorialImages.length > 0 && (
+            <div className="reveal mb-16">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {scopeOfBams.editorialImages.map((photo: any, index: number) => (
+                  <div key={index} className="rounded-xl overflow-hidden aspect-[4/3] relative group shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Editorial"} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="text-center">
             <Link to="/admissions" className="inline-flex items-center gap-2 px-8 py-4 bg-navy text-white font-bold rounded-xl hover:bg-gold hover:text-navy transition-all shimmer-btn">Apply for BAMS {new Date().getFullYear()}-{String(new Date().getFullYear() + 1).slice(2)} <ArrowRight className="w-4 h-4" /></Link>
           </div>

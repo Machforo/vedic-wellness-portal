@@ -6,14 +6,20 @@ interface PageHeaderProps {
   title: string;
   subtitle?: string;
   breadcrumbs?: { label: string; href?: string }[];
+  backgroundImage?: string;
 }
 
-export default function PageHeader({ title, subtitle, breadcrumbs }: PageHeaderProps) {
+export default function PageHeader({ title, subtitle, breadcrumbs, backgroundImage }: PageHeaderProps) {
   const ref = useScrollReveal();
 
   return (
     <section className="bg-navy relative overflow-hidden" ref={ref}>
-      <div className="absolute inset-0 opacity-10">
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <img src={backgroundImage} alt={title} className="w-full h-full object-cover opacity-20 mix-blend-overlay" />
+        </div>
+      )}
+      <div className="absolute inset-0 opacity-10 z-0">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--gold) / 0.3) 0%, transparent 50%)" }} />
       </div>
       <div className="relative container-wide pt-28 pb-16 md:pt-36 md:pb-24">

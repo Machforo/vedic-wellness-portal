@@ -13,6 +13,7 @@ export default function DynamicCoursePage() {
 
   const eligibility = bamsProgram.eligibility || [];
   const outcomes = bamsProgram.outcomes || [];
+
   
   // The backend syllabus phases are actually in syllabus.phases, but in DynamicCourse it was showing "Year-wise Structure" with hardcoded phases. We'll use the syllabus phases if available.
   const syllabus = data?.syllabus || {};
@@ -20,7 +21,12 @@ export default function DynamicCoursePage() {
 
   return (
     <Layout>
-      <PageHeader title="BAMS - Bachelor of Ayurvedic Medicine and Surgery" subtitle="5.5-year NCISM-recognised degree programme - the only Ayurvedic medical degree conferring the title 'Vaidya'" breadcrumbs={[{ label: "BAMS Programme" }]} />
+      <PageHeader 
+        title="BAMS - Bachelor of Ayurvedic Medicine and Surgery" 
+        subtitle="5.5-year NCISM-recognised degree programme - the only Ayurvedic medical degree conferring the title 'Vaidya'" 
+        breadcrumbs={[{ label: "BAMS Programme" }]} 
+        backgroundImage={bamsProgram?.bannerImage}
+      />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 mb-16">
@@ -39,7 +45,7 @@ export default function DynamicCoursePage() {
             </div>
             <div className="reveal-right">
               <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                <img src="https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=800&auto=format&fit=crop" alt="BAMS Programme" className="w-full h-[380px] object-cover" />
+                <img src={bamsProgram?.facultyTeachingImage || "https://images.unsplash.com/photo-1628771065518-0d82f1938462?q=80&w=800&auto=format&fit=crop"} alt="BAMS Programme" className="w-full h-[380px] object-cover" />
               </div>
             </div>
           </div>
@@ -77,10 +83,34 @@ export default function DynamicCoursePage() {
           </div>
           <div className="reveal mb-12">
             <h3 className="font-bold text-foreground mb-4">Career Outcomes</h3>
-            <div className="flex flex-wrap gap-3">
-              {outcomes.length > 0 ? outcomes.map((o: any, i: number) => <span key={i} className="px-4 py-2 bg-navy/5 text-navy text-sm font-medium rounded-xl border">{o.text || o}</span>) : null}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="flex flex-wrap gap-3 h-fit">
+                {outcomes.length > 0 ? outcomes.map((o: any, i: number) => <span key={i} className="px-4 py-2 bg-navy/5 text-navy text-sm font-medium rounded-xl border">{o.text || o}</span>) : null}
+              </div>
+              {bamsProgram?.careerOutcomeImage && (
+                <div className="rounded-2xl overflow-hidden shadow-sm border h-48 md:h-full">
+                  <img src={bamsProgram.careerOutcomeImage} alt="Career Outcomes" className="w-full h-full object-cover" />
+                </div>
+              )}
             </div>
           </div>
+          {bamsProgram?.studentActivityImages && bamsProgram.studentActivityImages.length > 0 && (
+            <div className="reveal mb-12">
+              <h3 className="font-bold text-foreground mb-6 text-center">Student Life & Clinical Exposure</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {bamsProgram.studentActivityImages.map((photo: any, i: number) => (
+                  <div key={i} className="rounded-xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Student Activity"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="text-center">
             <Link to="/admissions" className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-navy font-bold rounded-xl hover:bg-navy hover:text-white transition-all shimmer-btn">Apply for BAMS {new Date().getFullYear()}-{String(new Date().getFullYear() + 1).slice(2)} <ArrowRight className="w-4 h-4" /></Link>
           </div>

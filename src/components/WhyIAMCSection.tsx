@@ -23,20 +23,28 @@ export default function WhyIAMCSection() {
       <div className="container-wide">
         <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
           {/* Left */}
-          <div className="reveal-left">
+          <div className="reveal-left flex flex-col justify-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Why Choose IAMC</p>
             <h2 className="font-bold text-foreground leading-tight">
               {whySection.heading}
             </h2>
-            <p className="mt-4 leading-relaxed">
+            <p className="mt-4 leading-relaxed text-muted-foreground">
               {whySection.description}
             </p>
-            <a
-              href={whySection.ctaLink || "/why-choose-us"}
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 text-sm font-semibold bg-navy text-primary-foreground rounded-lg hover:bg-gold hover:text-navy transition-all active:scale-[0.97] shimmer-btn"
-            >
-              {whySection.ctaText || "Schedule a Campus Tour"}
-            </a>
+            {whySection.campusImage && (
+              <div className="mt-6 rounded-xl overflow-hidden aspect-video relative group">
+                <img src={whySection.campusImage} alt="Campus" className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              </div>
+            )}
+            <div className="mt-8">
+              <a
+                href={whySection.ctaLink || "/why-choose-us"}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-navy text-primary-foreground rounded-lg hover:bg-gold hover:text-navy transition-all active:scale-[0.97] shimmer-btn"
+              >
+                {whySection.ctaText || "Schedule a Campus Tour"}
+              </a>
+            </div>
           </div>
 
           {/* Right grid */}

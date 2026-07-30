@@ -55,8 +55,8 @@ function DepartmentContent({ dept }: { dept: any }) {
             </div>
             <div className="reveal">
               <div className="rounded-2xl overflow-hidden shadow-2xl border bg-navy/5">
-                {dept?.image ? (
-                  <img src={dept.image} alt={dept.name} className="w-full h-[400px] object-cover" />
+                {dept?.equipmentWideImage || dept?.image ? (
+                  <img src={dept.equipmentWideImage || dept.image} alt={dept.name} className="w-full h-[400px] object-cover" />
                 ) : (
                   <div className="w-full h-[400px] flex items-center justify-center bg-muted text-muted-foreground">
                     No Image Available
@@ -83,6 +83,35 @@ function DepartmentContent({ dept }: { dept: any }) {
                   </div>
                 );
               })}
+            </div>
+
+          )}
+
+          {((dept?.equipmentCloseups && dept.equipmentCloseups.length > 0) || (dept?.studentsWorkingImages && dept.studentsWorkingImages.length > 0)) && (
+            <div className="mt-16 pt-16 border-t border-border">
+              <h3 className="font-bold text-foreground mb-8 text-center">Laboratory & Practical Training</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {dept?.equipmentCloseups?.map((photo: any, idx: number) => (
+                  <div key={`eq-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Equipment"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {dept?.studentsWorkingImages?.map((photo: any, idx: number) => (
+                  <div key={`st-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Students Working"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

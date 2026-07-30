@@ -66,6 +66,48 @@ export default function AuditoriumSportsPage() {
               )}
             </div>
           </div>
+
+          {/* Photo Galleries */}
+          {((auditorium?.interiorDetails && auditorium.interiorDetails.length > 0) || auditorium?.eventPhoto) && (
+            <div className="reveal mt-12 pt-12 border-t border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6 text-center">Auditorium & Events</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {auditorium.interiorDetails?.map((photo: any, idx: number) => (
+                  <div key={`sh-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] shadow-sm border border-border group relative">
+                    <img src={photo.image} alt={photo.caption || "Auditorium Interior"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {auditorium.eventPhoto && (
+                  <div className="rounded-xl overflow-hidden aspect-[4/3] shadow-sm border border-border group relative">
+                    <img src={auditorium.eventPhoto} alt="Event Photo" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {sports?.interiorDetails && sports.interiorDetails.length > 0 && (
+            <div className="reveal mt-12 pt-12 border-t border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6 text-center">Sports & Recreation</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {sports.interiorDetails?.map((photo: any, idx: number) => (
+                  <div key={`sp-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] shadow-sm border border-border group relative">
+                    <img src={photo.image} alt={photo.caption || "Sports Facility"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
       <EnquiryCTA />

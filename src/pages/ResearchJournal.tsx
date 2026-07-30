@@ -57,7 +57,43 @@ export default function ResearchJournalPage() {
                 <FileText className="w-4 h-4" /> Download Submission Guidelines
               </a>
             </div>
+
           )}
+
+          {journal?.boardHeadshots && journal.boardHeadshots.length > 0 && (
+            <div className="reveal mt-16 pt-16 border-t border-border">
+              <h3 className="font-bold text-foreground mb-8 text-center">Editorial Board</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                {journal.boardHeadshots.map((person: any, idx: number) => (
+                  <div key={idx} className="text-center group">
+                    <div className="w-24 h-24 mx-auto rounded-full overflow-hidden shadow-sm border border-border mb-3 group-hover:shadow-md transition-shadow">
+                      <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                    </div>
+                    <p className="text-sm font-semibold text-foreground">{person.name}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {journal?.researchActivityImages && journal.researchActivityImages.length > 0 && (
+            <div className="reveal mt-16 pt-16 border-t border-border">
+              <h3 className="font-bold text-foreground mb-8 text-center">Research Activities</h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {journal.researchActivityImages.map((photo: any, idx: number) => (
+                  <div key={idx} className="rounded-xl overflow-hidden aspect-video shadow-sm border border-border group relative">
+                    <img src={photo.image} alt={photo.caption || "Research Activity"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-sm font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
         </div>
       </section>
       <EnquiryCTA />

@@ -52,16 +52,23 @@ export default function PlacementsPage() {
             </div>
           )}
 
-          {/* Process */}
-          <div className="reveal delay-100 max-w-3xl mx-auto mb-16">
+          {/* Process & Infographic */}
+          <div className="reveal delay-100 max-w-5xl mx-auto mb-16">
             <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Placement Process</h2>
-            <div className="space-y-4">
-              {placementProcess.map((step: any, i: number) => (
-                <div key={i} className="flex gap-4 items-start p-4 rounded-lg border bg-card">
-                  <div className="w-8 h-8 rounded-full bg-navy flex items-center justify-center shrink-0"><span className="text-xs font-bold text-primary-foreground">{step.step || i+1}</span></div>
-                  <p className="text-sm">{step.desc}</p>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-4">
+                {placementProcess.map((step: any, i: number) => (
+                  <div key={i} className="flex gap-4 items-start p-4 rounded-lg border bg-card">
+                    <div className="w-8 h-8 rounded-full bg-navy flex items-center justify-center shrink-0"><span className="text-xs font-bold text-primary-foreground">{step.step || i+1}</span></div>
+                    <p className="text-sm">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+              {placementsData?.statsInfographic && (
+                <div className="rounded-xl overflow-hidden shadow-sm border h-full min-h-[300px]">
+                  <img src={placementsData.statsInfographic} alt="Placement Statistics" className="w-full h-full object-cover" />
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -101,6 +108,24 @@ export default function PlacementsPage() {
                         {t.package && <p className="text-xs font-medium text-gold">{t.package}</p>}
                       </div>
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {placementsData?.placementCeremonyImages && placementsData.placementCeremonyImages.length > 0 && (
+            <div className="reveal delay-400 mt-16 pt-16 border-t border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Placement Ceremonies</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {placementsData.placementCeremonyImages.map((photo: any, idx: number) => (
+                  <div key={idx} className="rounded-xl overflow-hidden aspect-[4/3] shadow-sm border border-border group relative">
+                    <img src={photo.image} alt={photo.caption || "Placement Ceremony"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-sm font-medium">{photo.caption}</p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

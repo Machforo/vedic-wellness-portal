@@ -66,6 +66,24 @@ export default function ScholarshipsPage() {
               ))}
             </ul>
           </div>
+
+          {scholarshipsData?.certificateHandoverImages && scholarshipsData.certificateHandoverImages.length > 0 && (
+            <div className="reveal mt-16 pt-12 border-t border-border">
+              <h3 className="font-bold text-foreground mb-6 text-center">Scholarship Awardees</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {scholarshipsData.certificateHandoverImages.map((photo: any, index: number) => (
+                  <div key={index} className="rounded-xl overflow-hidden aspect-[4/3] relative group shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Scholarship Certificate"} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
       <EnquiryCTA />

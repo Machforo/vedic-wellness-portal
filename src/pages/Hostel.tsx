@@ -47,10 +47,74 @@ export default function HostelPage() {
               ))}
             </div>
 
-            <div className="reveal delay-300 rounded-xl border bg-card p-6 border-l-4 border-l-gold">
+            <div className="reveal delay-300 rounded-xl border bg-card p-6 border-l-4 border-l-gold mb-16">
               <h3 className="font-semibold text-foreground mb-3">Warden Contact & Admissions</h3>
               <p className="text-sm">For hostel enquiries and applications, contact the admissions office at <a href="tel:+918448797700" className="text-navy font-semibold hover:text-gold transition-colors">8448797700</a> or visit the campus administration block.</p>
             </div>
+
+            {/* Photo Galleries */}
+            {hostel?.roomInteriors && hostel.roomInteriors.length > 0 && (
+              <div className="reveal mt-12">
+                <h3 className="text-xl font-bold text-foreground mb-6">Room Interiors</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {hostel.roomInteriors.map((photo: any, idx: number) => (
+                    <div key={`ri-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] relative shadow-sm border border-border group">
+                      <img src={photo.image} alt={photo.caption || "Room Interior"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      {photo.caption && (
+                        <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-white text-xs font-medium">{photo.caption}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {hostel?.washroomImages && hostel.washroomImages.length > 0 && (
+              <div className="reveal mt-12">
+                <h3 className="text-xl font-bold text-foreground mb-6">Washroom Facilities</h3>
+                <div className="grid grid-cols-2 gap-4 max-w-2xl">
+                  {hostel.washroomImages.map((photo: any, idx: number) => (
+                    <div key={`wi-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] relative shadow-sm border border-border group">
+                      <img src={photo.image} alt={photo.caption || "Washroom"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {hostel?.diningHallImages && hostel.diningHallImages.length > 0 && (
+              <div className="reveal mt-12">
+                <h3 className="text-xl font-bold text-foreground mb-6">Dining Hall & Mess</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {hostel.diningHallImages.map((photo: any, idx: number) => (
+                    <div key={`dh-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] relative shadow-sm border border-border group">
+                      <img src={photo.image} alt={photo.caption || "Dining Hall"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      {photo.caption && (
+                        <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                          <p className="text-white text-xs font-medium">{photo.caption}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {hostel?.commonRoomImages && hostel.commonRoomImages.length > 0 && (
+              <div className="reveal mt-12">
+                <h3 className="text-xl font-bold text-foreground mb-6">Common Room & Recreation</h3>
+                <div className="grid grid-cols-2 gap-4 max-w-2xl">
+                  {hostel.commonRoomImages.map((photo: any, idx: number) => (
+                    <div key={`cr-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] relative shadow-sm border border-border group">
+                      <img src={photo.image} alt={photo.caption || "Common Room"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       </section>

@@ -21,6 +21,7 @@ export default function AboutSection() {
   const image = profile?.image || aboutInfo?.image || "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop";
   const ctaLink = profile?.ctaLink || "/about";
   const ctaText = profile?.ctaText || "Learn More About IAMC";
+  const mappedHighlights = data?.whySection?.points?.map((p: any) => p.heading || p.title || p) || highlights;
 
   return (
     <section id="about" className="py-12 md:py-20" ref={ref}>
@@ -55,10 +56,10 @@ export default function AboutSection() {
               ))}
             </div>
             <div className="space-y-3 pt-2">
-              {highlights.map((item) => (
-                <div key={item} className="flex items-start gap-3">
+              {mappedHighlights.map((item: any, i: number) => (
+                <div key={i} className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                  <span className="text-foreground/80 text-sm font-medium">{item}</span>
+                  <span className="text-foreground/80 text-sm font-medium">{item.title || item}</span>
                 </div>
               ))}
             </div>

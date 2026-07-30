@@ -31,7 +31,12 @@ export default function AboutPage() {
 
   return (
     <Layout>
-      <PageHeader title="About Ishan Ayurvedic Medical College" subtitle="NCISM-approved, the only private AYUSH college in NCR — classical Ayurvedic education with modern clinical practice." breadcrumbs={[{ label: "About IAMC" }]} />
+      <PageHeader 
+        title="About Ishan Ayurvedic Medical College" 
+        subtitle="NCISM-approved, the only private AYUSH college in NCR — classical Ayurvedic education with modern clinical practice." 
+        breadcrumbs={[{ label: "About IAMC" }]} 
+        backgroundImage={ourStory?.bannerImage}
+      />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -51,6 +56,24 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      {ourStory?.editorialPhotos && ourStory.editorialPhotos.length > 0 && (
+        <section className="py-12 bg-white">
+          <div className="container-wide">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {ourStory.editorialPhotos.map((photo: any, index: number) => (
+                <div key={index} className="rounded-xl overflow-hidden shadow-sm aspect-video relative group">
+                  <img src={photo.image} alt={photo.caption || "Editorial Photo"} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700" />
+                  {photo.caption && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <p className="text-white text-sm font-medium">{photo.caption}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       <section className="py-16 md:py-24 bg-section-alt">
         <div className="container-wide">
           <div className="text-center mb-14">

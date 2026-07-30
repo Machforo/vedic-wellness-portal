@@ -33,7 +33,7 @@ export default function CareersPage() {
                 <p className="text-foreground/70 leading-relaxed text-lg">Ishan Ayurvedic Medical College invites qualified Ayurvedic educators and practitioners to join our institution, contributing to producing the next generation of India's BAMS doctors.</p>
               )}
               <div className="rounded-2xl overflow-hidden shadow-2xl border">
-                <img src={careers.image || "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80"} alt="Ishan Ayurveda Campus" className="w-full h-80 object-cover" />
+                <img src={careers.facultyTeamPhoto || careers.image || "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80"} alt="Ishan Ayurveda Campus" className="w-full h-80 object-cover" />
               </div>
             </div>
             <div className="space-y-4">
@@ -65,6 +65,24 @@ export default function CareersPage() {
               </div>
             </div>
           </div>
+
+          {careers?.campusWorkplaceImages && careers.campusWorkplaceImages.length > 0 && (
+            <div className="reveal mt-16 pt-16 border-t border-border">
+              <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Life at Ishan Ayurveda</h2>
+              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {careers.campusWorkplaceImages.map((photo: any, idx: number) => (
+                  <div key={idx} className="rounded-xl overflow-hidden aspect-video shadow-sm border border-border group relative">
+                    <img src={photo.image} alt={photo.caption || "Campus Life"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-sm font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </Layout>

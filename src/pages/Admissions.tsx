@@ -33,7 +33,12 @@ export default function AdmissionsPage() {
 
   return (
     <Layout>
-      <PageHeader title={`BAMS Admissions ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(2)}`} subtitle="Admission to BAMS at IAMC is through NEET-UG followed by AYUSH central or UP state counselling - our team guides you through every step" breadcrumbs={[{ label: "Admissions" }]} />
+      <PageHeader 
+        title={`BAMS Admissions ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(2)}`} 
+        subtitle="Admission to BAMS at IAMC is through NEET-UG followed by AYUSH central or UP state counselling - our team guides you through every step" 
+        breadcrumbs={[{ label: "Admissions" }]} 
+        backgroundImage={admissionProcess?.bannerImage}
+      />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide max-w-5xl">
           <div className="reveal mb-12">
@@ -67,15 +72,39 @@ export default function AdmissionsPage() {
                 ))}
               </ul>
             </div>
-            <div className="reveal delay-100 p-6 rounded-2xl border bg-navy text-white">
-              <h3 className="font-bold text-white mb-4 flex items-center gap-2"><Phone className="w-5 h-5 text-gold" />Admissions Helpline</h3>
-              <p className="text-white/70 text-sm leading-relaxed mb-6">Our admissions counsellors are available Mon-Sat, 9 AM-5 PM to answer all NEET, counselling, eligibility, and documentation queries.</p>
-              <div className="space-y-3">
-                <a href={`tel:+91${helpContact}`} className="flex items-center gap-2 text-gold font-bold hover:text-white transition-colors"><Phone className="w-4 h-4" />{helpContact}</a>
-                <a href={`https://wa.me/${whatsappContact}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy font-bold rounded-xl hover:bg-white transition-all w-full justify-center">WhatsApp Us <ArrowRight className="w-4 h-4" /></a>
+            <div className="reveal delay-100 p-6 rounded-2xl border bg-navy text-white relative overflow-hidden">
+              <div className="relative z-10">
+                <h3 className="font-bold text-white mb-4 flex items-center gap-2"><Phone className="w-5 h-5 text-gold" />Admissions Helpline</h3>
+                <p className="text-white/70 text-sm leading-relaxed mb-6">Our admissions counsellors are available Mon-Sat, 9 AM-5 PM to answer all NEET, counselling, eligibility, and documentation queries.</p>
+                <div className="space-y-3">
+                  <a href={`tel:+91${helpContact}`} className="flex items-center gap-2 text-gold font-bold hover:text-white transition-colors"><Phone className="w-4 h-4" />{helpContact}</a>
+                  <a href={`https://wa.me/${whatsappContact}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy font-bold rounded-xl hover:bg-white transition-all w-full justify-center">WhatsApp Us <ArrowRight className="w-4 h-4" /></a>
+                </div>
               </div>
+              {admissionProcess?.counsellorImage && (
+                <div className="absolute inset-0 z-0 opacity-20">
+                  <img src={admissionProcess.counsellorImage} alt="Counsellor" className="w-full h-full object-cover" />
+                </div>
+              )}
             </div>
           </div>
+
+          {admissionProcess?.orientationPhotos && admissionProcess.orientationPhotos.length > 0 && (
+            <div className="reveal mt-16 pt-16 border-t border-border">
+              <div className="grid md:grid-cols-3 gap-6">
+                {admissionProcess.orientationPhotos.map((photo: any, idx: number) => (
+                  <div key={idx} className="rounded-2xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Orientation"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-sm font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
       <EnquiryCTA />

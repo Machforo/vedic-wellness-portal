@@ -29,7 +29,12 @@ Guided tours are arranged for incoming BAMS batches, visiting scholars, and dele
 
   return (
     <Layout>
-      <PageHeader title="Herbal Garden" subtitle="Over 200 medicinal plant species — the living classroom for Dravyaguna Vigyana students and Ayurvedic research scholars" breadcrumbs={[{ label: "Facilities", href: "/infrastructure" }, { label: "Herbal Garden" }]} />
+      <PageHeader 
+        title="Herbal Garden" 
+        subtitle="Over 200 medicinal plant species — the living classroom for Dravyaguna Vigyana students and Ayurvedic research scholars" 
+        breadcrumbs={[{ label: "Facilities", href: "/infrastructure" }, { label: "Herbal Garden" }]} 
+        backgroundImage={herbalGarden?.wideAngleImage}
+      />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 mb-16">
@@ -73,6 +78,35 @@ Guided tours are arranged for incoming BAMS batches, visiting scholars, and dele
               </table>
             </div>
           </div>
+
+          
+          {((herbalGarden?.plantCloseups && herbalGarden.plantCloseups.length > 0) || (herbalGarden?.studentsLearningImages && herbalGarden.studentsLearningImages.length > 0)) && (
+            <div className="reveal mt-16 pt-16 border-t border-border">
+              <h3 className="font-bold text-foreground mb-8 text-center">Garden Experience</h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {herbalGarden?.plantCloseups?.map((photo: any, idx: number) => (
+                  <div key={`pc-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Plant Closeup"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+                {herbalGarden?.studentsLearningImages?.map((photo: any, idx: number) => (
+                  <div key={`sl-${idx}`} className="rounded-xl overflow-hidden aspect-[4/3] group relative shadow-sm border border-border">
+                    <img src={photo.image} alt={photo.caption || "Students Learning"} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    {photo.caption && (
+                      <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                        <p className="text-white text-xs font-medium">{photo.caption}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
       <EnquiryCTA />

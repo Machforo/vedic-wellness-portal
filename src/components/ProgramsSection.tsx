@@ -22,8 +22,11 @@ const defaultDepartments = [];
 export default function ProgramsSection() {
   const ref = useScrollReveal();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const { data } = useAyurvedaData("academics");
-  const departments = data?.departments?.length > 0 ? data.departments : defaultDepartments;
+  const { data: coursesData } = useAyurvedaData("courses");
+  const { data: academicsData } = useAyurvedaData("academics");
+  
+  const fetchedPrograms = coursesData?.length > 0 ? coursesData : (coursesData?.data?.length > 0 ? coursesData.data : programs);
+  const departments = academicsData?.departments?.length > 0 ? academicsData.departments : defaultDepartments;
 
   return (
     <section id="programs" className="py-12 md:py-20 bg-section-alt overflow-hidden" ref={ref}>
@@ -40,7 +43,9 @@ export default function ProgramsSection() {
 
         <motion.div layout className="grid sm:grid-cols-1 lg:grid-cols-1 gap-8 max-w-3xl mx-auto">
           <AnimatePresence mode="popLayout">
-            {programs.map((program, i) => (
+            {fetchedPrograms.map((program: any, i: number) => {
+              const outcomesArray = program.outcomes || (program.careerScope ? program.careerScope.split(',').map((s: string) => s.trim()) : []);
+              return (
               <motion.div
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -57,7 +62,7 @@ export default function ProgramsSection() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-navy">{program.name}</h3>
-                    <p className="text-xs uppercase tracking-wider text-gold mt-1 font-semibold">{program.description}</p>
+                    <p className="text-xs uppercase tracking-wider text-gold mt-1 font-semibold">{program.description || `${program.duration} • ${program.eligibility}`}</p>
                   </div>
                 </div>
 
@@ -78,7 +83,7 @@ export default function ProgramsSection() {
                       >
                         <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Career Outcomes</p>
                         <div className="flex flex-wrap gap-2">
-                          {program.outcomes.map((outcome) => (
+                          {outcomesArray.map((outcome: string) => (
                             <span key={outcome} className="px-2.5 py-1 bg-muted rounded-full text-xs font-medium">{outcome}</span>
                           ))}
                         </div>
@@ -87,7 +92,7 @@ export default function ProgramsSection() {
                   </AnimatePresence>
 
                   <div className="pt-6 border-t flex items-center justify-between">
-                    <Link to={program.link} className="flex items-center gap-2 text-sm font-bold text-navy hover:text-gold transition-colors group/btn">
+                    <Link to={program.link || `/courses/${program.slug}`} className="flex items-center gap-2 text-sm font-bold text-navy hover:text-gold transition-colors group/btn">
                       Explore BAMS Programme
                       <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                     </Link>
@@ -95,7 +100,7 @@ export default function ProgramsSection() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )})}
           </AnimatePresence>
         </motion.div>
 

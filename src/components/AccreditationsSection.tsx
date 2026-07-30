@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 
 const accreditations = [
   { name: "NCISM", url: "https://placehold.co/150x150/e2e8f0/1e293b?text=NCISM" },
@@ -11,6 +12,9 @@ const accreditations = [
 
 export default function AccreditationsSection() {
   const ref = useScrollReveal();
+  const { data } = useAyurvedaData("homepage");
+
+  const list = data?.accreditations?.length > 0 ? data.accreditations : accreditations;
 
   return (
     <section id="accreditations" className="py-16 md:py-20 border-y bg-muted/30" ref={ref}>
@@ -22,14 +26,14 @@ export default function AccreditationsSection() {
           Ishan Ayurvedic Medical College and Research Centre holds all mandatory approvals from India's premier regulatory bodies
         </p>
         <div className="reveal delay-100 flex flex-wrap items-center justify-center gap-8 md:gap-14">
-          {accreditations.map((acc) => (
+          {list.map((acc: any) => (
             <div
               key={acc.name}
               className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-110"
             >
               <div className="h-14 md:h-16 w-32 flex items-center justify-center bg-white p-2 rounded-lg shadow-sm border">
                 <img
-                  src={acc.url}
+                  src={acc.image || acc.url}
                   alt={acc.name}
                   className="h-full w-auto object-contain"
                   loading="lazy"

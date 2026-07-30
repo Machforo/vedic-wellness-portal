@@ -33,6 +33,7 @@ export default function AlumniNetworkPage() {
         title={al.title || "Alumni Network"}
         subtitle={al.subtitle || "Celebrating the success of Ishan Ayurveda graduates across hospitals and wellness centers"}
         breadcrumbs={[{ label: "Placements" }, { label: "Alumni Network" }]}
+        backgroundImage={al.image}
       />
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
