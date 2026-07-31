@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useIshanLawData } from "@/hooks/useIshanLawData";
 import auditoriumImg from "@/assets/auditorium.jpg";
+import PageGallery from "@/components/PageGallery";
 
 export default function AuditoriumPage() {
   const ref = useScrollReveal();
@@ -47,6 +48,7 @@ export default function AuditoriumPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useIshanLawData } from "@/hooks/useIshanLawData";
+import PageGallery from "@/components/PageGallery";
 export default function LibraryPage() {
   const ref = useScrollReveal();
   const { data } = useIshanLawData("campuslife");
@@ -57,6 +58,7 @@ export default function LibraryPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

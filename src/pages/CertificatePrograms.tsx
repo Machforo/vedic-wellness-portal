@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 const programs = [
   { name: "Cyber Law & Digital Security", duration: "3 Months", fee: "₹5,000", eligibility: "Any student / graduate", desc: "Covers IT Act 2000, cyber crimes, digital evidence, data protection, and social media regulations." },
@@ -51,6 +52,7 @@ export default function CertificateProgramsPage() {
       </section>
 
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

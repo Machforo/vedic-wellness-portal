@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import * as Icons from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultReasons = [
   { icon: "Award", title: "NCISM Approved", desc: "The only approval that confers practitioner registration eligibility. IAMC's BAMS graduates are registered Vaidyas, eligible for government AYUSH service and independent clinical practice." },
@@ -48,6 +49,7 @@ export default function WhyChooseUsPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

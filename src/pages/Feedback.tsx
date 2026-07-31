@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 export default function FeedbackPage() {
   const ref = useScrollReveal();
@@ -67,6 +68,7 @@ export default function FeedbackPage() {
           </div>
         </div>
       </section>
+    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

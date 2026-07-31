@@ -4,6 +4,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FileText, Download } from "lucide-react";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultStatement = "The information provided below is submitted as required by the National Commission for Indian System of Medicine (NCISM) and the Ministry of AYUSH, and is updated annually to ensure full transparency. Any discrepancies found in the reported data should be immediately brought to the notice of the Principal at Ishan Ayurvedic Medical College and Research Centre, Knowledge Park, Greater Noida.\n\nNCISM mandates public disclosure for the benefit of current and prospective students, healthcare practitioners, and regulatory authorities. It serves as a comprehensive record of the institution's facilities, hospital standards, and Vaidya faculty expertise, ensuring accountability in Ayurvedic medical education.";
 
@@ -76,6 +77,7 @@ export default function MandatoryDisclosurePage() {
           </div>
         </div>
       </section>
+    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

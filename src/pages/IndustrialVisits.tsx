@@ -2,6 +2,7 @@
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Landmark, Shield, Users, Scale, FileText } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 export default function IndustrialVisitsPage() {
   const ref = useScrollReveal();
@@ -132,6 +133,7 @@ export default function IndustrialVisitsPage() {
           </div>
         </div>
       </section>
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

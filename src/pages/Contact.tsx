@@ -4,7 +4,20 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { useState } from "react";
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from "sonner";
+import PageGallery from "@/components/PageGallery";
+
+
+const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters').max(50, 'Name is too long').regex(/^[a-zA-Z\s]*$/, 'Name can only contain letters and spaces'),
+  phone: z.string().regex(/^[0-9]{10}$/, 'Phone number must be exactly 10 digits'),
+  email: z.string().email('Invalid email address').or(z.literal('')),
+  program: z.string().optional(),
+  message: z.string().optional()
+});
 
 export default function ContactPage() {
   const ref = useScrollReveal();
@@ -16,39 +29,27 @@ export default function ContactPage() {
     mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.2!2d77.49!3d28.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sIshan+Ayurvedic+Medical+College!5e0!3m2!1sen!2sin!4v1"
   };
 
-  const [form, setForm] = useState({ name: "", phone: "", email: "", program: "", message: "" });
-  const [submitting, setSubmitting] = useState(false);
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<z.infer<typeof contactSchema>>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: '', phone: '', email: '', program: '', message: '' }
+  });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !form.phone) return;
-
-    // Basic phone validation
-    const phoneRegex = /^\d{10}$/;
-    if (!phoneRegex.test(form.phone)) {
-      toast.error("Please enter a valid 10-digit phone number.");
-      return;
-    }
-
+  const onSubmit = async (data: z.infer<typeof contactSchema>) => {
     try {
       const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, source: "Contact Page" }),
+        body: JSON.stringify({ ...data, source: "Contact Page" }),
       });
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
-      }
+      if (!response.ok) throw new Error("Failed to submit form");
       toast.success("Your message has been sent successfully!");
       setSubmitted(true);
-      setForm({ name: "", phone: "", email: "", program: "", message: "" });
+      reset();
     } catch (err) {
       toast.error("Unable to send message. Please try again.");
       console.error(err);
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -154,6 +155,7 @@ export default function ContactPage() {
 
         </div>
       </section>
+    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Leaf } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 export default function HerbalGardenPage() {
   const ref = useScrollReveal();
@@ -109,6 +110,7 @@ Guided tours are arranged for incoming BAMS batches, visiting scholars, and dele
           )}
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

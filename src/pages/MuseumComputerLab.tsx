@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen, Monitor, FlaskConical, Archive } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 export default function MuseumComputerLabPage() {
   const ref = useScrollReveal();
@@ -58,6 +59,7 @@ export default function MuseumComputerLabPage() {
         </div>
       </section>
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

@@ -2,6 +2,7 @@
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Mic2, Calendar, User, Info } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 export default function GuestLecturesPage() {
   const ref = useScrollReveal();
@@ -97,6 +98,7 @@ export default function GuestLecturesPage() {
           </div>
         </div>
       </section>
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultPublications = [
   { title: "Clinical Efficacy of Panchakarma in Management of Rheumatoid Arthritis", authors: "Dr. R. Sharma, Dr. P. Mishra", journal: "Journal of Ayurveda and Integrative Medicine", year: "2024", doi: "#" },
@@ -54,6 +55,7 @@ export default function PublicationsPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -5,6 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen, Microscope, Award, Users, HeartPulse, Shield, Leaf, Beaker, Brain, Stethoscope, Eye, Activity, Scale } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { Navigate } from "react-router-dom";
+import PageGallery from "@/components/PageGallery";
 
 const iconMap: Record<string, any> = {
   BookOpen, Microscope, Award, Users, HeartPulse, Shield, Leaf, Beaker, Brain, Stethoscope, Eye, Activity, Scale, default: BookOpen
@@ -116,6 +117,7 @@ function DepartmentContent({ dept }: { dept: any }) {
           )}
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

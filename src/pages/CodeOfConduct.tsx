@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultRules = [
   { category: "1. Professional Conduct", items: "Ayurvedic students are expected to maintain the highest standards of decorum and dignity, reflecting the noble nature of the Vaidya profession. Respectful behavior towards faculty, staff, and fellow students is mandatory. Any form of misconduct will result in immediate disciplinary action." },
@@ -45,6 +46,7 @@ export default function CodeOfConductPage() {
           </div>
         </div>
       </section>
+    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

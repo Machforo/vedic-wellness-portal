@@ -5,6 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CheckCircle2, BookOpen, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 export default function DynamicCoursePage() {
   const ref = useScrollReveal();
@@ -116,6 +117,7 @@ export default function DynamicCoursePage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

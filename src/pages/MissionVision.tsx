@@ -5,6 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Eye, Target, CheckCircle2 } from "lucide-react";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultValues = ["Classical Scholarship", "Clinical Excellence", "Compassionate Care", "Evidence-Based Practice", "Ethical Conduct", "Community Health"];
 
@@ -50,6 +51,7 @@ export default function MissionVisionPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Settings, FlaskConical, Shield, BookOpen } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: Settings, title: "Industrial Machinery", description: "Tablet press, capsule filling machine, coating pan, and fluid bed dryer for hands-on manufacturing training." },
@@ -55,6 +56,7 @@ export default function MachineRoomPage() {
         </div>
       </section>
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

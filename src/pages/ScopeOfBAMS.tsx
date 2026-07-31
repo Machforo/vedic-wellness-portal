@@ -5,6 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { TrendingUp, Building2, Globe, BookOpen, ArrowRight, HeartPulse, Stethoscope, Microscope } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const iconMap: Record<string, any> = {
   Building2,
@@ -78,6 +79,7 @@ export default function ScopeOfBAMSPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

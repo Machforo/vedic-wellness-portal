@@ -4,6 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Wifi, Monitor, BookOpen, Building2, Cctv, MapPin, ArrowRight, Scale, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const iconMap: Record<string, any> = {
   Building2, BookOpen, Monitor, Scale, Wifi, Cctv, MapPin, ArrowRight, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube, default: Building2
@@ -94,6 +95,7 @@ export default function InfrastructurePage() {
         </div>
       </section>
 
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

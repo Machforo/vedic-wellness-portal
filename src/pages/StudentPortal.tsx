@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { Lock, GraduationCap } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 export default function StudentPortalPage() {
   const ref = useScrollReveal();
@@ -59,6 +60,7 @@ export default function StudentPortalPage() {
           </div>
         </div>
       </section>
+    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

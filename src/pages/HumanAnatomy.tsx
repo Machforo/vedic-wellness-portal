@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Microscope, BookOpen, FlaskConical, Users } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: Microscope, title: "Advanced Microscopy", description: "High-powered compound and dissection microscopes for histological and anatomical studies of human tissues and organ systems." },
@@ -55,6 +56,7 @@ export default function HumanAnatomyPage() {
         </div>
       </section>
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FlaskConical, Heart, BookOpen, Award } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: FlaskConical, title: "Drug Effect Studies", description: "Students conduct experiments on isolated tissue preparations, animal models, and in-vitro systems to study drug actions and mechanisms." },
@@ -55,6 +56,7 @@ export default function PharmacologyPage() {
         </div>
       </section>
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }

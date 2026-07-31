@@ -5,6 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Shield } from "lucide-react";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import PageGallery from "@/components/PageGallery";
 
 const defaultApprovals = [
   { name: "NCISM", description: "NCISM is the apex statutory body governing Ayurvedic, Unani, Siddha, and Sowa-Rigpa medical education and practice in India. IAMC's BAMS programme is NCISM-approved, ensuring the degree is recognised across India and eligible for practitioner registration.", logo: "https://placehold.co/150x150/e2e8f0/1e293b?text=NCISM" },
@@ -48,6 +49,7 @@ export default function ApprovalsPage() {
           </div>
         </div>
       </section>
+      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

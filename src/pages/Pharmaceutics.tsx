@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FlaskConical, Layers, Beaker, Award } from "lucide-react";
+import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: FlaskConical, title: "Dosage Form Preparation", description: "Students prepare tablets, capsules, syrups, suspensions, and emulsions using industry-standard equipment and formulation techniques." },
@@ -55,6 +56,7 @@ export default function PharmaceuticsPage() {
         </div>
       </section>
       <EnquiryCTA />
-    </Layout>
+    <PageGallery />
+      </Layout>
   );
 }
