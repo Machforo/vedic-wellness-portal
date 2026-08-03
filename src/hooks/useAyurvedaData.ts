@@ -13,6 +13,7 @@ export function useAyurvedaData(endpoint: string) {
     },
     staleTime: 0,
     refetchOnMount: 'always',
+    refetchOnWindowFocus: true,
     retry: 2,
   });
 }
