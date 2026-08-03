@@ -18,6 +18,19 @@ export default function Consultation() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nameRegex = /^[a-zA-Z\s.'-]+$/;
+    if (!formData.name || !nameRegex.test(formData.name.trim())) {
+      toast.error("Name should only contain alphabets and spaces.");
+      return;
+    }
+
+    const phoneRegex = /^\d{10}$/;
+    if (!formData.phone || !phoneRegex.test(formData.phone.trim())) {
+      toast.error("Phone number must be 10 digits.");
+      return;
+    }
+
     try {
       const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       const response = await fetch(`${apiBase}/ayurveda/leads`, {
@@ -111,7 +124,7 @@ export default function Consultation() {
                             type="text"
                             required
                             value={formData.name}
-                            onChange={e => setFormData({ ...formData, name: e.target.value })}
+                            onChange={e => setFormData({ ...formData, name: e.target.value.replace(/[^a-zA-Z\s.'-]/g, '') })}
                             className="w-full pl-12 pr-4 py-3.5 bg-muted/50 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm"
                             placeholder="John Doe"
                           />

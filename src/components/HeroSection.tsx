@@ -81,6 +81,13 @@ export default function HeroSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const nameRegex = /^[a-zA-Z\s.'-]+$/;
+    if (!formData.name || !nameRegex.test(formData.name.trim())) {
+      toast.error("Name should only contain alphabets and spaces.");
+      return;
+    }
+
     if (!/^\d{10}$/.test(formData.phone)) { toast.error("Please enter a valid 10-digit phone number."); return; }
     try {
       const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
@@ -175,7 +182,7 @@ export default function HeroSection() {
                       </div>
                     ) : (
                       <form className="space-y-4" onSubmit={handleSubmit}>
-                        <div className="relative"><User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40" /><input type="text" placeholder="Full Name *" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))} required className="w-full pl-10 pr-4 py-3.5 bg-muted/60 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" /></div>
+                        <div className="relative"><User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40" /><input type="text" placeholder="Full Name *" value={formData.name} onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value.replace(/[^a-zA-Z\s.'-]/g, '') }))} required className="w-full pl-10 pr-4 py-3.5 bg-muted/60 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" /></div>
                         <div className="relative"><PhoneIcon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40" /><input type="tel" placeholder="Mobile Number *" value={formData.phone} onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))} required className="w-full pl-10 pr-4 py-3.5 bg-muted/60 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white transition-all text-sm" /></div>
                         <div className="relative"><BookOpen size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40" /><select required value={formData.course} onChange={(e) => setFormData((p) => ({ ...p, course: e.target.value }))} className="w-full pl-10 pr-4 py-3.5 bg-muted/60 border rounded-xl outline-none focus:ring-2 focus:ring-gold/60 focus:bg-white appearance-none transition-all text-sm cursor-pointer"><option value="">Select Programme *</option><option>BAMS — 5.5 Years (incl. Internship)</option></select></div>
                         <div className="flex items-start gap-2 pt-1"><input type="checkbox" id="hero-consent" className="mt-1 accent-gold w-4 h-4" defaultChecked /><label htmlFor="hero-consent" className="text-xs leading-relaxed">I authorise IAMC to contact me regarding my BAMS admission enquiry.</label></div>

@@ -114,19 +114,28 @@ export default function ContactPage() {
                     <button onClick={() => setSubmitted(false)} className="mt-5 text-sm text-navy underline">Submit another enquiry</button>
                   </div>
                 ) : (
-                  <form className="space-y-4" onSubmit={handleSubmit}>
+                  <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" placeholder="Full Name*" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] transition-all" />
-                      <input type="tel" placeholder="Phone Number*" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} required className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] transition-all" />
+                      <div>
+                        <input {...register("name")} onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s.'-]/g, ''); }} placeholder="Full Name*" className={`w-full px-4 py-3 text-sm rounded-lg border ${errors.name ? 'border-red-500' : 'border-border/50'} bg-background/50 focus:bg-background focus:outline-none focus:ring-2 transition-all`} />
+                        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+                      </div>
+                      <div>
+                        <input {...register("phone")} type="tel" placeholder="Phone Number*" className={`w-full px-4 py-3 text-sm rounded-lg border ${errors.phone ? 'border-red-500' : 'border-border/50'} bg-background/50 focus:bg-background focus:outline-none focus:ring-2 transition-all`} />
+                        {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                      </div>
                     </div>
-                    <input type="email" placeholder="Email Address" value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] transition-all" />
-                    <select value={form.program} onChange={e => setForm(p => ({ ...p, program: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 text-foreground focus:bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] transition-all">
+                    <div>
+                      <input {...register("email")} type="email" placeholder="Email Address" className={`w-full px-4 py-3 text-sm rounded-lg border ${errors.email ? 'border-red-500' : 'border-border/50'} bg-background/50 focus:bg-background focus:outline-none focus:ring-2 transition-all`} />
+                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                    </div>
+                    <select {...register("program")} className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 text-foreground focus:bg-background focus:outline-none focus:ring-2 transition-all">
                       <option value="">Select Program</option>
                       <option>BAMS</option>
                     </select>
-                    <textarea placeholder="Your Message (optional)" rows={4} value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] transition-all resize-none" />
-                    <button type="submit" disabled={submitting} className="w-full py-3.5 text-sm font-semibold bg-navy text-primary-foreground rounded-lg shadow-lg hover:bg-navy/90 transition-all active:scale-[0.97] disabled:opacity-60">
-                      {submitting ? "Submitting..." : "Submit Enquiry"}
+                    <textarea {...register("message")} placeholder="Your Message (optional)" rows={4} className="w-full px-4 py-3 text-sm rounded-lg border border-border/50 bg-background/50 focus:bg-background focus:outline-none focus:ring-2 transition-all resize-none" />
+                    <button type="submit" disabled={isSubmitting} className="w-full py-3.5 text-sm font-semibold bg-navy text-primary-foreground rounded-lg shadow-lg hover:bg-navy/90 transition-all active:scale-[0.97] disabled:opacity-60">
+                      {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                     </button>
                   </form>
                 )}
