@@ -11,7 +11,8 @@ export function useAyurvedaData(endpoint: string) {
       }
       return response.json();
     },
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: 'always',
     retry: 2,
   });
 }
