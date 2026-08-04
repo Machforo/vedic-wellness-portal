@@ -75,6 +75,30 @@ export default function AboutPage() {
           </div>
         </section>
       )}
+      {(() => {
+        const gh = data?.groupHistory;
+        const timelineList = [
+          ...(gh?.timelineImages || []).map((t: any) => t?.url || t?.image || t),
+          ...(gh?.timelineInfographic ? [gh.timelineInfographic] : [])
+        ].filter(Boolean);
+
+        if (timelineList.length === 0) return null;
+
+        return (
+          <section className="py-12 bg-white">
+            <div className="container-wide">
+              <h3 className="text-xl font-bold text-navy mb-6 text-center">Timeline & Infographics</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {timelineList.map((url: string, i: number) => (
+                  <div key={i} className="rounded-2xl overflow-hidden shadow-md border bg-slate-50 p-2">
+                    <img src={url} alt={`Timeline Infographic ${i + 1}`} className="w-full h-auto max-h-[450px] object-contain mx-auto" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
       <section className="py-16 md:py-24 bg-section-alt">
         <div className="container-wide">
           <div className="text-center mb-14">

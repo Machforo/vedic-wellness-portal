@@ -90,7 +90,7 @@ export default function HeroSection() {
 
     if (!/^\d{10}$/.test(formData.phone)) { toast.error("Please enter a valid 10-digit phone number."); return; }
     try {
-      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const apiBase = import.meta.env.VITE_API_URL || "https://ishan-backend-g096.onrender.com/api";
       const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

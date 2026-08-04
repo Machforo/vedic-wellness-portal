@@ -37,7 +37,7 @@ export default function ContactPage() {
 
   const onSubmit = async (data: z.infer<typeof contactSchema>) => {
     try {
-      const apiBase = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const apiBase = import.meta.env.VITE_API_URL || "https://ishan-backend-g096.onrender.com/api";
       const response = await fetch(`${apiBase}/ayurveda/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
