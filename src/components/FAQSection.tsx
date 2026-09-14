@@ -3,6 +3,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ChevronDown, ChevronUp, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
+import { rt } from "@/lib/richText";
 
 const faqs = [
   {
@@ -83,7 +84,7 @@ export default function FAQSection() {
                     >
                       <div className="p-6 pt-0 leading-relaxed bg-card">
                         <div className="pl-14 border-l-2 border-gold/20 ml-5 py-2">
-                          {faq.answer}
+                          <span className="rich-text" dangerouslySetInnerHTML={{ __html: rt(faq.answer) }} />
                         </div>
                       </div>
                     </motion.div>

@@ -3,7 +3,6 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FlaskConical, Microscope, BookOpen, Award } from "lucide-react";
-import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: FlaskConical, title: "Advanced Synthesis Lab", description: "Equipped with modern synthesis apparatus, rotary evaporators, and reflux assemblies for hands-on drug synthesis experiments." },
@@ -59,7 +58,6 @@ export default function PharmaceuticalChemistryPage() {
         </div>
       </section>
       <EnquiryCTA />
-    <PageGallery />
-      </Layout>
+    </Layout>
   );
 }

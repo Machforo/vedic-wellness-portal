@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+
 
 export default function PressCoveragePage() {
   const ref = useScrollReveal();
@@ -64,7 +64,6 @@ export default function PressCoveragePage() {
           )}
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

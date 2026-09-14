@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen, Users, FileText } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function ResearchJournalPage() {
   const ref = useScrollReveal();
@@ -33,7 +33,7 @@ export default function ResearchJournalPage() {
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Ishan Ayurveda Journal</p>
               <h2 className="font-bold text-foreground leading-tight">Advancing Ayurvedic Scholarship Through Rigorous Research</h2>
               {journal.description ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:m-0" dangerouslySetInnerHTML={{ __html: journal.description }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(journal.description) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed">IAMC's peer-reviewed Ayurvedic research journal provides a platform for faculty, scholars, students, and Ayurvedic practitioners to publish clinical studies, case reports, literature reviews, and experimental research — bridging classical and contemporary Ayurvedic science.</p>
               )}
@@ -97,7 +97,6 @@ export default function ResearchJournalPage() {
 
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

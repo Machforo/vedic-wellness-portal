@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CheckCircle2, ArrowRight, FileText, Phone } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function AdmissionsPage() {
   const ref = useScrollReveal();
@@ -46,7 +46,7 @@ export default function AdmissionsPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Admission Process</p>
             <h2 className="font-bold text-foreground mb-4">5-Step Admission Process</h2>
             {admissionProcess.description ? (
-              <div className="text-foreground/70 leading-relaxed max-w-2xl" dangerouslySetInnerHTML={{ __html: admissionProcess.description }}></div>
+              <div className="text-foreground/70 leading-relaxed max-w-2xl rich-text" dangerouslySetInnerHTML={{ __html: rt(admissionProcess.description) }}></div>
             ) : (
               <p className="text-foreground/70 leading-relaxed max-w-2xl">BAMS admission is regulated - all students must appear for NEET-UG and obtain a seat through AYUSH counselling. IAMC's admissions team guides students through central and UP state counselling processes, stray vacancy rounds, and document verification.</p>
             )}
@@ -57,7 +57,7 @@ export default function AdmissionsPage() {
                 <div className="w-12 h-12 rounded-xl bg-gold text-navy font-black text-lg flex items-center justify-center shrink-0">{s.step}</div>
                 <div>
                   <h3 className="font-bold text-foreground mb-1">{s.title}</h3>
-                  <div className="text-sm text-foreground/70 leading-relaxed [&>p]:m-0" dangerouslySetInnerHTML={{ __html: s.desc }}></div>
+                  <div className="text-sm text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(s.desc) }}></div>
                 </div>
               </div>
             ))}
@@ -108,7 +108,6 @@ export default function AdmissionsPage() {
           )}
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

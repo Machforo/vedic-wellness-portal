@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 const defaultPublications = [
   { title: "Clinical Efficacy of Panchakarma in Management of Rheumatoid Arthritis", authors: "Dr. R. Sharma, Dr. P. Mishra", journal: "Journal of Ayurveda and Integrative Medicine", year: "2024", doi: "#" },
@@ -28,7 +28,7 @@ export default function PublicationsPage() {
       <section className="py-20 md:py-28" ref={ref}>
         <div className="container-wide">
           {pubs.description ? (
-            <div className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: pubs.description }}></div>
+            <div className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(pubs.description) }}></div>
           ) : (
             <p className="reveal text-foreground/70 leading-relaxed max-w-3xl mx-auto text-center mb-12">
               The faculty and students of Ishan Ayurvedic Medical College are actively engaged in Ayurvedic research, regularly publishing in national and international peer-reviewed journals.
@@ -55,7 +55,6 @@ export default function PublicationsPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -4,7 +4,6 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FlaskConical, Users, Award, TrendingUp } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
 
 const defaultProjects = [
   { title: "Clinical Validation of Panchakarma Protocols for Metabolic Syndrome", pi: "Dr. R. Sharma", department: "Kayachikitsa", status: "Ongoing", funding: "CCIM Research Grant" },
@@ -68,7 +67,6 @@ export default function ResearchProjectsPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

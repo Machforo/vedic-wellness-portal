@@ -3,7 +3,6 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Leaf, FlaskConical, Microscope, BookOpen } from "lucide-react";
-import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: Leaf, title: "Herbal Drug Identification", description: "Students learn macroscopic and microscopic identification of crude drugs, including morphological and histological studies." },
@@ -56,7 +55,6 @@ export default function PharmacognosyPage() {
         </div>
       </section>
       <EnquiryCTA />
-    <PageGallery />
-      </Layout>
+    </Layout>
   );
 }

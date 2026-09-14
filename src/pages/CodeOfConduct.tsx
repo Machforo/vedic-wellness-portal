@@ -3,7 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const defaultRules = [
   { category: "1. Professional Conduct", items: "Ayurvedic students are expected to maintain the highest standards of decorum and dignity, reflecting the noble nature of the Vaidya profession. Respectful behavior towards faculty, staff, and fellow students is mandatory. Any form of misconduct will result in immediate disciplinary action." },
@@ -34,7 +35,7 @@ export default function CodeOfConductPage() {
               {rules.map((s: any) => (
                 <div key={s.category}>
                   <h2 className="text-lg font-bold text-foreground mb-3">{s.category}</h2>
-                  <div className="text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: s.items }} />
+                  <div className="text-sm leading-relaxed rich-text" dangerouslySetInnerHTML={{ __html: rt(s.items) }} />
                 </div>
               ))}
             </div>
@@ -46,7 +47,6 @@ export default function CodeOfConductPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

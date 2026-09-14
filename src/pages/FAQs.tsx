@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const defaultFaqs = [
   { question: "Is the BAMS degree approved by NCISM?", answer: "Yes, Ishan Ayurvedic Medical College is approved by the National Commission for Indian System of Medicine (NCISM), ensuring the BAMS degree is fully recognized across India." },
@@ -40,7 +41,7 @@ export default function FAQsPage() {
                         {faq.question}
                       </AccordionTrigger>
                       <AccordionContent className="text-sm leading-relaxed pb-4">
-                        <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                        <div className="rich-text" dangerouslySetInnerHTML={{ __html: rt(faq.answer) }} />
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -61,7 +62,6 @@ export default function FAQsPage() {
         </div>
       </section>
 
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

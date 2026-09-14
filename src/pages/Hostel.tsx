@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CheckCircle2 } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const amenities = [
   "Separate boys and girls blocks", "Furnished rooms (2/3 sharing)", "Attached washrooms",
@@ -32,7 +33,7 @@ export default function HostelPage() {
             )}
             <div className="reveal space-y-5 mb-12">
               {hostel.content ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: hostel.content }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(hostel.content) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">
                   {defaultDesc}
@@ -119,7 +120,6 @@ export default function HostelPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

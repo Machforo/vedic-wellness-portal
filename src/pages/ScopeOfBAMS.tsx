@@ -5,7 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { TrendingUp, Building2, Globe, BookOpen, ArrowRight, HeartPulse, Stethoscope, Microscope } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 const iconMap: Record<string, any> = {
   Building2,
@@ -39,7 +39,7 @@ export default function ScopeOfBAMSPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Career Landscape</p>
             <h2 className="font-bold text-foreground leading-tight mb-6">India's AYUSH Sector Is One of the Fastest Growing Health Sectors</h2>
             {scopeOfBams.description ? (
-              <div className="text-foreground/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: scopeOfBams.description }}></div>
+              <div className="text-foreground/70 leading-relaxed rich-text" dangerouslySetInnerHTML={{ __html: rt(scopeOfBams.description) }}></div>
             ) : (
               <p className="text-foreground/70 leading-relaxed">With 50,000+ AYUSH health centres, a National AYUSH Mission, WHO recognition of traditional medicine, and growing global wellness demand - BAMS is no longer a niche qualification. It is a gateway to a broad and expanding professional landscape.</p>
             )}
@@ -51,7 +51,7 @@ export default function ScopeOfBAMSPage() {
                 <div key={i} className={`reveal delay- p-8 rounded-2xl border bg-card hover:shadow-[0_8px_32px_hsl(var(--navy)/0.08)] transition-all`}>
                   <div className="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-navy" /></div>
                   <h3 className="font-bold text-foreground mb-3">{s.title}</h3>
-                  <div className="text-sm text-foreground/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: s.desc }}></div>
+                  <div className="text-sm text-foreground/70 leading-relaxed rich-text" dangerouslySetInnerHTML={{ __html: rt(s.desc) }}></div>
                 </div>
               ); 
             })}
@@ -79,7 +79,6 @@ export default function ScopeOfBAMSPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

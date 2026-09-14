@@ -4,7 +4,6 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Users, Building2, Star, TrendingUp } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
 
 const defaultAlumni = [
   { name: "Dr. Priya Sharma", batch: "BAMS 2018", company: "Patanjali Ayurved", role: "Senior Medical Officer" },
@@ -74,7 +73,6 @@ export default function AlumniNetworkPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

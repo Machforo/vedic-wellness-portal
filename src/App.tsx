@@ -46,6 +46,7 @@ const ScopeOfBAMS = lazy(() => import("./pages/ScopeOfBAMS"));
 const Syllabus = lazy(() => import("./pages/Syllabus"));
 const Admissions = lazy(() => import("./pages/Admissions"));
 const Scholarships = lazy(() => import("./pages/Scholarships"));
+const CertificatePrograms = lazy(() => import("./pages/CertificatePrograms"));
 
 // Faculty
 const Faculty = lazy(() => import("./pages/Faculty"));
@@ -53,6 +54,7 @@ const VisitingFaculty = lazy(() => import("./pages/VisitingFaculty"));
 
 // 14 Departments
 const DynamicDepartment = lazy(() => import("./pages/DynamicDepartment"));
+const DepartmentsIndex = lazy(() => import("./pages/Departments"));
 
 // Campus Facilities
 const Infrastructure = lazy(() => import("./pages/Infrastructure"));
@@ -108,6 +110,8 @@ const App = () => (
             <Routes>
               {/* ── 301 Redirects ── */}
               <Route path="/join-us" element={<Navigate to="/careers" replace />} />
+              <Route path="/academics" element={<Navigate to="/departments" replace />} />
+              <Route path="/campus" element={<Navigate to="/infrastructure" replace />} />
               {/* Hospital redirects — external, handled by vercel.json */}
 
               {/* ── Homepage ── */}
@@ -129,12 +133,14 @@ const App = () => (
               <Route path="/syllabus" element={<Syllabus />} />
               <Route path="/admissions" element={<Admissions />} />
               <Route path="/scholarships" element={<Scholarships />} />
+              <Route path="/certificate-programs" element={<CertificatePrograms />} />
 
               {/* ── Faculty ── */}
               <Route path="/faculty" element={<Faculty />} />
               <Route path="/visiting-faculty" element={<VisitingFaculty />} />
 
               {/* ── 14 Departments ── */}
+              <Route path="/departments" element={<DepartmentsIndex />} />
               <Route path="/ayurvedic-siddhanta" element={<DynamicDepartment slug="ayurvedic-siddhanta" />} />
               <Route path="/rachana-sharir" element={<DynamicDepartment slug="rachana-sharir" />} />
               <Route path="/kriya-sharir" element={<DynamicDepartment slug="kriya-sharir" />} />

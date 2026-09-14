@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function FeePaymentPage() {
   const ref = useScrollReveal();
@@ -25,7 +25,7 @@ export default function FeePaymentPage() {
             <div className="text-center lg:text-left">
               <div className="reveal space-y-4 mb-10">
                 {feePayment.description ? (
-                  <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap [&>p]:m-0" dangerouslySetInnerHTML={{ __html: feePayment.description }}></div>
+                  <div className="text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(feePayment.description) }}></div>
                 ) : (
                   <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">Pay tuition fees, hostel charges, and examination fees online through the Ishan Fee Payment Portal. Select Ishan Ayurveda as your institution, choose your program (BAMS), and complete payment via net banking, UPI, or card. Download your receipt immediately after payment.</p>
                 )}
@@ -38,7 +38,6 @@ export default function FeePaymentPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

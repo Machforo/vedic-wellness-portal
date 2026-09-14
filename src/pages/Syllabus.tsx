@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FileText, Download } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function SyllabusPage() {
   const ref = useScrollReveal();
@@ -27,7 +27,7 @@ export default function SyllabusPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">NCISM Curriculum</p>
             <h2 className="font-bold text-foreground mb-4">Phase-wise BAMS Syllabus</h2>
             {syllabus.description ? (
-              <div className="text-foreground/70 leading-relaxed max-w-2xl" dangerouslySetInnerHTML={{ __html: syllabus.description }}></div>
+              <div className="text-foreground/70 leading-relaxed max-w-2xl rich-text" dangerouslySetInnerHTML={{ __html: rt(syllabus.description) }}></div>
             ) : (
               <p className="text-foreground/70 leading-relaxed max-w-2xl">BAMS curriculum follows the NCISM-prescribed syllabus divided into phases. It balances classical Ayurvedic texts with modern science subjects; clinical training begins in Phase 2 and each phase builds progressively toward clinical competence in all 14 specialised departments.</p>
             )}
@@ -64,7 +64,6 @@ export default function SyllabusPage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

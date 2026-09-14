@@ -5,7 +5,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Shield } from "lucide-react";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const defaultApprovals = [
   { name: "NCISM", description: "NCISM is the apex statutory body governing Ayurvedic, Unani, Siddha, and Sowa-Rigpa medical education and practice in India. IAMC's BAMS programme is NCISM-approved, ensuring the degree is recognised across India and eligible for practitioner registration.", logo: "https://placehold.co/150x150/e2e8f0/1e293b?text=NCISM" },
@@ -27,8 +28,8 @@ export default function ApprovalsPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">{data?.approvalsSection?.subtitle || "Regulatory Standing"}</p>
             <h2 className="font-bold text-foreground mb-4">{data?.approvalsSection?.title || "Approved by India's Apex AYUSH Regulatory Body"}</h2>
             <div 
-              className="text-foreground/70 leading-relaxed max-w-3xl" 
-              dangerouslySetInnerHTML={{ __html: data?.approvalsSection?.description || "IAMC's BAMS degree is NCISM-approved — the only approval that confers full practitioner registration eligibility in all states of India. Without NCISM approval, an Ayurvedic degree is not recognised for medical practice. IAMC graduates are registered as Vaidyas and eligible for government AYUSH service." }} 
+              className="text-foreground/70 leading-relaxed max-w-3xl rich-text" 
+              dangerouslySetInnerHTML={{ __html: rt(data?.approvalsSection?.description || "IAMC's BAMS degree is NCISM-approved — the only approval that confers full practitioner registration eligibility in all states of India. Without NCISM approval, an Ayurvedic degree is not recognised for medical practice. IAMC graduates are registered as Vaidyas and eligible for government AYUSH service.") }} 
             />
           </div>
           <div className="space-y-6">
@@ -42,14 +43,13 @@ export default function ApprovalsPage() {
                     <Shield className="w-4 h-4 text-gold" />
                     <h3 className="font-bold text-foreground">{a.name}</h3>
                   </div>
-                  <div className="text-sm text-foreground/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: a.description }} />
+                  <div className="text-sm text-foreground/70 leading-relaxed rich-text" dangerouslySetInnerHTML={{ __html: rt(a.description) }} />
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

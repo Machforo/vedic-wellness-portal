@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Music, Trophy } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function AuditoriumSportsPage() {
   const ref = useScrollReveal();
@@ -28,7 +29,7 @@ export default function AuditoriumSportsPage() {
               </div>
               <h2 className="font-bold text-foreground text-2xl">Seminar Hall & Auditorium</h2>
               {auditorium.content ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: auditorium.content }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(auditorium.content) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed">
                   The state-of-the-art auditorium at Ishan Ayurvedic Medical College provides a professional venue for guest lectures, annual convocations, cultural programmes, and national-level seminars and conferences in Ayurvedic science.
@@ -50,7 +51,7 @@ export default function AuditoriumSportsPage() {
               </div>
               <h2 className="font-bold text-foreground text-2xl">Sports Facilities</h2>
               {sports.content ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: sports.content }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(sports.content) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed">
                   We believe in holistic education. The Ishan campus sports complex encourages students to maintain a healthy mind and body alongside their rigorous Ayurvedic academic pursuits.
@@ -111,7 +112,6 @@ export default function AuditoriumSportsPage() {
           )}
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -4,7 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import { User, Phone, BookOpen, Send, Calendar, Clock, CheckCircle } from "lucide-react";
 
 import { toast } from "sonner";
-import PageGallery from "@/components/PageGallery";
+
 
 export default function Consultation() {
   const [formData, setFormData] = useState({
@@ -215,7 +215,6 @@ export default function Consultation() {
 
         </div>
       </div>
-    <PageGallery />
-      </Layout>
+    </Layout>
   );
 }

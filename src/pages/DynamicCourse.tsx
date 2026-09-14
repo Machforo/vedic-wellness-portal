@@ -5,7 +5,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CheckCircle2, BookOpen, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function DynamicCoursePage() {
   const ref = useScrollReveal();
@@ -35,7 +36,7 @@ export default function DynamicCoursePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Programme Overview</p>
               <h2 className="font-bold text-foreground leading-tight">The BAMS Degree - Gateway to Becoming a Vaidya</h2>
               {bamsProgram.overview ? (
-                <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: bamsProgram.overview }}></div>
+                <div className="text-foreground/70 leading-relaxed rich-text" dangerouslySetInnerHTML={{ __html: rt(bamsProgram.overview) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed">Bachelor of Ayurvedic Medicine and Surgery (BAMS) is a five-and-a-half-year degree programme including a one-year compulsory rotatory internship. NCISM recognised across India and in several foreign countries, BAMS is the only AYUSH medical degree that confers the title 'Vaidya' and confers full practitioner registration eligibility.</p>
               )}
@@ -74,7 +75,7 @@ export default function DynamicCoursePage() {
                       {p.desc ? (
                         <p className="text-xs text-foreground/60 mt-1">{p.desc}</p>
                       ) : (
-                        <div className="text-xs text-foreground/60 mt-1 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: p.subjects }}></div>
+                        <div className="text-xs text-foreground/60 mt-1 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(p.subjects) }}></div>
                       )}
                     </div>
                   </div>
@@ -117,7 +118,6 @@ export default function DynamicCoursePage() {
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function FacultyPage() {
   const ref = useScrollReveal();
@@ -87,7 +87,7 @@ export default function FacultyPage() {
                       )}
                     </div>
                     {member.bio && (
-                      <div className="text-xs text-foreground/70 mt-4 line-clamp-3 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: member.bio }}></div>
+                      <div className="text-xs text-foreground/70 mt-4 line-clamp-3 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(member.bio) }}></div>
                     )}
                   </div>
                 </div>
@@ -96,7 +96,6 @@ export default function FacultyPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

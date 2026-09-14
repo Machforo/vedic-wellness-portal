@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function FeedbackPage() {
   const ref = useScrollReveal();
@@ -24,7 +24,7 @@ export default function FeedbackPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="reveal space-y-8">
               {feedback.description ? (
-                <div className="text-foreground/70 leading-relaxed text-lg [&>p]:m-0" dangerouslySetInnerHTML={{ __html: feedback.description }}></div>
+                <div className="text-foreground/70 leading-relaxed text-lg [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(feedback.description) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed text-lg">Ishan Ayurvedic Medical College values feedback from students, parents, and visitors. All responses are carefully reviewed by the Quality Assurance Cell. Your inputs remain private and confidential.</p>
               )}
@@ -68,7 +68,6 @@ export default function FeedbackPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function VisitingFacultyPage() {
   const ref = useScrollReveal();
@@ -49,7 +49,7 @@ export default function VisitingFacultyPage() {
                 <p className="text-xs text-gold font-medium mt-1">{f.org}</p>
                 <div className="mt-3 pt-3 border-t">
                   <p className="text-xs font-semibold text-foreground/80 mb-2">{f.specialisation}</p>
-                  <div className="text-xs text-muted-foreground leading-relaxed text-left [&>p]:m-0" dangerouslySetInnerHTML={{ __html: f.impact }}></div>
+                  <div className="text-xs text-muted-foreground leading-relaxed text-left [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(f.impact) }}></div>
                 </div>
                 <div className="mt-3 text-left">
                   <span className="px-2 py-1 rounded bg-muted text-xs font-medium text-muted-foreground border">
@@ -61,7 +61,6 @@ export default function VisitingFacultyPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

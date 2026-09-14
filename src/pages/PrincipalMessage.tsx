@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function PrincipalMessagePage() {
   const ref = useScrollReveal();
@@ -32,14 +33,13 @@ export default function PrincipalMessagePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">A Word from Our Principal</p>
               <h2 className="font-bold text-foreground leading-tight">Welcome to Ishan Ayurvedic Medical College</h2>
               <div 
-                className="text-foreground/70 leading-relaxed space-y-4" 
-                dangerouslySetInnerHTML={{ __html: principalMessage?.message || fallbackMessage }} 
+                className="text-foreground/70 leading-relaxed space-y-4 rich-text" 
+                dangerouslySetInnerHTML={{ __html: rt(principalMessage?.message || fallbackMessage) }} 
               />
             </div>
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

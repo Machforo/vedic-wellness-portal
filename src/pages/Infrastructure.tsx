@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Wifi, Monitor, BookOpen, Building2, Cctv, MapPin, ArrowRight, Scale, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const iconMap: Record<string, any> = {
   Building2, BookOpen, Monitor, Scale, Wifi, Cctv, MapPin, ArrowRight, Microscope, Beaker, Library, Stethoscope, Droplet, TestTube, default: Building2
@@ -38,7 +39,7 @@ export default function InfrastructurePage() {
         <div className="container-wide">
           <div className="reveal max-w-3xl mb-14">
             {infrastructure.content ? (
-              <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: infrastructure.content }}></div>
+              <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(infrastructure.content) }}></div>
             ) : (
               <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">
                 {intro}
@@ -68,7 +69,7 @@ export default function InfrastructurePage() {
                   </div>
                   <h3 className="font-bold text-foreground mb-2">{f.title}</h3>
                   {f.desc && (
-                    <div className="text-sm leading-relaxed text-foreground/70 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: f.desc }}></div>
+                    <div className="text-sm leading-relaxed text-foreground/70 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(f.desc) }}></div>
                   )}
                 </div>
               );
@@ -95,7 +96,6 @@ export default function InfrastructurePage() {
         </div>
       </section>
 
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

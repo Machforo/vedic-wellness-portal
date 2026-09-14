@@ -3,7 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FileText, Download } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function DownloadsPage() {
   const ref = useScrollReveal();
@@ -32,7 +33,7 @@ export default function DownloadsPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
             <div className="reveal space-y-8">
               {downloadsSection.description ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:m-0" dangerouslySetInnerHTML={{ __html: downloadsSection.description }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(downloadsSection.description) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed">
                   Access mandatory forms, academic calendars, syllabus documents, and guidelines. All documents are in PDF format for easy accessibility across devices. For any specific document not listed here, please contact the administrative office.
@@ -57,7 +58,6 @@ export default function DownloadsPage() {
         </div>
       </div>
     </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

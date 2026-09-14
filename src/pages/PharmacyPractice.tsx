@@ -3,7 +3,6 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Heart, Users, BookOpen, Stethoscope } from "lucide-react";
-import PageGallery from "@/components/PageGallery";
 
 const highlights = [
   { icon: Stethoscope, title: "Clinical Training", description: "Students receive clinical pharmacy training, learning drug therapy management, patient counselling, and medication reconciliation." },
@@ -56,7 +55,6 @@ export default function PharmacyPracticePage() {
         </div>
       </section>
       <EnquiryCTA />
-    <PageGallery />
-      </Layout>
+    </Layout>
   );
 }

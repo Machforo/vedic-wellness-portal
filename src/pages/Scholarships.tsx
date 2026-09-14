@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CheckCircle2 } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function ScholarshipsPage() {
   const ref = useScrollReveal();
@@ -34,7 +34,7 @@ export default function ScholarshipsPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3">Financial Assistance</p>
             <h2 className="font-bold text-foreground mb-4">Scholarships for BAMS Students</h2>
             {scholarshipsData.description ? (
-              <div className="text-foreground/70 leading-relaxed max-w-2xl" dangerouslySetInnerHTML={{ __html: scholarshipsData.description }}></div>
+              <div className="text-foreground/70 leading-relaxed max-w-2xl rich-text" dangerouslySetInnerHTML={{ __html: rt(scholarshipsData.description) }}></div>
             ) : (
               <p className="text-foreground/70 leading-relaxed max-w-2xl">Multiple scholarship programmes are available to BAMS students at IAMC. Our admissions team assists eligible students in applying.</p>
             )}
@@ -49,11 +49,11 @@ export default function ScholarshipsPage() {
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Eligibility</p>
-                    <div className="text-foreground/70 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: s.eligibility }}></div>
+                    <div className="text-foreground/70 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(s.eligibility) }}></div>
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Benefit</p>
-                    <div className="text-foreground/70 font-semibold [&>p]:m-0" dangerouslySetInnerHTML={{ __html: s.benefit }}></div>
+                    <div className="text-foreground/70 font-semibold [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(s.benefit) }}></div>
                   </div>
                 </div>
               </div>
@@ -87,7 +87,6 @@ export default function ScholarshipsPage() {
           )}
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

@@ -4,7 +4,8 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Leaf } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function HerbalGardenPage() {
   const ref = useScrollReveal();
@@ -43,7 +44,7 @@ Guided tours are arranged for incoming BAMS batches, visiting scholars, and dele
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Living Laboratory</p>
               <h2 className="font-bold text-foreground leading-tight">{herbalGarden.speciesCount || "200+"} Medicinal Species on Campus</h2>
               {herbalGarden.description ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: herbalGarden.description }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(herbalGarden.description) }}></div>
               ) : (
                 <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap">{defaultDesc}</div>
               )}
@@ -110,7 +111,6 @@ Guided tours are arranged for incoming BAMS batches, visiting scholars, and dele
           )}
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

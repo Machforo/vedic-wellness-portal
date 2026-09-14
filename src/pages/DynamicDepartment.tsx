@@ -5,7 +5,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { BookOpen, Microscope, Award, Users, HeartPulse, Shield, Leaf, Beaker, Brain, Stethoscope, Eye, Activity, Scale } from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { Navigate } from "react-router-dom";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 const iconMap: Record<string, any> = {
   BookOpen, Microscope, Award, Users, HeartPulse, Shield, Leaf, Beaker, Brain, Stethoscope, Eye, Activity, Scale, default: BookOpen
@@ -51,7 +51,7 @@ function DepartmentContent({ dept }: { dept: any }) {
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Department Overview</p>
               <h2 className="font-bold text-foreground leading-tight">{dept?.name}</h2>
               {dept?.description ? (
-                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4" dangerouslySetInnerHTML={{ __html: dept.description }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:mb-4 rich-text" dangerouslySetInnerHTML={{ __html: rt(dept.description) }}></div>
               ) : null}
             </div>
             <div className="reveal">
@@ -78,7 +78,7 @@ function DepartmentContent({ dept }: { dept: any }) {
                     <div>
                       <h3 className="font-bold text-foreground mb-2">{h.title}</h3>
                       {h.description ? (
-                        <div className="text-sm leading-relaxed text-foreground/70 [&>p]:m-0" dangerouslySetInnerHTML={{ __html: h.description }}></div>
+                        <div className="text-sm leading-relaxed text-foreground/70 [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(h.description) }}></div>
                       ) : null}
                     </div>
                   </div>
@@ -117,7 +117,6 @@ function DepartmentContent({ dept }: { dept: any }) {
           )}
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

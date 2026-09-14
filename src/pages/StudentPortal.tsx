@@ -3,7 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { Lock, GraduationCap } from "lucide-react";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function StudentPortalPage() {
   const ref = useScrollReveal();
@@ -22,7 +23,7 @@ export default function StudentPortalPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
             <div className="reveal space-y-8">
               {portal?.description ? (
-                <div className="text-foreground/70 leading-relaxed whitespace-pre-wrap [&>p]:m-0" dangerouslySetInnerHTML={{ __html: portal.description }}></div>
+                <div className="text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(portal.description) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed whitespace-pre-wrap">Current BAMS students can access their academic profiles, attendance records, clinical postings, and library resources through the unified student portal. University examination results are available via the official Mahayogi Guru Gorakhnath AYUSH University portal.</p>
               )}
@@ -60,7 +61,6 @@ export default function StudentPortalPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

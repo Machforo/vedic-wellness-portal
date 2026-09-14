@@ -4,7 +4,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { FileText, Download } from "lucide-react";
 
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 const defaultStatement = "The information provided below is submitted as required by the National Commission for Indian System of Medicine (NCISM) and the Ministry of AYUSH, and is updated annually to ensure full transparency. Any discrepancies found in the reported data should be immediately brought to the notice of the Principal at Ishan Ayurvedic Medical College and Research Centre, Knowledge Park, Greater Noida.\n\nNCISM mandates public disclosure for the benefit of current and prospective students, healthcare practitioners, and regulatory authorities. It serves as a comprehensive record of the institution's facilities, hospital standards, and Vaidya faculty expertise, ensuring accountability in Ayurvedic medical education.";
 
@@ -42,8 +43,8 @@ export default function MandatoryDisclosurePage() {
               <div>
                 <p className="font-semibold text-foreground mb-1">NCISM Compliance Statement</p>
                 <div 
-                  className="text-sm leading-relaxed" 
-                  dangerouslySetInnerHTML={{ __html: statement }} 
+                  className="text-sm leading-relaxed rich-text" 
+                  dangerouslySetInnerHTML={{ __html: rt(statement) }} 
                 />
               </div>
             </div>
@@ -62,7 +63,7 @@ export default function MandatoryDisclosurePage() {
                       ))}
                     </ul>
                   ) : (
-                    <div className="text-sm space-y-2 prose prose-sm prose-p:my-1 prose-ul:my-1 prose-li:my-0 max-w-none text-foreground/80" dangerouslySetInnerHTML={{ __html: section.items }} />
+                    <div className="text-sm space-y-2 prose prose-sm prose-p:my-1 prose-ul:my-1 prose-li:my-0 max-w-none text-foreground/80 rich-text" dangerouslySetInnerHTML={{ __html: rt(section.items) }} />
                   )}
                 </div>
               ))}
@@ -77,7 +78,6 @@ export default function MandatoryDisclosurePage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

@@ -4,7 +4,7 @@ import EnquiryCTA from "@/components/EnquiryCTA";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import * as Icons from "lucide-react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 const defaultReasons = [
   { icon: "Award", title: "NCISM Approved", desc: "The only approval that confers practitioner registration eligibility. IAMC's BAMS graduates are registered Vaidyas, eligible for government AYUSH service and independent clinical practice." },
@@ -30,9 +30,9 @@ export default function WhyChooseUsPage() {
           <div className={"text-center max-w-2xl mx-auto mb-16"}>
             <p className={"text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-3"}>Our Advantage</p>
             <h2 className={"font-bold text-foreground leading-tight mb-4"}>{whySection?.heading || "6 Reasons BAMS Students Choose IAMC"}</h2>
-            <div 
+            <div data-rich-text="" 
               className={"text-foreground/70 leading-relaxed"} 
-              dangerouslySetInnerHTML={{ __html: whySection?.description || "Choosing a BAMS college is choosing your entire clinical career. IAMC's unique combination of NCISM approval, an in-campus teaching hospital, 14 specialised departments, and a living herbal garden makes it unrivalled in NCR." }} 
+              dangerouslySetInnerHTML={{ __html: rt(whySection?.description || "Choosing a BAMS college is choosing your entire clinical career. IAMC's unique combination of NCISM approval, an in-campus teaching hospital, 14 specialised departments, and a living herbal garden makes it unrivalled in NCR.") }} 
             />
           </div>
           <div className={"grid sm:grid-cols-2 lg:grid-cols-3 gap-6"}>
@@ -42,14 +42,13 @@ export default function WhyChooseUsPage() {
                 <div key={r.title || r.heading || i} className={"reveal delay- p-6 rounded-2xl border bg-card hover:shadow-[0_8px_32px_hsl(var(--navy)/0.08)] transition-all"}>
                   <div className={"w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center mb-4"}><Icon className={"w-6 h-6 text-navy"} /></div>
                   <h3 className={"font-bold text-foreground mb-2"}>{r.heading || r.title}</h3>
-                  <div className={"text-sm text-foreground/70 leading-relaxed"} dangerouslySetInnerHTML={{ __html: r.description || r.desc }} />
+                  <div data-rich-text="" className={"text-sm text-foreground/70 leading-relaxed"} dangerouslySetInnerHTML={{ __html: rt(r.description || r.desc) }} />
                 </div>
               ); 
             })}
           </div>
         </div>
       </section>
-      <PageGallery images={data?.pageGallery} />
       <EnquiryCTA />
     </Layout>
   );

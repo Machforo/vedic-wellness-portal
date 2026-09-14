@@ -19,14 +19,33 @@ const programs = [
 
 const defaultDepartments = [];
 
+/**
+ * Department routes are declared per slug in App.tsx. Slugifying the display
+ * name (the previous behaviour) produced paths like
+ * "/departments/kayachikitsa-ayurvedic-internal-medicine-" which 404'd.
+ */
+function departmentPath(dept: any): string {
+  if (dept?.path) return dept.path;
+  if (dept?.href) return dept.href;
+  if (dept?.slug) return `/${String(dept.slug).replace(/^\//, "")}`;
+  return "/departments";
+}
+
 export default function ProgramsSection() {
   const ref = useScrollReveal();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const { data: coursesData } = useAyurvedaData("courses");
   const { data: academicsData } = useAyurvedaData("academics");
-  
+  const { data: departmentsData } = useAyurvedaData("departments");
+
   const fetchedPrograms = coursesData?.length > 0 ? coursesData : (coursesData?.data?.length > 0 ? coursesData.data : programs);
-  const departments = academicsData?.departments?.length > 0 ? academicsData.departments : defaultDepartments;
+
+  // The departments collection carries the slugs the routes are declared with;
+  // the academics singleton's inline list does not, so it is only a fallback.
+  const collectionDepartments = (Array.isArray(departmentsData) ? departmentsData : []).filter((d: any) => d?.name && d?.slug);
+  const departments = collectionDepartments.length > 0
+    ? collectionDepartments
+    : (academicsData?.departments?.length > 0 ? academicsData.departments : defaultDepartments);
 
   return (
     <section id="programs" className="py-12 md:py-20 bg-section-alt overflow-hidden" ref={ref}>
@@ -105,16 +124,20 @@ export default function ProgramsSection() {
         </motion.div>
 
         {/* Dept grid teaser */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          {departments.slice(0, 7).map((dept: any) => (
-            <Link key={dept.name} to={dept.path || dept.href || `/departments/${dept.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="p-3 rounded-xl border bg-white text-center text-xs font-semibold text-navy hover:bg-gold hover:border-gold hover:text-navy transition-all">
-              {dept.name}
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-6">
-          <Link to="/academics" className="text-sm font-semibold text-navy hover:text-gold transition-colors inline-flex items-center gap-1">View All {departments.length} Departments <ArrowUpRight className="w-4 h-4" /></Link>
-        </div>
+        {departments.length > 0 && (
+          <>
+            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+              {departments.slice(0, 7).map((dept: any) => (
+                <Link key={dept.slug || dept.name} to={departmentPath(dept)} className="p-3 rounded-xl border bg-white text-center text-xs font-semibold text-navy hover:bg-gold hover:border-gold hover:text-navy transition-all">
+                  {dept.name}
+                </Link>
+              ))}
+            </div>
+            <div className="text-center mt-6">
+              <Link to="/departments" className="text-sm font-semibold text-navy hover:text-gold transition-colors inline-flex items-center gap-1">View All {departments.length} Departments <ArrowUpRight className="w-4 h-4" /></Link>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

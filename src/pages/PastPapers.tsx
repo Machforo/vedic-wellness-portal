@@ -4,7 +4,8 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Download, FileText, Search } from "lucide-react";
 import { useState } from "react";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
+
 
 export default function PastPapersPage() {
   const ref = useScrollReveal();
@@ -44,7 +45,7 @@ export default function PastPapersPage() {
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">{pastPapersSection.tag || "Exam Resources"}</p>
                 <h2 className="font-bold text-foreground leading-tight">{pastPapersSection.title || "Prepare with Confidence"}</h2>
                 {pastPapersSection.description ? (
-                  <div className="text-foreground/70 leading-relaxed [&>p]:m-0" dangerouslySetInnerHTML={{ __html: pastPapersSection.description }}></div>
+                  <div className="text-foreground/70 leading-relaxed [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(pastPapersSection.description) }}></div>
                 ) : (
                   <p className="text-foreground/70 leading-relaxed">
                     Access previous years' Mahayogi Guru Gorakhnath AYUSH University question papers for BAMS. These are invaluable resources for understanding exam patterns, critical topics, and frequently asked questions in Ayurvedic classical texts and modern science.
@@ -120,7 +121,6 @@ export default function PastPapersPage() {
           </div>
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }

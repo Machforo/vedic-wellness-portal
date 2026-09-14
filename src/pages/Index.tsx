@@ -11,25 +11,47 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import FacultySection from "@/components/FacultySection";
 import CTASection from "@/components/CTASection";
-import PageGallery from "@/components/PageGallery";
+import DynamicPageSections from "@/components/DynamicPageSections";
 
 const Index = () => {
+  const defaultSections: Record<string, React.ReactNode> = {
+    hero: <HeroSection />,
+    stats: <StatsBar />,
+    about: <div id="about"><AboutSection /></div>,
+    programs: <div id="programs"><ProgramsSection /></div>,
+    why_iamc: <div id="why-iamc"><WhyIAMCSection /></div>,
+    placements: <div id="placements"><PlacementsSection /></div>,
+    faculty: <FacultySection />,
+    campus: <div id="campus"><CampusExperience /></div>,
+    news: <div id="news"><NewsSection /></div>,
+    testimonials: <TestimonialsSection />,
+    faqs: <FAQSection />,
+    cta: <CTASection />
+  };
+
+  const defaultOrder = [
+    'hero',
+    'stats',
+    'about',
+    'programs',
+    'why_iamc',
+    'placements',
+    'faculty',
+    'campus',
+    'news',
+    'testimonials',
+    'faqs',
+    'cta'
+  ];
+
   return (
     <Layout>
-      <HeroSection />
-      <StatsBar />
-      <div id="about"><AboutSection /></div>
-      <div id="programs"><ProgramsSection /></div>
-      <div id="why-iamc"><WhyIAMCSection /></div>
-      <div id="placements"><PlacementsSection /></div>
-      <FacultySection />
-      <div id="campus"><CampusExperience /></div>
-      <div id="news"><NewsSection /></div>
-      <TestimonialsSection />
-      <FAQSection />
-      <CTASection />
-    <PageGallery />
-      </Layout>
+      <DynamicPageSections
+        pageId="homepage"
+        defaultSections={defaultSections}
+        defaultOrder={defaultOrder}
+      />
+    </Layout>
   );
 };
 

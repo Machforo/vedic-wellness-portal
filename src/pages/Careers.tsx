@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
-import PageGallery from "@/components/PageGallery";
+import { rt } from "@/lib/richText";
 
 export default function CareersPage() {
   const ref = useScrollReveal();
@@ -29,7 +29,7 @@ export default function CareersPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
             <div className="reveal space-y-10">
               {careers.description ? (
-                <div className="text-foreground/70 leading-relaxed text-lg [&>p]:m-0" dangerouslySetInnerHTML={{ __html: careers.description }}></div>
+                <div className="text-foreground/70 leading-relaxed text-lg [&>p]:m-0 rich-text" dangerouslySetInnerHTML={{ __html: rt(careers.description) }}></div>
               ) : (
                 <p className="text-foreground/70 leading-relaxed text-lg">Ishan Ayurvedic Medical College invites qualified Ayurvedic educators and practitioners to join our institution, contributing to producing the next generation of India's BAMS doctors.</p>
               )}
@@ -86,7 +86,6 @@ export default function CareersPage() {
           )}
         </div>
       </section>
-    <PageGallery images={data?.pageGallery} />
     </Layout>
   );
 }
