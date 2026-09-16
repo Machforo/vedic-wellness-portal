@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { usePageLayout } from "@/hooks/usePageLayout";
 import CustomSectionRenderer from "@/components/CustomSectionRenderer";
 import PageHeader from "@/components/PageHeader";
+import PageGallery from "@/components/PageGallery";
 
 export function getPageIdFromPath(pathname: string): string {
   if (!pathname || pathname === "/" || pathname === "/home") return "homepage";
@@ -119,6 +120,11 @@ export default function DynamicContentReorderer({ children }: DynamicContentReor
           unassignedChildren.length > 0
         ) {
           return <React.Fragment key={sec.id}>{unassignedChildren}</React.Fragment>;
+        }
+
+        // Built-in gallery section placed in layout
+        if (sec.id === "gallery" || sec.id === "page_gallery") {
+          return <PageGallery key={sec.id} isInline={true} />;
         }
 
         // Custom section added by user (custom_html, hero, split, cards, cta, faq)

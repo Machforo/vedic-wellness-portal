@@ -42,10 +42,17 @@ const parentTestimonials = [
 export default function TestimonialsSection() {
   const [activeTab, setActiveTab] = useState<'students' | 'parents'>('students');
   const { data: testimonialsData } = useAyurvedaData("testimonials");
-  const backendTestimonials = testimonialsData?.length > 0 ? testimonialsData : (testimonialsData?.data?.length > 0 ? testimonialsData.data : []);
+  const backendTestimonials = Array.isArray(testimonialsData)
+    ? testimonialsData
+    : Array.isArray(testimonialsData?.data)
+    ? testimonialsData.data
+    : [];
   
-  const testimonials = backendTestimonials.length > 0 ? backendTestimonials.filter((t: any) => t.type === "Student") : studentTestimonials;
-  const parents = backendTestimonials.length > 0 ? backendTestimonials.filter((t: any) => t.type === "Parent") : parentTestimonials;
+  const rawStudents = backendTestimonials.filter((t: any) => t && t.type !== "Parent");
+  const rawParents = backendTestimonials.filter((t: any) => t && t.type === "Parent");
+
+  const testimonials = rawStudents.length > 0 ? rawStudents : studentTestimonials;
+  const parents = rawParents.length > 0 ? rawParents : parentTestimonials;
 
   return (
     <section className="py-16 md:py-24 bg-section-alt overflow-hidden">

@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { usePageLayout, SectionLayoutItem } from "@/hooks/usePageLayout";
 import CustomSectionRenderer from "@/components/CustomSectionRenderer";
+import PageGallery from "@/components/PageGallery";
 
 interface DynamicPageSectionsProps {
   pageId: string;
@@ -41,6 +42,11 @@ export default function DynamicPageSections({
         const target = direct || under || dash;
         if (target) {
           return <React.Fragment key={sec.id}>{target}</React.Fragment>;
+        }
+
+        // Built-in gallery section placed in layout
+        if (sec.id === "gallery" || sec.id === "page_gallery") {
+          return <PageGallery key={sec.id} isInline={true} />;
         }
 
         // Otherwise, render custom section (custom_html, hero, split, cards, cta, faq)
