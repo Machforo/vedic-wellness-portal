@@ -92,6 +92,9 @@ export default function DynamicContentReorderer({ children }: DynamicContentReor
     }
   });
 
+  if (typeof window !== 'undefined') {
+    (window as any).__renderedDynamicPagePath = pathname;
+  }
   const sections = layoutData.sections;
   const handledIds = new Set<string>();
 
