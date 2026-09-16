@@ -126,7 +126,7 @@ export default function DynamicContentReorderer({ children }: DynamicContentReor
         }
 
         // Built-in gallery section placed in layout
-        if (sec.id === "gallery" || sec.id === "page_gallery") {
+        if (sec.id === "gallery" || sec.id === "page_gallery" || sec.type === "gallery" || sec.id.includes("gallery")) {
           return <PageGallery key={sec.id} isInline={true} />;
         }
 

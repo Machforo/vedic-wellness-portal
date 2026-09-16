@@ -3,7 +3,6 @@ import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
 import MediaGallery from "@/components/MediaGallery";
 import PageGallery from "@/components/PageGallery";
-import PageSections from "@/components/PageSections";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
 import { rt } from "@/lib/richText";
@@ -153,8 +152,6 @@ export default function CampusLifePage({
           )}
         </div>
       </section>
-
-      <PageSections />
       <PageGallery />
       <EnquiryCTA />
     </Layout>

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
 import EnquiryCTA from "@/components/EnquiryCTA";
-import PageSections from "@/components/PageSections";
 import PageGallery from "@/components/PageGallery";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useAyurvedaData } from "@/hooks/useAyurvedaData";
@@ -73,8 +72,6 @@ export default function DepartmentsPage() {
           )}
         </div>
       </section>
-
-      <PageSections />
       <PageGallery />
       <EnquiryCTA />
     </Layout>
