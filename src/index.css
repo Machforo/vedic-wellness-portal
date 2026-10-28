@@ -450,6 +450,67 @@
      only guarantee they never overflow horizontally. */
   .page-custom-section img { max-width: 100%; height: auto; }
   .page-custom-section table { display: block; overflow-x: auto; }
+  /* Transform sterile slate templates into rich Ayurvedic aesthetics */
+  .page-custom-section section.bg-slate-50,
+  .page-custom-section .bg-slate-50 {
+    background: linear-gradient(135deg, hsl(40 45% 97%) 0%, hsl(35 40% 95%) 50%, hsl(43 50% 96%) 100%) !important;
+    position: relative;
+    border-top: 1px solid hsl(43 60% 50% / 0.15);
+    border-bottom: 1px solid hsl(43 60% 50% / 0.15);
+  }
+
+  .page-custom-section .bg-white {
+    background: linear-gradient(180deg, #ffffff 0%, hsl(40 30% 98%) 100%) !important;
+  }
+
+  .page-custom-section .border-slate-100,
+  .page-custom-section .border-slate-200 {
+    border-color: hsl(43 60% 50% / 0.25) !important;
+  }
+
+  /* Make FAQ and feature cards within custom sections pop with vibrant saturation */
+  .page-custom-section div[class*='rounded-xl'],
+  .page-custom-section div[class*='rounded-2xl'] {
+    border-color: hsl(43 60% 50% / 0.25) !important;
+    border-left: 4px solid hsl(35 90% 45%) !important;
+    box-shadow: 0 4px 20px -2px hsl(215 50% 10% / 0.05), 0 2px 8px -1px hsl(43 60% 50% / 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .page-custom-section div[class*='rounded-xl']:hover,
+  .page-custom-section div[class*='rounded-2xl']:hover {
+    transform: translateY(-2px);
+    border-color: hsl(43 80% 45% / 0.6) !important;
+    border-left: 4px solid hsl(43 90% 45%) !important;
+    box-shadow: 0 12px 30px -4px hsl(215 50% 10% / 0.12), 0 0 20px hsl(43 80% 50% / 0.2) !important;
+  }
+
+  .page-custom-section .text-slate-900 {
+    color: hsl(var(--navy)) !important;
+    font-weight: 700 !important;
+  }
+
+  .page-custom-section h2.text-slate-900,
+  .page-custom-section h2 {
+    color: hsl(var(--navy)) !important;
+    position: relative;
+    letter-spacing: -0.01em;
+  }
+
+  .page-custom-section h3.text-slate-900,
+  .page-custom-section h3 {
+    color: hsl(215 100% 25%) !important;
+    font-weight: 700 !important;
+  }
+
+  .page-custom-section .text-slate-600 {
+    color: hsl(213 40% 25%) !important;
+    line-height: 1.65 !important;
+  }
+
+  .page-custom-section .text-slate-500 {
+    color: hsl(213 30% 38%) !important;
+  }
 }
 
 /* ---------------------------------------------------------------------------
